@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Runtime Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- Nel Playground MDN incollare soltanto il contenuto di step-04-finale/html.html. -->
+    <main class="app">
+      <header class="hero">
+        <div><p class="eyebrow">Demo HTML · CSS · JavaScript</p><h1>Runtime Explorer</h1><p>Filtra e cerca alcuni linguaggi in base all'ambiente di esecuzione.</p></div>
+        <button id="theme" class="theme" type="button" aria-pressed="false">Tema scuro</button>
+      </header>
+      <section class="controls" aria-label="Ricerca e filtri">
+        <label class="search"><span>Cerca una tecnologia</span><input id="search" type="search" placeholder="Es. Java, dati, web…" autocomplete="off" /></label>
+        <div class="filters" aria-label="Filtra per runtime">
+          <button class="filter is-active" data-filter="all" aria-pressed="true">Tutti</button><button class="filter" data-filter="jvm" aria-pressed="false">JVM</button><button class="filter" data-filter="dotnet" aria-pressed="false">.NET</button><button class="filter" data-filter="browser" aria-pressed="false">Browser</button><button class="filter" data-filter="python" aria-pressed="false">Python</button><button id="reset" class="reset" type="button">Reset</button>
+        </div>
+      </section>
+      <p id="status" class="status" aria-live="polite">6 tecnologie visibili</p>
+      <section class="cards" aria-label="Tecnologie">
+        <article class="card" data-runtime="jvm"><span class="badge">JVM</span><h2>Java</h2><p>Portabilità tramite bytecode e macchina virtuale.</p></article>
+        <article class="card" data-runtime="jvm"><span class="badge">JVM</span><h2>Kotlin</h2><p>Interoperabilità con Java e sintassi più concisa.</p></article>
+        <article class="card" data-runtime="dotnet"><span class="badge">.NET</span><h2>C#</h2><p>Linguaggio general purpose dell'ecosistema .NET.</p></article>
+        <article class="card" data-runtime="dotnet"><span class="badge">.NET</span><h2>F#</h2><p>Programmazione functional-first sulla piattaforma .NET.</p></article>
+        <article class="card" data-runtime="browser"><span class="badge">Browser</span><h2>JavaScript</h2><p>Interattività nativa nelle applicazioni web.</p></article>
+        <article class="card" data-runtime="python"><span class="badge">Python</span><h2>Python</h2><p>Ecosistema ampio per automazione, dati e AI.</p></article>
+      </section>
+    </main>
+  </body>
+</html>
+

@@ -1,0 +1,20 @@
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Local development and browser-test artifacts
+.playwright-cli/
+output/playwright/
+
+# Temporary generation files
+tmp/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Operating-system metadata
+*:Zone.Identifier
+*:com.dropbox.attrs
+.DS_Store
