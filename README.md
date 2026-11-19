@@ -85,3 +85,20 @@ Prima di pubblicare una revisione è opportuno verificare:
 ## Note
 
 Il progetto ha finalità didattiche. Le applicazioni dimostrative non raccolgono dati reali e le integrazioni con servizi cloud sono simulate o eseguite in sandbox pubbliche.
+
+## Versione accessibile (screen reader)
+
+La cartella [`sito-accessibile/`](sito-accessibile/) contiene un sito HTML statico, senza JavaScript, che riproduce il contenuto della presentazione per la lettura con screen reader. Si apre da `index.html` e può essere pubblicata così com'è (percorsi relativi).
+
+- Ogni slide è un titolo di secondo livello; le slide sono raggruppate per giornata.
+- Ogni immagine ha testo alternativo, descrizione estesa e trascrizione del testo contenuto.
+- I diagrammi disegnati con forme sono descritti a parole.
+
+Per rigenerarla dopo modifiche al pptx:
+
+```bash
+python3 tools/build_accessible_site.py   # richiede python-pptx e markdown-it-py
+python3 tools/check_accessible_site.py   # alt, id, link interni, gerarchia dei titoli
+```
+
+Le descrizioni scritte a mano stanno in `tools/accessible-site/`: `images/<hash>.md` (una scheda per immagine, il nome è lo SHA-1 abbreviato dell'immagine) e `slides/NNN.md` (descrizione dei diagrammi e delle slide che l'estrazione automatica non rende bene). Se si aggiunge un'immagine o si cambia un diagramma, va aggiornata la scheda corrispondente (`--check` segnala le immagini senza scheda).

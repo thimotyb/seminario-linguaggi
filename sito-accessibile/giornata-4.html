@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giornata 4: Decisioni, qualità e casi – Seminario linguaggi</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header>
+<p class="sito"><a href="index.html">Seminario: linguaggi moderni e scelte architetturali</a></p>
+<nav aria-label="Parti del corso"><ul>
+<li><a href="index.html">Indice</a></li><li><a href="apertura.html">Apertura</a></li><li><a href="giornata-1.html">Giornata 1</a></li><li><a href="giornata-2.html">Giornata 2</a></li><li><a href="giornata-3.html">Giornata 3</a></li><li><a href="giornata-4.html" aria-current="page">Giornata 4</a></li><li><a href="chiusura.html">Chiusura</a></li>
+</ul></nav>
+</header>
+<main id="contenuto">
+<h1>Giornata 4: Decisioni, qualità e casi</h1>
+<p class="lead">Trasformare la panoramica tecnica in capacità di valutazione.</p>
+<nav aria-label="Slide di questa parte"><h2 class="toc-t">Slide di questa parte (16)</h2><ol class="toc"><li><a href="#slide-81">Slide 81: Dalle esigenze ai criteri di scelta</a></li><li><a href="#slide-82">Slide 82: Attributi di qualità</a></li><li><a href="#slide-83">Slide 83: Matrice di valutazione delle alternative</a></li><li><a href="#slide-84">Slide 84: Decision record: rendere la scelta leggibile</a></li><li><a href="#slide-85">Slide 85: Codice manutenibile</a></li><li><a href="#slide-86">Slide 86: Testabilità</a></li><li><a href="#slide-87">Slide 87: Documentazione che accompagna il sistema</a></li><li><a href="#slide-88">Slide 88: Sicurezza applicativa di base</a></li><li><a href="#slide-89">Slide 89: Linee guida AgID: quattro prospettive sul software sicuro</a></li><li><a href="#slide-90">Slide 90: Secure SDLC nella PA: requisiti, controlli e responsabilità</a></li><li><a href="#slide-91">Slide 91: Threat modeling: trovare difetti di design prima del codice</a></li><li><a href="#slide-92">Slide 92: Microsoft Threat Modeling Tool: dal DFD alle minacce STRIDE</a></li><li><a href="#slide-93">Slide 93: Segnali di rischio in una proposta tecnica</a></li><li><a href="#slide-94">Slide 94: Caso finale: valutare una proposta</a></li><li><a href="#slide-95">Slide 95: Checklist per il dialogo con i fornitori</a></li><li><a href="#slide-96">Slide 96: Messaggi da portare con sé</a></li></ol></nav>
+<article id="slide-81" aria-labelledby="slide-81-t">
+<h2 id="slide-81-t"><span class="num">Slide 81.</span> Dalle esigenze ai criteri di scelta</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Driver di business</li><li>Vincoli tecnici e normativi</li><li>Attributi di qualità</li><li>Competenze e modello operativo</li><li>Evidenze e assunzioni</li></ul>
+<h3>Schema grafico: dalla domanda alla shortlist</h3>
+<p>Quattro riquadri sovrapposti che formano un imbuto: sono sempre più stretti scendendo, con una freccia verso il basso tra l’uno e l’altro.</p>
+<ol>
+<li><strong>Esigenze</strong>.</li>
+<li><strong>Vincoli</strong>.</li>
+<li><strong>Criteri</strong>.</li>
+<li><strong>Opzioni</strong>.</li>
+</ol>
+<p>Didascalia sotto lo schema: una decisione, con assunzioni esplicite.</p>
+
+
+</article><article id="slide-82" aria-labelledby="slide-82-t">
+<h2 id="slide-82-t"><span class="num">Slide 82.</span> Attributi di qualità</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Affidabilità</li><li>Prestazioni e scalabilità</li><li>Sicurezza</li><li>Manutenibilità</li><li>Interoperabilità</li><li>Usabilità e accessibilità</li></ul>
+<h3>Schema grafico: la qualità è multidimensionale</h3>
+<p>Al centro un riquadro “Fit for purpose” (adeguato allo scopo), circondato da sei riquadri, uno per ciascun attributo di qualità: affidabilità, prestazioni, sicurezza, manutenibilità, interoperabilità e usabilità.</p>
+
+
+</article><article id="slide-83" aria-labelledby="slide-83-t">
+<h2 id="slide-83-t"><span class="num">Slide 83.</span> Matrice di valutazione delle alternative</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Criteri espliciti e pesati</li><li>Scala di valutazione condivisa</li><li>Evidenze a supporto</li><li>Sensibilità rispetto ai pesi</li><li>Decisione documentata</li></ul>
+<h3>Esempio di score pesato</h3>
+<p>Tabella di valutazione di due alternative, A e B, su quattro criteri, con voto da 1 a 5 e peso percentuale del criterio:</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Peso</th>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sicurezza</td>
+<td>30%</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Costo</td>
+<td>20%</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>25%</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>25%</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Totale riportato nella slide: A 4,15, B 3,35.</p>
+
+
+</article><article id="slide-84" aria-labelledby="slide-84-t">
+<h2 id="slide-84-t"><span class="num">Slide 84.</span> Decision record: rendere la scelta leggibile</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Contesto</li><li>Decisione</li><li>Alternative considerate</li><li>Conseguenze</li><li>Data, stato e responsabili</li></ul>
+<h3>Esempio di decision record: ADR-007, database del servizio</h3>
+<p>Scheda con cinque campi:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Contenuto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stato</td>
+<td>Accettata</td>
+</tr>
+<tr>
+<td>Contesto</td>
+<td>letture elevate, team SQL</td>
+</tr>
+<tr>
+<td>Decisione</td>
+<td>PostgreSQL gestito</td>
+</tr>
+<tr>
+<td>Alternative</td>
+<td>SQL Server, NoSQL</td>
+</tr>
+<tr>
+<td>Conseguenze</td>
+<td>skill e lock-in moderato</td>
+</tr>
+</tbody>
+</table>
+<p>Sotto la scheda: data, owner, evidenze e link.</p>
+
+
+</article><article id="slide-85" aria-labelledby="slide-85-t">
+<h2 id="slide-85-t"><span class="num">Slide 85.</span> Codice manutenibile</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Leggibilità e semplicità</li><li>Responsabilità chiare</li><li>Riduzione della duplicazione</li><li>Standard condivisi e revisione</li></ul>
+<h3>Schema grafico: costo di una modifica</h3>
+<p>Due colonne a confronto, ciascuna con una catena di tre passi dall’alto verso il basso:</p>
+<ul>
+<li><strong>Prima</strong>: duplicazione → 5 file da toccare → regressioni.</li>
+<li><strong>Dopo</strong>: responsabilità chiare → 1 modulo da toccare → test rapido.</li>
+</ul>
+<p>Didascalia: il tempo di cambiamento diminuisce.</p>
+
+
+</article><article id="slide-86" aria-labelledby="slide-86-t">
+<h2 id="slide-86-t"><span class="num">Slide 86.</span> Testabilità</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Comportamenti verificabili</li><li>Dipendenze controllabili</li><li>Test a più livelli</li><li>Automazione e feedback rapido</li></ul>
+<h3>Schema grafico: portafoglio dei test (piramide)</h3>
+<p>Tre fasce sovrapposte che formano una piramide, la cui larghezza cresce dall’alto verso il basso:</p>
+<ol>
+<li>in alto, la più piccola: <strong>E2E</strong> (end to end), pochi test;</li>
+<li>al centro: <strong>Integrazione</strong>;</li>
+<li>in basso, la più larga: <strong>Unit</strong>, molti test.</li>
+</ol>
+<p>Le didascalie indicano che i test più in basso sono più veloci e che la fiducia cresce salendo; il feedback è continuo nella pipeline.</p>
+
+
+</article><article id="slide-87" aria-labelledby="slide-87-t">
+<h2 id="slide-87-t"><span class="num">Slide 87.</span> Documentazione che accompagna il sistema</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Contratti API</li><li>Decisioni architetturali</li><li>Modelli e diagrammi</li><li>Runbook e conoscenza operativa</li><li>Aggiornamento come parte del lavoro</li></ul>
+<h3>Schema grafico: documento giusto, destinatario giusto</h3>
+<p>Al centro il riquadro “Sistema”, circondato da quattro tipi di documento, ciascuno con il proprio destinatario:</p>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Destinatario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API</td>
+<td>sviluppatori (Dev)</td>
+</tr>
+<tr>
+<td>ADR (decisioni architetturali)</td>
+<td>architetti (Arch)</td>
+</tr>
+<tr>
+<td>Runbook</td>
+<td>operations (Ops)</td>
+</tr>
+<tr>
+<td>Guida</td>
+<td>utenti</td>
+</tr>
+</tbody>
+</table>
+
+
+</article><article id="slide-88" aria-labelledby="slide-88-t">
+<h2 id="slide-88-t"><span class="num">Slide 88.</span> Sicurezza applicativa di base</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Identità e controllo degli accessi</li><li>Validazione degli input</li><li>Protezione dei dati e dei segreti</li><li>Dipendenze e supply chain</li><li>Logging e gestione degli incidenti</li></ul>
+<h3>Schema grafico: security by design in ogni fase</h3>
+<p>Sei riquadri disposti in cerchio attorno al riquadro centrale “Rischio ↓” (il rischio diminuisce). Seguendo il cerchio in senso orario dall’alto, le fasi sono: <strong>Threat model</strong>, <strong>Design</strong>, <strong>Code</strong>, <strong>Test</strong>, <strong>Deploy</strong>, <strong>Monitor</strong>. La sicurezza viene considerata in ogni fase del ciclo di vita.</p>
+
+
+</article><article id="slide-89" aria-labelledby="slide-89-t">
+<h2 id="slide-89-t"><span class="num">Slide 89.</span> Linee guida AgID: quattro prospettive sul software sicuro</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<p>Linee guida ufficiali per lo sviluppo sicuro delle applicazioni nella Pubblica Amministrazione.</p>
+<h3>Le quattro prospettive</h3>
+<table>
+<thead>
+<tr>
+<th>Prospettiva</th>
+<th>Che cosa riguarda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Secure SDLC</td>
+<td>azioni di sicurezza in tutte le fasi</td>
+</tr>
+<tr>
+<td>Hardening</td>
+<td>proteggere il software di base e il contesto</td>
+</tr>
+<tr>
+<td>Secure coding</td>
+<td>prevenire e individuare le vulnerabilità</td>
+</tr>
+<tr>
+<td>Threat modeling</td>
+<td>minacce, mitigazioni, Secure/Privacy by Design</td>
+</tr>
+</tbody>
+</table>
+<h3>Obiettivo</h3>
+<p>Disponibilità, integrità e riservatezza delle informazioni della PA.</p>
+<h3>Collegamenti</h3>
+<ul>
+<li><a href="https://www.agid.gov.it/it/linee-guida">Pagina delle linee guida AgID</a></li>
+<li><a href="https://www.agid.gov.it/sites/agid/files/2024-07/Linee-guida_di_sicurezza_sviluppo-applicazioni.pdf">Documento AgID 2024: linee guida di sicurezza per lo sviluppo di applicazioni (PDF)</a></li>
+<li><a href="https://www.agid.gov.it/sites/default/files/repository_files/allegato_4_-_linee_guida_per_la_modellazione_delle_minacce-dlt.pdf">Allegato 4: linee guida per la modellazione delle minacce (PDF)</a></li>
+</ul>
+
+<p class="fonte"><strong>Fonte.</strong> Fonti ufficiali AgID: pubblicazione 03/07/2024 · Allegato 4 Secure/Privacy by Design</p>
+</article><article id="slide-90" aria-labelledby="slide-90-t">
+<h2 id="slide-90-t"><span class="num">Slide 90.</span> Secure SDLC nella PA: requisiti, controlli e responsabilità</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<h3>Schema: le cinque fasi del Secure SDLC</h3>
+<p>Cinque riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Design</strong>: requisiti e threat model.</li>
+<li><strong>Coding</strong>: standard e review.</li>
+<li><strong>Verify</strong>: SAST (analisi statica), DAST (analisi dinamica) e test.</li>
+<li><strong>Release</strong>: accettazione e hardening.</li>
+<li><strong>Operate</strong>: monitoraggio e aggiornamento.</li>
+</ol>
+<h3>Tre responsabilità lungo le fasi</h3>
+<p><strong>Governance PA</strong></p>
+<ul>
+<li>Struttura tecnica che guida e monitora.</li>
+<li>Infrastruttura operativa sicura.</li>
+<li>Coordinamento funzionale.</li>
+</ul>
+<p><strong>Fornitore / team</strong></p>
+<ul>
+<li>Standard e best practice dichiarati.</li>
+<li>Vulnerabilità corrette.</li>
+<li>Revisioni di sicurezza continue.</li>
+</ul>
+<p><strong>Evidenze</strong></p>
+<ul>
+<li>Controlli e risultati.</li>
+<li>Criteri di accettazione.</li>
+<li>Owner e tracciabilità.</li>
+</ul>
+
+<p class="fonte"><strong>Fonte.</strong> Fonte: AgID, pp. 7–9 · impatti organizzativi, strategia di applicazione e responsabilità</p>
+</article><article id="slide-91" aria-labelledby="slide-91-t">
+<h2 id="slide-91-t"><span class="num">Slide 91.</span> Threat modeling: trovare difetti di design prima del codice</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-91-115-t">
+<img src="immagini/66b22dae8e.png" alt="Ciclo del threat modeling in quattro fasi: Diagram, Identify, Mitigate, Validate, con frecce che formano un cerchio." loading="lazy">
+<figcaption>
+<h3 id="fig-91-115-t">Immagine: Ciclo del threat modeling in quattro fasi: Diagram, Identify, Mitigate, Validate, con frecce che formano un cerchio.</h3>
+<p><strong>Descrizione.</strong> Quattro parole disposte ai vertici di un quadrato e collegate da frecce blu curve che girano in senso orario, a formare un ciclo continuo: &quot;Diagram&quot; (in alto a destra), &quot;Identify&quot; (in basso a destra), &quot;Mitigate&quot; (in basso a sinistra), &quot;Validate&quot; (in alto a sinistra), da cui si torna a &quot;Diagram&quot;. È il processo del Microsoft Security Development Lifecycle per la modellazione delle minacce.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Diagram → Identify → Mitigate → Validate → (di nuovo) Diagram</p>
+</figcaption></figure>
+<h3>Il modello diventa un artefatto di progetto</h3>
+<p>Cinque passi numerati:</p>
+<ol>
+<li>Definire requisiti e obiettivi di sicurezza.</li>
+<li>Disegnare componenti, flussi e trust boundary (confini di fiducia).</li>
+<li>Identificare le minacce.</li>
+<li>Definire e assegnare le mitigazioni.</li>
+<li>Validare mitigazioni e rischio residuo.</li>
+</ol>
+<p>AgID: fase preventiva per individuare requisiti di sicurezza e privacy.</p>
+<p><a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started">Guida Microsoft al Threat Modeling Tool</a></p>
+
+<p class="fonte"><strong>Fonte.</strong> Fonti: AgID pp. 4–5 · Microsoft Security Development Lifecycle</p>
+</article><article id="slide-92" aria-labelledby="slide-92-t">
+<h2 id="slide-92-t"><span class="num">Slide 92.</span> Microsoft Threat Modeling Tool: dal DFD alle minacce STRIDE</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<p>Schermata del tool: DFD (diagramma di flusso dei dati) ed elenco delle minacce generate per elemento.</p>
+<figure class="immagine" aria-labelledby="fig-92-116-t">
+<img src="immagini/a1de9e598c.png" alt="Schermata di Microsoft Threat Modeling Tool: diagramma con utente, web server e archivio dati, e tabella con nove minacce generate." loading="lazy">
+<figcaption>
+<h3 id="fig-92-116-t">Immagine: Schermata di Microsoft Threat Modeling Tool: diagramma con utente, web server e archivio dati, e tabella con nove minacce generate.</h3>
+<p><strong>Descrizione.</strong> Screenshot di &quot;New Threat Model* - Microsoft Threat Modeling Tool (Preview)&quot;. In alto il menu (File, Edit, View, Settings, Diagram, Reports, Help) e la barra degli strumenti. Nell&#x27;area di disegno &quot;Diagram 1&quot; un diagramma di flusso dei dati: a sinistra un&#x27;entità esterna quadrata &quot;Human User&quot;, al centro un processo circolare &quot;Web Server&quot;, a destra un archivio dati &quot;Generic Data Store&quot;. Tra Human User e Web Server due frecce curve opposte, etichettate &quot;Commands&quot; (verso il server) e &quot;Responses&quot; (verso l&#x27;utente); tra Web Server e Generic Data Store due frecce etichettate &quot;Configuration&quot; e &quot;Results&quot;. Sotto, il pannello &quot;Threat List&quot; con nove minacce generate automaticamente, tutte in rosso con stato &quot;Not Started&quot; e priorità &quot;High&quot;. Il pannello &quot;Threat Properties&quot; è vuoto: &quot;No threats are selected&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Diagramma: Human User ⇄ (Commands, Responses) ⇄ Web Server ⇄ (Configuration, Results) ⇄ Generic Data Store</p>
+<p>Threat List — colonne: ID, Diagram, Changed By, Last Modified, State, Title, Category, Description, Justification, Interaction, Priority</p>
+<p>0 — Diagram 1 — Generated — Not Started — Spoofing the… — Spoofing — Human User… — Commands — High</p>
+<p>1 — Cross Site Scr… — Tampering — The web serv… — Commands — High</p>
+<p>2 — Elevation Usi… — Elevation Of… — Web Server… — Commands — High</p>
+<p>3 — Spoofing of D… — Spoofing — Generic Data… — Configuration — High</p>
+<p>4 — Potential Exc… — Denial Of Ser… — Does Web Se… — Configuration — High</p>
+<p>5 — Spoofing of S… — Spoofing — Generic Data… — Results — High</p>
+<p>6 — Cross Site Scr… — Tampering — The web serv… — Results — High</p>
+<p>7 — Persistent Cr… — Tampering — The web serv… — Results — High</p>
+<p>8 — Weak Access… — Information… — Improper dat… — Results — High</p>
+<p>9 Threats Displayed, 9 Total</p>
+<p>Threat Properties: No threats are selected. Schede: Threat Properties; Notes - no entries</p>
+</figcaption></figure>
+<h3>STRIDE</h3>
+<p>Sei categorie di minaccia, ciascuna associata a una proprietà di sicurezza:</p>
+<table>
+<thead>
+<tr>
+<th>Lettera</th>
+<th>Minaccia</th>
+<th>Proprietà violata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>Spoofing</td>
+<td>autenticazione</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Tampering</td>
+<td>integrità</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Repudiation</td>
+<td>non ripudio</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Information disclosure</td>
+<td>riservatezza</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Denial of service</td>
+<td>disponibilità</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Elevation of privilege</td>
+<td>autorizzazione</td>
+</tr>
+</tbody>
+</table>
+<p>Il tool guida il diagramma, applica STRIDE per elemento e gestisce mitigazioni e report.</p>
+<p>Collegamenti: <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool">Panoramica</a> · <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started">Guida</a> · <a href="https://aka.ms/threatmodelingtool">Download</a></p>
+
+<p class="fonte"><strong>Fonte.</strong> Screenshot e metodo: Microsoft Learn, Threat Modeling Tool</p>
+</article><article id="slide-93" aria-labelledby="slide-93-t">
+<h2 id="slide-93-t"><span class="num">Slide 93.</span> Segnali di rischio in una proposta tecnica</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Benefici senza metriche</li><li>Dipendenze e lock-in non esplicitati</li><li>Complessità operativa sottovalutata</li><li>Migrazione all-or-nothing</li><li>Responsabilità e competenze non definite</li></ul>
+<h3>Checklist semaforo</h3>
+<p>Tre livelli con i colori del semaforo:</p>
+<table>
+<thead>
+<tr>
+<th>Colore</th>
+<th>Significato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verde</td>
+<td>evidenze e metriche</td>
+</tr>
+<tr>
+<td>Giallo</td>
+<td>assunzioni da validare</td>
+</tr>
+<tr>
+<td>Rosso</td>
+<td>rischio senza owner</td>
+</tr>
+</tbody>
+</table>
+<p>Regola: se è rosso, fermarsi e chiedere evidenze.</p>
+
+
+</article><article id="slide-94" aria-labelledby="slide-94-t">
+<h2 id="slide-94-t"><span class="num">Slide 94.</span> Caso finale: valutare una proposta</h2>
+<p class="kicker">CONFRONTO GUIDATO</p><p class="meta">Durata prevista: 45 minuti.</p>
+<h3>Scenario</h3>
+<p>Un fornitore propone React, microservizi Java e Python, container e Kubernetes per un nuovo servizio istituzionale.</p>
+<h3>Domande</h3>
+<ul><li>Quali parti della proposta sono motivate?</li><li>Quali dati e diagrammi chiediamo?</li><li>Quali alternative confrontiamo?</li><li>Quali rischi, responsabilità e criteri di accettazione?</li></ul>
+
+</article><article id="slide-95" aria-labelledby="slide-95-t">
+<h2 id="slide-95-t"><span class="num">Slide 95.</span> Checklist per il dialogo con i fornitori</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Problema, utenti e vincoli</li><li>Architettura e responsabilità</li><li>Qualità misurabili</li><li>Sicurezza e conformità</li><li>Delivery, esercizio e supporto</li><li>Evoluzione, costi e uscita</li></ul>
+<h3>Sei domande prima di dire sì</h3>
+<p>Sei riquadri con una spunta, ciascuno con una domanda; per ogni domanda servono una risposta, un’evidenza e un responsabile:</p>
+<ol>
+<li>Problema chiaro?</li>
+<li>Owner definiti?</li>
+<li>Qualità misurabile?</li>
+<li>Sicurezza provata?</li>
+<li>Esercizio sostenibile?</li>
+<li>Uscita possibile?</li>
+</ol>
+
+
+</article><article id="slide-96" aria-labelledby="slide-96-t">
+<h2 id="slide-96-t"><span class="num">Slide 96.</span> Messaggi da portare con sé</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<ul><li>Non esiste una tecnologia migliore in assoluto</li><li>Il contesto rende una scelta adeguata o fragile</li><li>Architettura e organizzazione si influenzano</li><li>Qualità, sicurezza e operabilità vanno progettate</li><li>Una buona decisione rende visibili trade-off ed evidenze</li></ul>
+<h3>Cinque principi da riusare</h3>
+<p>Cinque riquadri numerati: 1 Contesto, 2 Trade-off, 3 Evidenze, 4 Operabilità, 5 Evoluzione.</p>
+<p>Didascalia: una buona scelta resta spiegabile nel tempo.</p>
+
+
+</article>
+<nav aria-label="Pagina precedente e successiva" class="pn"><p><a href="giornata-3.html" rel="prev">← Giornata 3</a></p><p><a href="chiusura.html" rel="next">Chiusura →</a></p></nav>
+</main>
+<footer>
+<p>Versione accessibile della presentazione, per la lettura con screen reader. Il contenuto corrisponde alla presentazione PowerPoint; le immagini sono descritte a parole e il testo che contengono è trascritto.</p>
+</footer>
+</body>
+</html>

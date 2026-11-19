@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giornata 2: Ecosistemi e casi d&#x27;uso – Seminario linguaggi</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header>
+<p class="sito"><a href="index.html">Seminario: linguaggi moderni e scelte architetturali</a></p>
+<nav aria-label="Parti del corso"><ul>
+<li><a href="index.html">Indice</a></li><li><a href="apertura.html">Apertura</a></li><li><a href="giornata-1.html">Giornata 1</a></li><li><a href="giornata-2.html" aria-current="page">Giornata 2</a></li><li><a href="giornata-3.html">Giornata 3</a></li><li><a href="giornata-4.html">Giornata 4</a></li><li><a href="chiusura.html">Chiusura</a></li>
+</ul></nav>
+</header>
+<main id="contenuto">
+<h1>Giornata 2: Ecosistemi e casi d&#x27;uso</h1>
+<p class="lead">Java, .NET, Python, JavaScript e React letti con la stessa griglia.</p>
+<nav aria-label="Slide di questa parte"><h2 class="toc-t">Slide di questa parte (32)</h2><ol class="toc"><li><a href="#slide-17">Slide 17: Una griglia comune per il confronto</a></li><li><a href="#slide-18">Slide 18: Come funziona Java: dal sorgente al codice macchina</a></li><li><a href="#slide-19">Slide 19: Bytecode: il contratto portabile della piattaforma Java</a></li><li><a href="#slide-20">Slide 20: Dentro la JVM: caricare, verificare, eseguire, ottimizzare</a></li><li><a href="#slide-21">Slide 21: Garbage Collector: recuperare memoria senza gestione manuale</a></li><li><a href="#slide-22">Slide 22: G1: regioni, generazioni e pause controllabili</a></li><li><a href="#slide-23">Slide 23: VisualVM: osservare la JVM mentre l&#x27;applicazione vive</a></li><li><a href="#slide-24">Slide 24: .NET: linguaggi, runtime e servizi cloud</a></li><li><a href="#slide-25">Slide 25: .NET nei sistemi applicativi</a></li><li><a href="#slide-26">Slide 26: Java e .NET</a></li><li><a href="#slide-27">Slide 27: REST: risorse, metodi e risposte HTTP</a></li><li><a href="#slide-28">Slide 28: Python: dal dato al modello, fino all&#x27;AI generativa</a></li><li><a href="#slide-29">Slide 29: Pandas DataFrame: una tabella con indici, tipi e operazioni</a></li><li><a href="#slide-30">Slide 30: Il flusso Pandas: caricare, capire, trasformare, riassumere</a></li><li><a href="#slide-31">Slide 31: Visualizzare con Seaborn: scegliere il grafico per la domanda</a></li><li><a href="#slide-32">Slide 32: Machine Learning in Python: dai feature al risultato</a></li><li><a href="#slide-33">Slide 33: Dal notebook all&#x27;albero: addestrare e leggere il modello</a></li><li><a href="#slide-34">Slide 34: AI generativa con Python: un&#x27;applicazione attorno al modello</a></li><li><a href="#slide-35">Slide 35: JavaScript nel browser: comportamento sopra HTML e CSS</a></li><li><a href="#slide-36">Slide 36: La Console JavaScript: provare, osservare, diagnosticare</a></li><li><a href="#slide-37">Slide 37: Can I Use: decidere se una funzionalità Web è utilizzabile</a></li><li><a href="#slide-38">Slide 38: React Quick Start: l&#x27;interfaccia come composizione</a></li><li><a href="#slide-39">Slide 39: Props, state e render: il flusso dei dati in React</a></li><li><a href="#slide-40">Slide 40: Inciso · React Native: React incontra le UI mobili native</a></li><li><a href="#slide-41">Slide 41: Expo Snack: una app React Native modificabile nel browser</a></li><li><a href="#slide-42">Slide 42: Material UI: componenti pronti, tema coerente, API React</a></li><li><a href="#slide-43">Slide 43: MUI MCP: documentazione del componente dentro il flusso AI</a></li><li><a href="#slide-44">Slide 44: Design Italia: dal sistema di design al componente React</a></li><li><a href="#slide-45">Slide 45: Design React Kit: un componente conforme resta codice React</a></li><li><a href="#slide-46">Slide 46: Laboratorio live: modifica React direttamente nel browser</a></li><li><a href="#slide-47">Slide 47: Backend e frontend: responsabilità diverse</a></li><li><a href="#slide-48">Slide 48: Scegliere uno stack per un servizio</a></li></ol></nav>
+<article id="slide-17" aria-labelledby="slide-17-t">
+<h2 id="slide-17-t"><span class="num">Slide 17.</span> Una griglia comune per il confronto</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Modello di esecuzione</li><li>Punti di forza dell&#x27;ecosistema</li><li>Contesti tipici</li><li>Qualità operative</li><li>Rischi e competenze</li></ul>
+<h3>Schema grafico: stessi criteri, tecnologie diverse</h3>
+<p>Una griglia di confronto illustrativa, senza valori: le colonne sono le quattro tecnologie (Java, .NET, PY per Python, JS per JavaScript) e le righe sono quattro criteri: runtime, ecosistema, fit (adeguatezza al contesto) e rischi. Ogni cella contiene solo un pallino colorato: la griglia mostra la struttura del confronto, che va compilata con pesi ed evidenze.</p>
+<p>Didascalia sotto la griglia: pesi + evidenze → scelta motivata.</p>
+
+<p><a href="https://www.tiobe.com/tiobe-index/">TIOBE LANGUAGE INDEX</a></p>
+
+</article><article id="slide-18" aria-labelledby="slide-18-t">
+<h2 id="slide-18-t"><span class="num">Slide 18.</span> Come funziona Java: dal sorgente al codice macchina</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<h3>Schema: dal sorgente al codice macchina</h3>
+<p>Cinque riquadri in sequenza da sinistra a destra, ciascuno con un titolo e un esempio, collegati da frecce:</p>
+<ol>
+<li><strong>Sorgente</strong>: file <code>.java</code>.</li>
+<li><strong>Compilatore</strong>: <code>javac</code>.</li>
+<li><strong>Bytecode</strong>: file <code>.class</code>.</li>
+<li><strong>JVM</strong>: carica (load), verifica (verify) ed esegue (execute).</li>
+<li><strong>Macchina</strong>: codice nativo.</li>
+</ol>
+
+<figure class="immagine" aria-labelledby="fig-18-1-t">
+<img src="immagini/2edb25c6c2.png" alt="Slide del corso Java Performance: &quot;The language and the platform&quot;, con diagramma da sorgente .java a codice macchina." loading="lazy">
+<figcaption>
+<h3 id="fig-18-1-t">Immagine: Slide del corso Java Performance: &quot;The language and the platform&quot;, con diagramma da sorgente .java a codice macchina.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (giugno 2023, pagina 7). A sinistra un titolo e cinque punti elenco; a destra un diagramma orizzontale. Il diagramma parte da un file sorgente &quot;.java&quot;, che il compilatore javac trasforma in un file &quot;.class&quot;. Il class loader carica il file &quot;.class&quot; in un riquadro tratteggiato che rappresenta la JVM: lì diventa una &quot;.class&quot; trasformata; l&#x27;interprete la esegue (&quot;Executing code&quot;); il compilatore JIT produce infine codice macchina, mostrato come una sequenza di cifre binarie.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>THE LANGUAGE AND THE PLATFORM</p>
+<ul><li>Java code starts life as human-readable Java source, and it&#x27;s then compiled by javac into a .class file and loaded into a JVM.</li><li>It&#x27;s common for classes to be manipulated and altered during the loading process.</li><li>Many of the most popular Java frameworks transform classes as they&#x27;re loaded to inject dynamic behavior such as instrumentation or alternative lookups for classes to load.</li><li>JVM bytecode is more like a halfway house between human-readable source and machine code. In the technical terms of compiler theory, bytecode is really a form of intermediate language (IL) rather than actual machine code.</li><li>The real compiler in the Java ecosystem is the JIT compiler.</li></ul>
+<p>Diagramma: .java → (javac) → .class → (Class loader) → Transformed .class → (Interpreter) → Executing code → (JIT compiler) → Machine code 101011100001.</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 7</p>
+</figcaption></figure>
+<p>La portabilità nasce dal bytecode; le prestazioni dal runtime che lo interpreta e lo compila JIT.</p>
+<p>Java Performance Course v1, p. 7</p>
+<p><a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html">ROADMAP SUPPORTO LTS</a></p>
+
+</article><article id="slide-19" aria-labelledby="slide-19-t">
+<h2 id="slide-19-t"><span class="num">Slide 19.</span> Bytecode: il contratto portabile della piattaforma Java</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-19-1-t">
+<img src="immagini/0240fcab6c.png" alt="Slide del corso Java Performance: &quot;Bytecode&quot;, con un listato di bytecode a sinistra e sei punti elenco a destra." loading="lazy">
+<figcaption>
+<h3 id="fig-19-1-t">Immagine: Slide del corso Java Performance: &quot;Bytecode&quot;, con un listato di bytecode a sinistra e sei punti elenco a destra.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 23). A sinistra c&#x27;è un listato di testo a spaziatura fissa con l&#x27;output di un disassemblatore di bytecode Java per la classe ScratchImpl: il metodo main e un blocco static. A destra il titolo &quot;BYTECODE&quot; e sei punti elenco che spiegano che cos&#x27;è il bytecode.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>BYTECODE</p>
+<p>Listato a sinistra (output del disassemblatore):</p>
+<pre><code>{
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+        0: new #2 // class ScratchImpl
+        3: dup
+        4: invokespecial #3 // Method &quot;&lt;init&gt;&quot;:()V
+        7: putstatic #4 // Field inst:LScratchImpl;
+       10: getstatic #4 // Field inst:LScratchImpl;
+       13: invokevirtual #5 // Method run:()V
+       16: return
+      LineNumberTable:
+        line 14: 0
+        line 15: 10
+        line 16: 16
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+        0: aconst_null
+        1: putstatic #4 // Field inst:LScratchImpl;
+        4: return
+      LineNumberTable:
+        line 3: 0
+}
+SourceFile: &quot;ScratchImpl.java&quot;</code></pre>
+<p>Punti elenco a destra:</p>
+<ul><li>Bytecode is an intermediate representation of a program, halfway between human readable source and machine code.</li><li>Bytecode is produced by javac from Java source code files.</li><li>Some high-level language features have been compiled away and don&#x27;t appear in bytecode. For example, Java&#x27;s looping constructs (for, while, and the like) are gone, turned into bytecode branch instructions.</li><li>Each opcode is represented by a single byte (hence the name bytecode).</li><li>Bytecode is an abstract representation, not &quot;machine code for an imaginary CPU.&quot;</li><li>Bytecode can be further compiled to machine code, usually &quot;just in time.&quot;</li></ul>
+<p>Piè di pagina: June, 2023 · Java Performance · 23</p>
+</figcaption></figure>
+<h3>Tre idee</h3>
+<ul><li>È un linguaggio intermedio, non codice macchina</li><li>Ogni opcode occupa un byte</li><li>javap permette di disassemblare i file .class</li><li>Il JIT ottimizza a runtime i metodi più usati</li></ul>
+<p>Write once → JVM compatibile → run</p>
+<p>Java Performance Course v1, pp. 8, 19 e 23</p>
+
+</article><article id="slide-20" aria-labelledby="slide-20-t">
+<h2 id="slide-20-t"><span class="num">Slide 20.</span> Dentro la JVM: caricare, verificare, eseguire, ottimizzare</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Schema: le quattro fasi dentro la JVM</h3>
+<p>Quattro riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Class loading</strong>: trova classi e dipendenze.</li>
+<li><strong>Linking</strong>: verifica, prepara e risolve.</li>
+<li><strong>Interpreter</strong>: esegue subito il bytecode.</li>
+<li><strong>JIT</strong>: compila i metodi “caldi”, cioè eseguiti più spesso.</li>
+</ol>
+
+<figure class="immagine" aria-labelledby="fig-20-1-t">
+<img src="immagini/2855c56b3a.png" alt="Slide del corso Java Performance: &quot;Bytecode&quot;, solo testo, quattro paragrafi sul bytecode Java." loading="lazy">
+<figcaption>
+<h3 id="fig-20-1-t">Immagine: Slide del corso Java Performance: &quot;Bytecode&quot;, solo testo, quattro paragrafi sul bytecode Java.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 8) composta solo da testo: un titolo e quattro paragrafi puntati che definiscono il bytecode Java e il suo ruolo nella portabilità. Non contiene figure.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>BYTECODE</p>
+<ul><li>Bytecode in Java refers to the intermediate representation of Java source code that is compiled by the Java compiler. It is a low-level, platform-independent instruction set that can be executed by the Java Virtual Machine (JVM).</li><li>When you write Java code, it is first compiled into bytecode. This bytecode is stored in .class files, which contain instructions that the JVM can understand and execute. It is a binary format that is not directly executable by the operating system but requires the JVM to interpret and execute the instructions.</li><li>Bytecode is designed to be platform-independent, which means it can run on any device or operating system that has a compatible JVM. This allows Java programs to be written once and run anywhere, as long as the target device has a JVM that can execute the bytecode.</li><li>During runtime, the JVM loads the bytecode, verifies its integrity and security, and executes the instructions to perform the desired operations. This intermediate bytecode representation provides a level of abstraction that enables portability and allows the JVM to optimize the execution for the specific platform on which it is running.</li></ul>
+<p>Piè di pagina: June, 2023 · Java Performance · 8</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> BYTECODE VERIFICATO</p>
+<figure class="immagine" aria-labelledby="fig-20-2-t">
+<img src="immagini/cc5f0ecf8f.png" alt="Slide del corso Java Performance: &quot;The runtime environment&quot;, con il funzionamento dello stack di valutazione in quattro passi." loading="lazy">
+<figcaption>
+<h3 id="fig-20-2-t">Immagine: Slide del corso Java Performance: &quot;The runtime environment&quot;, con il funzionamento dello stack di valutazione in quattro passi.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 25). A sinistra cinque punti elenco sulla macchina a stack della JVM. A destra, in alto, una figura con quattro colonne affiancate: in ognuna c&#x27;è lo stato dello stack di valutazione e sotto l&#x27;elenco delle istruzioni &quot;iconst_1, iconst_2, iadd&quot; con l&#x27;istruzione corrente in grassetto. Nella prima colonna lo stack è vuoto; dopo iconst_1 contiene il valore 1; dopo iconst_2 contiene 2 sopra 1; dopo iadd contiene solo 3, la somma. In basso a destra un riquadro con due paragrafi di spiegazione.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>THE RUNTIME ENVIRONMENT</p>
+<ul><li>Understanding the stack machine used by the JVM is crucial to comprehend bytecode.</li><li>Unlike hardware CPUs, the JVM does not have processor registers and instead utilizes an evaluation stack for all calculations and operations.</li><li>The evaluation stack, also known as the operand stack, is specific to each method, and a new stack is created when a method is called.</li><li>Additionally, the JVM has a call stack for each Java thread, which keeps track of executed methods and is used for generating stack traces in Java.</li><li>It is important to distinguish between the per-thread call stack and the per-method evaluation stack.</li></ul>
+<p>Figura: quattro stati dello stack. Stack vuoto; poi 1 (dopo iconst_1); poi 2 e 1 (dopo iconst_2); poi 3 (dopo iadd). Sotto ogni stato: iconst_1, iconst_2, iadd.</p>
+<p>Riquadro: As a method runs, it needs an area of memory to use as an evaluation stack, for computing new values. In addition, every running thread needs a call stack that records which methods are currently in flight (the stack that would be reported by a stack trace). These two stacks will interact in some cases.</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 25</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> STACK PER THREAD · OPERAND STACK PER METODO</p>
+<p>Java Performance Course v1, pp. 8-13 e 25</p>
+
+</article><article id="slide-21" aria-labelledby="slide-21-t">
+<h2 id="slide-21-t"><span class="num">Slide 21.</span> Garbage Collector: recuperare memoria senza gestione manuale</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-21-1-t">
+<img src="immagini/ca22d1ec3a.png" alt="Slide del corso Java Performance: &quot;GC basics&quot;, con diagramma di stack e heap e riferimenti agli oggetti." loading="lazy">
+<figcaption>
+<h3 id="fig-21-1-t">Immagine: Slide del corso Java Performance: &quot;GC basics&quot;, con diagramma di stack e heap e riferimenti agli oggetti.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 75). A sinistra sei punti elenco sul garbage collector. A destra un diagramma con due aree: a sinistra &quot;Stack&quot;, una colonna di caselle di cui due colorate in azzurro; a destra &quot;Heap&quot;, un trapezio che contiene tanti piccoli oggetti. Dalle due caselle dello stack partono frecce verso oggetti dell&#x27;heap, e da questi altre frecce portano ad altri oggetti: gli oggetti raggiungibili sono colorati in azzurro, quelli non più raggiungibili sono in grigio chiaro e sono quelli che il garbage collector può liberare. In alto a destra e in basso compaiono due indirizzi web.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>GC BASICS</p>
+<ul><li>The standard Java process has both a stack and a heap. The stack is where local variables are stored. Local variables that hold primitives directly store the primitive value in the stack.</li><li>Local variables of reference type will point at a location in Java&#x27;s heap, which is where the objects will actually be created.</li><li>The primitive fields of an object are still allocated at addresses within the heap.</li><li>As a Java program runs, new objects are created in the heap, and the relationships between the objects changes (as fields are updated).</li><li>Eventually, the heap will run out of space for new objects to be created. However, many of the objects that have been created will no longer be needed (e.g., temporary objects that were created in one method and not passed to any other method, or returned to the caller).</li><li>Space in the heap can therefore be reclaimed, and the program can continue to run. The mechanism by which the platform recovers and reuses heap memory that is no longer in use by application code is called garbage collection.</li></ul>
+<p>Diagramma: etichette &quot;Stack&quot; e &quot;Heap&quot;.</p>
+<p>Indirizzi web nell&#x27;immagine: https://drive.google.com/file/d/1Epmq574uzd_nEtXt4G8Ps4V3KtK4qjVc/view?usp=sharing e https://betterprogramming.pub/understanding-the-jvm-memory-model-heap-vs-non-heap-c14aa6fa703e</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 75</p>
+</figcaption></figure>
+<p>STACK: variabili locali e riferimenti</p>
+<figure class="immagine" aria-labelledby="fig-21-2-t">
+<img src="immagini/ce8278232e.png" alt="Slide del corso Java Performance: &quot;Generational GC&quot;, con l&#x27;heap diviso in Eden, Survivor e Tenured." loading="lazy">
+<figcaption>
+<h3 id="fig-21-2-t">Immagine: Slide del corso Java Performance: &quot;Generational GC&quot;, con l&#x27;heap diviso in Eden, Survivor e Tenured.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 77). A sinistra quattro punti elenco sul garbage collector generazionale. A destra un trapezio, che rappresenta l&#x27;heap, con tre riquadri sovrapposti dall&#x27;alto in basso: &quot;Eden&quot; in azzurro, &quot;Survivor&quot; in azzurro chiaro con una linea tratteggiata a metà, &quot;Tenured&quot; in viola e più grande.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>GENERATIONAL GC</p>
+<ul><li>The Java platform provides a number of enhancements to the basic mark-and-sweep approach. One of the simplest is the addition of generational GC. In this approach, the heap isn&#x27;t a uniform area of memory—a number of different areas of heap memory participate in the life cycle of a Java object.</li><li>Depending on how long an object lives, it can be moved from area to area during collections. References to it can point to several different areas of memory during the lifespan of the object.</li><li>The reason for this arrangement (and the movement of objects) is that analysis of running systems shows that objects tend to either have brief lives or be very long-lived.</li><li>The generational hypothesis is that only a small fraction of objects encountered during a young collection are still alive. So, the time taken for a young collection should be very small.</li></ul>
+<p>Diagramma dell&#x27;heap, dall&#x27;alto in basso: Eden, Survivor, Tenured.</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 77</p>
+</figcaption></figure>
+<p>HEAP: Eden → Survivor → Old generation</p>
+<p>Java Performance Course v1, pp. 74-78</p>
+
+</article><article id="slide-22" aria-labelledby="slide-22-t">
+<h2 id="slide-22-t"><span class="num">Slide 22.</span> G1: regioni, generazioni e pause controllabili</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-22-1-t">
+<img src="immagini/169839560b.png" alt="Slide del corso Java Performance: &quot;G1: Java&#x27;s default collector&quot;, con la griglia di regioni dell&#x27;heap e la legenda dei colori." loading="lazy">
+<figcaption>
+<h3 id="fig-22-1-t">Immagine: Slide del corso Java Performance: &quot;G1: Java&#x27;s default collector&quot;, con la griglia di regioni dell&#x27;heap e la legenda dei colori.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide in inglese del corso &quot;Java Performance&quot; (pagina 83). A sinistra sei punti elenco sul collector G1. A destra un trapezio che rappresenta l&#x27;heap diviso in una griglia di piccole regioni quadrate di dimensione uguale. Le regioni sono colorate secondo la legenda &quot;Key&quot;: viola per Tenured, azzurro chiaro per Survivor, azzurro intenso per Eden, bianco per Unused, grigio scuro per Humongous. Le regioni dello stesso tipo non sono contigue: sono sparse nella griglia; le regioni Humongous occupano più caselle adiacenti in orizzontale. Sotto la figura c&#x27;è un indirizzo web.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>G1: JAVA&#x27;S DEFAULT COLLECTOR</p>
+<ul><li>G1 is a relatively new collector for the Java platform. It became production-quality at Java 8u40 and was made the default collector with Java 9</li><li>It is not only a generational garbage collector, but it is also regionalized, which means that the G1 Java heap divides the heap into equal-sized regions (such as 1, 2, or 4 MB each). Generations still exist, but they are now no longer necessarily contiguous in memory.</li><li>Regionalization has been introduced to support the idea of predictability of GC pauses. Older collectors (such as Parallel) suffered from the problem that once a GC cycle had begun, it needed to run to completion, regardless of how long that took (i.e., they were all-or-nothing).</li><li>Young collections in G1 are fully STW and will run to completion</li><li>G1 keeps track of the objects that are moved to the old generation, and when enough old space has been filled, an old collection is started. This is a concurrent collection, because it runs (as far as possible) concurrently with the application threads.</li><li>It is possible that the collection of the entire old generation cannot be completed in a single GC cycle. In this case, G1 just collects a set of regions and then completes the collection, releasing the CPU cores that were being used for GC.</li></ul>
+<p>Legenda (Key): Tenured, Survivor, Eden, Unused, Humongous.</p>
+<p>Indirizzo web nell&#x27;immagine: https://plumbr.io/handbook/gc-tuning-in-practice/other-examples/humongous-allocations</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 83</p>
+</figcaption></figure>
+<h3>Come leggerlo</h3>
+<ul><li>Heap diviso in regioni di pari dimensione</li><li>Generazioni non necessariamente contigue</li><li>Young collection in Stop-the-World</li><li>Old collection per quanto possibile concorrente</li><li>Obiettivo: maggiore prevedibilità delle pause</li></ul>
+<p>Java Performance Course v1, pp. 80-85</p>
+
+</article><article id="slide-23" aria-labelledby="slide-23-t">
+<h2 id="slide-23-t"><span class="num">Slide 23.</span> VisualVM: osservare la JVM mentre l&#x27;applicazione vive</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-23-1-t">
+<img src="immagini/eec9f1611d.png" alt="Schermata di VisualVM, scheda Visual GC, che mostra memoria e garbage collection di un&#x27;applicazione Eclipse." loading="lazy">
+<figcaption>
+<h3 id="fig-23-1-t">Immagine: Schermata di VisualVM, scheda Visual GC, che mostra memoria e garbage collection di un&#x27;applicazione Eclipse.</h3>
+<p><strong>Descrizione.</strong> Screenshot della finestra di VisualVM 2.1.6 (pagina 79 del corso Java Performance, giugno 2023). Nella colonna sinistra c&#x27;è l&#x27;elenco delle applicazioni (Local: VisualVM ed Eclipse; Remote, VM Coredumps, JFR Snapshots, Snapshots). Nella scheda &quot;Visual GC&quot; del processo Eclipse si vedono tre pannelli. &quot;Spaces&quot;: colonne verticali per Metaspace, Old ed Eden, più due riquadri S0 e S1, riempite in parte (Eden è riempita per circa un quinto, le altre quasi vuote). &quot;Graphs&quot;: grafici temporali con i valori numerici indicati nell&#x27;etichetta. &quot;Histogram&quot;: parametri di tenuring e quindici caselle numerate da 0 a 15, di cui solo la casella 1 è piena.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>VisualVM 2.1.6</p>
+<p>Menu: File, Applications, View, Tools, Window, Help</p>
+<p>Applications: Local (VisualVM, Eclipse (pid 36068)), Remote, VM Coredumps, JFR Snapshots, Snapshots</p>
+<p>Schede: Start Page, Eclipse (pid 36068); sotto-schede Overview, Monitor, Threads, Sampler, Profiler, Visual GC</p>
+<p>Visual GC — opzioni: Spaces, Graphs, Histogram. Refresh rate: Auto msec.</p>
+<p>Spaces: Metaspace, Old, Eden, S0, S1</p>
+<p>Graphs:</p>
+<ul><li>Compile Time: 6938 compiles - 14,448s</li><li>Class Loader Time: 5820 loaded, 2 unloaded - 1,838s</li><li>GC Time: 10 collections, 128,998ms Last Cause: G1 Evacuation Pause</li><li>Eden Space (1,000G, 320,000M): 197,000M, 8 collections, 45,614ms</li><li>Survivor 0 (8, 8): 0</li><li>Survivor 1 (1,000G, 3,000M): 3,000M</li><li>Old Gen (1,000G, 189,000M): 25,294M, 2 collections, 83,384ms</li><li>Metaspace (1,037G, 40,902M): 37,403M</li></ul>
+<p>Histogram — Parameters: Tenuring Threshold: 2; Max Tenuring Threshold: 15; Desired Survivor Size: 18350080; Current Survivor Size: 8</p>
+<p>Istogramma: caselle da 0 a 15; la casella 1 è riempita.</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 79</p>
+</figcaption></figure>
+<h3>Memoria e GC</h3>
+<figure class="immagine" aria-labelledby="fig-23-2-t">
+<img src="immagini/363e84f288.png" alt="Slide &quot;Base profiling: VisualVM&quot; con screenshot dell&#x27;IDE e della scheda Threads di VisualVM che mostra thread &quot;zombie&quot;." loading="lazy">
+<figcaption>
+<h3 id="fig-23-2-t">Immagine: Slide &quot;Base profiling: VisualVM&quot; con screenshot dell&#x27;IDE e della scheda Threads di VisualVM che mostra thread &quot;zombie&quot;.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide del corso Java Performance (pagina 99). In alto a destra tre cartoni animati di zombie, a richiamare i &quot;zombie thread&quot;. A sinistra, sotto il titolo, un link a VisualVM e un punto elenco con il link a un esempio su GitHub. Sotto, uno screenshot di un IDE Eclipse con il progetto &quot;profile-threads-starter&quot;, il file Main.java aperto e la console con messaggi di log in rosso; una freccia rossa con la scritta &quot;Main exits&quot; indica la fine del metodo main e un cerchio rosso evidenzia il pulsante rosso di stop della console, ancora attivo. A destra, la scheda Threads di VisualVM per il processo main.Main: l&#x27;elenco dei thread con barre orizzontali nel tempo, quasi tutte verdi (running) per 109.910 ms, qualche barra gialla (wait) o arancione (park). Una freccia collega il testo esplicativo ai thread Thread-0, Thread-1, Thread-2 e Thread-3 sempre in esecuzione.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>BASE PROFILING: VISUALVM</p>
+<p>https://visualvm.github.io/index.html</p>
+<ul><li>A simple zombie case: https://github.com/thimotyb/java-performance-course/tree/main/profile-threads-starter</li></ul>
+<p>Annotazioni sullo screenshot dell&#x27;IDE: &quot;Main exits&quot;</p>
+<p>Scheda VisualVM Threads — main.Main (pid 33652): Live threads: 16; Daemon threads: 11; pulsanti Thread Dump e Threads visualization.</p>
+<p>Thread elencati (colonne Running e Total): Attach Listener 109,910 ms (100%); Common-Cleaner 0 ms (0%); DestroyJavaVM 109,910 ms (100%); Finalizer 0 ms (0%); JMX server connection timeout 23; Monitor Ctrl-Break 109,910 ms (100%); Reference Handler 109,910 ms (100%); RMI Scheduler(0) 0 ms (0%); RMI TCP Accept-0 109,910 ms (100%); RMI TCP Connection(1)-127.0.0.1 90,752 ms (82,6%); Signal Dispatcher 109,910 ms (100%); Thread-0, Thread-1, Thread-2, Thread-3 109,910 ms (100%) ciascuno; RMI TCP Connection(2)-127.0.0.1 66,563 ms (65,3%).</p>
+<p>Legenda: Running, Sleeping, Wait, Park, Monitor.</p>
+<p>Testo esplicativo: &quot;Even if the app doesn&#x27;t seem to do anything, the four threads it created are continuously running. These running threads that do nothing but stay alive are called zombie threads. The only thing they do is consume CPU resources.&quot;</p>
+<p>In basso a destra: &quot;Attach source to profiler to identify threads. Name the threads in the code.&quot;</p>
+<p>Piè di pagina: June, 2023 · Java Performance · 99</p>
+</figcaption></figure>
+<h3>Thread e stato</h3>
+<figure class="immagine" aria-labelledby="fig-23-3-t">
+<img src="immagini/9a18210450.png" alt="Slide &quot;Threads - Locks/Monitors&quot;: scheda Threads di VisualVM con molti thread http-nio e fasi di attesa evidenziate con cerchi rossi." loading="lazy">
+<figcaption>
+<h3 id="fig-23-3-t">Immagine: Slide &quot;Threads - Locks/Monitors&quot;: scheda Threads di VisualVM con molti thread http-nio e fasi di attesa evidenziate con cerchi rossi.</h3>
+<p><strong>Descrizione.</strong> Screenshot di una slide del corso Java Performance (pagina 112) che riproduce la scheda Threads di VisualVM per l&#x27;applicazione TicketServiceAPI-0.0.1-SNAPSHOT.jar. Mostra 125 thread attivi, di cui 121 daemon. La linea temporale elenca i thread http-nio-8080-exec-105 … 119 e per ciascuno una barra colorata nel tempo: verde per Running, viola Sleeping, giallo Wait, arancione Park, azzurro Monitor. Quattro zone, in cui compaiono tratti azzurri (thread bloccati su un monitor, cioè in attesa di un lock), sono cerchiate a mano in rosso. A destra, per ogni thread, il tempo in esecuzione e il totale (24.078 ms).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>THREADS – LOCKS/MONITORS</p>
+<p>Schede VisualVM: Overview, Monitor, Threads, Sampler, Profiler, Visual GC</p>
+<p>TicketServiceAPI-0.0.1-SNAPSHOT.jar (pid 34672)</p>
+<p>Threads — Live threads: 125; Daemon threads: 121; pulsanti &quot;Threads visualization&quot; e &quot;Thread Dump&quot;</p>
+<p>Timeline — Show: Live Threads; orari da 22:35:35 a 22:36:05</p>
+<p>Thread, tempo Running e Total: http-nio-8080-exec-105 16.389 ms (68,1%); -106 14.458 ms (60%); -107 15.022 ms (62,4%); -108 15.115 ms (62,8%); -109 16.726 ms (69,5%); -110 12.587 ms (52,3%); -111 15.284 ms (63,5%); -112 17.754 ms (73,7%); -113 14.508 ms (60,3%); -114 14.844 ms (61,6%); -115 14.014 ms (58,2%); -116 16.428 ms (68,2%); -117 16.152 ms (67,1%); -118 16.034 ms (66,6%); -119 15.072 ms (62,6%). Total: 24.078 ms per tutti.</p>
+<p>Legenda: Running, Sleeping, Wait, Park, Monitor.</p>
+</figcaption></figure>
+<h3>Lock e profiler</h3>
+<p>Correlare timeline, heap, GC, thread e metodi: il profiler formula ipotesi, non sostituisce le misure.</p>
+<p>Java Performance Course v1, pp. 79, 99 e 111-113</p>
+
+</article><article id="slide-24" aria-labelledby="slide-24-t">
+<h2 id="slide-24-t"><span class="num">Slide 24.</span> .NET: linguaggi, runtime e servizi cloud</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<p>.NET è una piattaforma gratuita, open source e multipiattaforma: runtime, librerie, compilatori, SDK e stack applicativi.</p>
+<h3>Dal sorgente all’esecuzione</h3>
+<p>Cinque riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro:</p>
+<ol>
+<li>Linguaggi: C#, F#, Visual Basic.</li>
+<li>Compiler → CIL + metadata (assembly).</li>
+<li>CoreCLR / CLR, il runtime.</li>
+<li>JIT, GC (garbage collector), type system, threading.</li>
+<li>Sistemi operativi e architetture: Windows, Linux, macOS; x64 e Arm64.</li>
+</ol>
+
+<h3>Componenti che completano la piattaforma</h3>
+<p>Quattro riquadri affiancati: Librerie, SDK + CLI, NuGet, ASP.NET Core.</p>
+
+<h3>Dalla piattaforma al deployment Azure</h3>
+<figure class="immagine" aria-labelledby="fig-24-1-t">
+<img src="immagini/be21d93bc5.png" alt="Diagramma di architettura Azure: App Service con slot di deployment, Azure SQL Database, Storage account, Azure Active Directory e controllo del codice sorgente." loading="lazy">
+<figcaption>
+<h3 id="fig-24-1-t">Immagine: Diagramma di architettura Azure: App Service con slot di deployment, Azure SQL Database, Storage account, Azure Active Directory e controllo del codice sorgente.</h3>
+<p><strong>Descrizione.</strong> Diagramma ufficiale Microsoft di un&#x27;applicazione web su Azure, racchiuso in un grande riquadro tratteggiato etichettato &quot;Resource group&quot;. Dentro il riquadro, a sinistra, c&#x27;è l&#x27;&quot;App Service Plan&quot; che contiene alcune &quot;Instances&quot; (tre icone) e l&#x27;&quot;App Service app&quot;; in basso nello stesso plan ci sono i &quot;Deployment slots&quot;: &quot;staging&quot;, &quot;production&quot; e &quot;last-known good&quot;, con frecce verso l&#x27;alto che indicano lo scambio (swap) da staging a production e poi a last-known good. A destra, due riquadri: &quot;Azure SQL Database&quot; con un &quot;logical server&quot; e due &quot;database&quot;, e &quot;Storage account&quot; con un &quot;Blob container&quot; che contiene &quot;app logs&quot; e &quot;web server logs&quot;. All&#x27;esterno, a sinistra: &quot;Azure Active Directory&quot;, che fornisce un &quot;access token&quot; all&#x27;App Service app dopo che l&#x27;utente si è autenticato (&quot;authenticate&quot;); un utente che raggiunge la produzione tramite un indirizzo IP (&quot;IP address&quot;); un secondo utente che &quot;valida il deployment&quot; (&quot;validate deployment&quot;) sullo slot di staging; e &quot;Source control&quot;, che esegue il &quot;deploy&quot; verso lo slot di staging.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>App Service Plan; Instances; App Service app; Deployment slots: last-known good, production, staging; Azure SQL Database: logical server, database, database; Storage account: Blob container, app logs, web server logs; Azure Active Directory; access token; authenticate; IP address; validate deployment; deploy; Source control; Resource group.</p>
+</figcaption></figure>
+<p>App Service esegue l’app .NET e aggiunge scaling, slot, identità e servizi dati gestiti.</p>
+<p><a href="https://learn.microsoft.com/it-it/dotnet/core/introduction">INTRODUZIONE .NET</a></p>
+<p><a href="https://dotnetfiddle.net/">PROVA .NET ONLINE</a></p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">ARCHITETTURA AZURE</a></p>
+
+</article><article id="slide-25" aria-labelledby="slide-25-t">
+<h2 id="slide-25-t"><span class="num">Slide 25.</span> .NET nei sistemi applicativi</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Web API e servizi</li><li>Applicazioni enterprise</li><li>Integrazione con ambienti Microsoft</li><li>Deployment multipiattaforma</li></ul>
+<h3>Schema grafico: backend .NET, flusso tipico</h3>
+<p>Quattro riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro, dal client ai dati:</p>
+<ol>
+<li><strong>Client</strong>: web e mobile.</li>
+<li><strong>ASP.NET Core</strong>: API e autenticazione.</li>
+<li><strong>Servizi</strong>: business logic (logica applicativa).</li>
+<li><strong>Dati / Cloud</strong>: SQL e Azure.</li>
+</ol>
+<p>Sotto lo schema una nota: trasversali a tutti i livelli ci sono dependency injection (DI), logging, configurazione e osservabilità.</p>
+
+
+</article><article id="slide-26" aria-labelledby="slide-26-t">
+<h2 id="slide-26-t"><span class="num">Slide 26.</span> Java e .NET</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<p>Due riquadri affiancati a confronto.</p>
+<h3>Java / JVM</h3>
+<ul>
+<li>Ecosistema JVM</li>
+<li>Framework e standard enterprise</li>
+<li>Ampia base installata</li>
+</ul>
+<h3>.NET / CLR</h3>
+<ul>
+<li>Toolchain integrata</li>
+<li>Ecosistema Microsoft</li>
+<li>Runtime multipiattaforma</li>
+</ul>
+
+
+</article><article id="slide-27" aria-labelledby="slide-27-t">
+<h2 id="slide-27-t"><span class="num">Slide 27.</span> REST: risorse, metodi e risposte HTTP</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-27-101-t">
+<img src="immagini/8e4cf8215d.jpg" alt="Icona decorativa rossa di una finestra di browser vuota con tre puntini in alto a destra." loading="lazy">
+<figcaption>
+<h3 id="fig-27-101-t">Immagine: Icona decorativa rossa di una finestra di browser vuota con tre puntini in alto a destra.</h3>
+<p><strong>Descrizione.</strong> Icona stilizzata, senza testo, che rappresenta la finestra di un browser: cornice rossa con tre puntini bianchi nella barra del titolo e un&#x27;area bianca vuota. Ha solo funzione decorativa e non porta informazioni.</p>
+</figcaption></figure>
+<h3>Schema: una risorsa, quattro metodi, quattro risposte</h3>
+<p>Un client (rappresentato dall’icona di una finestra di browser) accede alla risorsa <strong>/cittadini/472</strong>, cioè una risorsa identificata da un URI. I metodi HTTP disponibili sono quattro; ogni metodo corrisponde a un’operazione:</p>
+<table>
+<thead>
+<tr>
+<th>Metodo</th>
+<th>Operazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>legge</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>crea</td>
+</tr>
+<tr>
+<td>PUT/PATCH</td>
+<td>aggiorna</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>elimina</td>
+</tr>
+</tbody>
+</table>
+<p>Il server risponde con un codice di stato HTTP:</p>
+<table>
+<thead>
+<tr>
+<th>Codice</th>
+<th>Significato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>404</td>
+<td>non trovata</td>
+</tr>
+<tr>
+<td>429</td>
+<td>troppi accessi</td>
+</tr>
+<tr>
+<td>503</td>
+<td>non disponibile</td>
+</tr>
+</tbody>
+</table>
+<p>REST trasferisce rappresentazioni dello stato tramite il protocollo HTTP.</p>
+
+
+</article><article id="slide-28" aria-labelledby="slide-28-t">
+<h2 id="slide-28-t"><span class="num">Slide 28.</span> Python: dal dato al modello, fino all&#x27;AI generativa</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<h3>Schema: dal dato al modello</h3>
+<p>Quattro riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Dati</strong>: Pandas.</li>
+<li><strong>Esplorazione</strong>: Seaborn.</li>
+<li><strong>Modello</strong>: scikit-learn.</li>
+<li><strong>Gen AI</strong>: modelli e API.</li>
+</ol>
+
+<ul><li>notebook per esplorare</li><li>librerie per manipolare dati</li><li>API semplici per addestrare e usare modelli</li><li>ecosistema per orchestrare servizi AI</li></ul>
+<p>Python è il collante</p>
+<p><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/learning-python3.ipynb">APRIRE IL NOTEBOOK INTRODUTTIVO</a></p>
+
+</article><article id="slide-29" aria-labelledby="slide-29-t">
+<h2 id="slide-29-t"><span class="num">Slide 29.</span> Pandas DataFrame: una tabella con indici, tipi e operazioni</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    &quot;team&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;],
+    &quot;score&quot;: [72, 91, 84]
+})
+
+high = df.loc[df[&quot;score&quot;] &gt;= 80]
+summary = df.groupby(&quot;team&quot;)[&quot;score&quot;].mean()</code></pre>
+<p>DataFrame = colonne (Series) allineate sullo stesso indice</p>
+<ul><li>df[&#x27;colonna&#x27;] seleziona una Series</li><li>.loc usa etichette e condizioni</li><li>.iloc usa posizioni</li><li>groupby aggrega per gruppi</li><li>read_csv / read_excel / read_sql importano dati</li></ul>
+<p><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/pandas-dataframe.ipynb">COLAB · INTRODUZIONE AI DATAFRAME</a></p>
+<p><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/Importing_data_with_pandas.ipynb">COLAB · IMPORTARE I DATI</a></p>
+
+</article><article id="slide-30" aria-labelledby="slide-30-t">
+<h2 id="slide-30-t"><span class="num">Slide 30.</span> Il flusso Pandas: caricare, capire, trasformare, riassumere</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Schema: il flusso Pandas in cinque passi</h3>
+<p>Cinque riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Load</strong>: <code>read_csv</code>, <code>read_sql</code>.</li>
+<li><strong>Inspect</strong>: <code>head</code>, <code>info</code>, <code>describe</code>.</li>
+<li><strong>Filter</strong>: <code>loc</code> e condizioni.</li>
+<li><strong>Transform</strong>: <code>assign</code>, <code>merge</code>.</li>
+<li><strong>Group</strong>: <code>groupby</code>, <code>agg</code>.</li>
+</ol>
+
+<p>Domanda — Risposta riproducibile</p>
+<p>Qual è la distribuzione del punteggio per team? — df.groupby(&#x27;team&#x27;).score.agg([&#x27;count&#x27;,&#x27;mean&#x27;,&#x27;std&#x27;])</p>
+<p><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/02_Filtering_%26_Sorting/Chipotle/Exercises_with_solutions.ipynb">COLAB · FILTRARE E ORDINARE</a></p>
+<p><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/03_Grouping/Alcohol_Consumption/Exercise_with_solutions.ipynb">COLAB · GROUPING</a></p>
+
+</article><article id="slide-31" aria-labelledby="slide-31-t">
+<h2 id="slide-31-t"><span class="num">Slide 31.</span> Visualizzare con Seaborn: scegliere il grafico per la domanda</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-31-1-t">
+<img src="immagini/af2772d23e.png" alt="Griglia 4 per 4 di grafici Seaborn (pairplot) sul dataset dei pinguini, con tre specie in colori diversi." loading="lazy">
+<figcaption>
+<h3 id="fig-31-1-t">Immagine: Griglia 4 per 4 di grafici Seaborn (pairplot) sul dataset dei pinguini, con tre specie in colori diversi.</h3>
+<p><strong>Descrizione.</strong> Esempio ufficiale di Seaborn: una matrice di grafici 4 per 4 che confronta quattro misure dei pinguini: bill_length_mm (lunghezza del becco), bill_depth_mm (profondità del becco), flipper_length_mm (lunghezza della pinna) e body_mass_g (massa corporea). Le misure sono sugli assi, sia in riga sia in colonna. Fuori dalla diagonale ogni grafico è un diagramma a dispersione (scatter plot) di una coppia di misure; sulla diagonale ci sono le curve di densità di ogni singola misura. I punti sono colorati per specie: Adelie in blu, Chinstrap in arancione, Gentoo in verde (legenda &quot;species&quot; a destra). Si vede che le tre specie formano nuvole di punti in gran parte separate: ad esempio i Gentoo hanno pinne più lunghe e massa maggiore, e becco meno profondo, degli Adelie.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Assi: bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g (in riga e in colonna).</p>
+<p>Legenda &quot;species&quot;: Adelie (blu), Chinstrap (arancione), Gentoo (verde).</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> RELAZIONI</p>
+<p>sns.pairplot(data=df, …)</p>
+<figure class="immagine" aria-labelledby="fig-31-2-t">
+<img src="immagini/b0034a3261.png" alt="Grafico Seaborn a violino della spesa totale per giorno della settimana, diviso tra fumatori e non fumatori." loading="lazy">
+<figcaption>
+<h3 id="fig-31-2-t">Immagine: Grafico Seaborn a violino della spesa totale per giorno della settimana, diviso tra fumatori e non fumatori.</h3>
+<p><strong>Descrizione.</strong> Esempio ufficiale di Seaborn: un grafico a violino (violin plot) con l&#x27;asse orizzontale &quot;day&quot; (Thur, Fri, Sat, Sun) e l&#x27;asse verticale &quot;total_bill&quot; (da circa 0 a 60). Per ogni giorno c&#x27;è una forma divisa in due metà: la metà verde a sinistra rappresenta i clienti fumatori (&quot;smoker: Yes&quot;) e quella grigio scuro a destra i non fumatori (&quot;No&quot;). La larghezza di ogni metà mostra la densità dei conti; le linee tratteggiate interne segnano i quartili. In tutti i giorni la maggior parte dei conti si colloca tra circa 10 e 25, con code più lunghe verso valori alti, fino a circa 50-60 nel fine settimana e il giovedì.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Asse x: day (Thur, Fri, Sat, Sun). Asse y: total_bill. Legenda &quot;smoker&quot;: Yes (verde), No (grigio scuro).</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> DISTRIBUZIONI</p>
+<p>sns.violinplot(data=df, …)</p>
+<figure class="immagine" aria-labelledby="fig-31-3-t">
+<img src="immagini/48d24cfb5d.png" alt="Mappa di calore Seaborn con i passeggeri aerei per mese e anno dal 1949 al 1960, con i valori scritti in ogni cella." loading="lazy">
+<figcaption>
+<h3 id="fig-31-3-t">Immagine: Mappa di calore Seaborn con i passeggeri aerei per mese e anno dal 1949 al 1960, con i valori scritti in ogni cella.</h3>
+<p><strong>Descrizione.</strong> Esempio ufficiale di Seaborn: una mappa di calore (heatmap) con i mesi (da gennaio a dicembre) sulle righe e gli anni dal 1949 al 1960 sulle colonne. In ogni cella è scritto il numero di passeggeri; il colore va dal viola scuro, per i valori bassi, al color pesca chiaro per quelli alti (la barra dei colori a destra va da circa 100 a 600). Il numero cresce da sinistra a destra, cioè anno dopo anno, e con un picco in estate (luglio e agosto): il valore minimo è 104 (novembre 1949), il massimo è 622 (luglio 1960).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Valori per mese (anni 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960):</p>
+<p>Jan: 112, 115, 145, 171, 196, 204, 242, 284, 315, 340, 360, 417</p>
+<p>Feb: 118, 126, 150, 180, 196, 188, 233, 277, 301, 318, 342, 391</p>
+<p>Mar: 132, 141, 178, 193, 236, 235, 267, 317, 356, 362, 406, 419</p>
+<p>Apr: 129, 135, 163, 181, 235, 227, 269, 313, 348, 348, 396, 461</p>
+<p>May: 121, 125, 172, 183, 229, 234, 270, 318, 355, 363, 420, 472</p>
+<p>Jun: 135, 149, 178, 218, 243, 264, 315, 374, 422, 435, 472, 535</p>
+<p>Jul: 148, 170, 199, 230, 264, 302, 364, 413, 465, 491, 548, 622</p>
+<p>Aug: 148, 170, 199, 242, 272, 293, 347, 405, 467, 505, 559, 606</p>
+<p>Sep: 136, 158, 184, 209, 237, 259, 312, 355, 404, 404, 463, 508</p>
+<p>Oct: 119, 133, 162, 191, 211, 229, 274, 306, 347, 359, 407, 461</p>
+<p>Nov: 104, 114, 146, 172, 180, 203, 237, 271, 305, 310, 362, 390</p>
+<p>Dec: 118, 140, 166, 194, 201, 229, 278, 306, 336, 337, 405, 432</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> MATRICI</p>
+<p>sns.heatmap(data=df, …)</p>
+<p>Seaborn 0.13.2 official example gallery</p>
+
+</article><article id="slide-32" aria-labelledby="slide-32-t">
+<h2 id="slide-32-t"><span class="num">Slide 32.</span> Machine Learning in Python: dai feature al risultato</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-32-1-t">
+<img src="immagini/24cf491fed.png" alt="Slide &quot;Conversion of categorical features in binary form&quot; con una funzione Python che trasforma una variabile categorica in colonne binarie." loading="lazy">
+<figcaption>
+<h3 id="fig-32-1-t">Immagine: Slide &quot;Conversion of categorical features in binary form&quot; con una funzione Python che trasforma una variabile categorica in colonne binarie.</h3>
+<p><strong>Descrizione.</strong> Screenshot della slide 29 del corso &quot;Practical Machine Learning&quot;, in inglese. Contiene il titolo, una frase introduttiva e un breve listato in Python: la funzione cat_to_num prende i dati, ricava le categorie distinte, e per ciascuna categoria costruisce una colonna binaria (1 se il dato è uguale alla categoria, 0 altrimenti); restituisce l&#x27;elenco delle colonne.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Conversion of categorical features in binary form</p>
+<ul><li>Example of conversion algorithm in Python</li></ul>
+<pre><code>def cat_to_num(data):
+    categories = unique(data)
+    features = []
+    for cat in categories:
+        binary = (data == cat)
+        features.append(binary.astype(&quot;int&quot;))
+    return features</code></pre>
+<p>Numero di slide: 29</p>
+</figcaption></figure>
+<p>PREPARAZIONE: categorie → feature numeriche</p>
+<figure class="immagine" aria-labelledby="fig-32-2-t">
+<img src="immagini/383af43006.png" alt="Slide &quot;Classification Tree Example&quot;: due alberi di classificazione sui passeggeri del Titanic, uno con pochi dati e uno con molti dati." loading="lazy">
+<figcaption>
+<h3 id="fig-32-2-t">Immagine: Slide &quot;Classification Tree Example&quot;: due alberi di classificazione sui passeggeri del Titanic, uno con pochi dati e uno con molti dati.</h3>
+<p><strong>Descrizione.</strong> Screenshot della slide 80 del corso &quot;Practical Machine Learning&quot;. Affianca due alberi decisionali che predicono se un passeggero del Titanic è sopravvissuto. Ogni nodo interno pone una domanda; le foglie riportano la classe prevista e due numeri (morti/sopravvissuti nel gruppo). L&#x27;albero a sinistra (pochi dati) ha un solo test, sul genere: a una diramazione &quot;Died 207/40&quot;, all&#x27;altra &quot;Lived 36/117&quot;. L&#x27;albero a destra (molti dati) parte dallo stesso test sul genere, poi ramifica con altre domande su età, numero di fratelli/coniugi, classe del biglietto e tariffa. L&#x27;albero di destra è più profondo e più preciso; entrambi mostrano come più dati permettano più divisioni.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Classification Tree Example</p>
+<p>Albero di sinistra — &quot;Classification tree: Small amount of data&quot;:</p>
+<p>Gender = M</p>
+<p>  ramo sinistro → Died 207/40</p>
+<p>  ramo destro → Lived 36/117</p>
+<p>Albero di destra — &quot;Classification tree: Large amount of data&quot;:</p>
+<p>Gender = M</p>
+<p>  ramo sinistro → Age ≥ 6.5</p>
+<p>      ramo sinistro → Died 460/93</p>
+<p>      ramo destro → SibSp ≥ 2.5</p>
+<p>          ramo sinistro → Died 8/1</p>
+<p>          ramo destro → Lived 0/15</p>
+<p>  ramo destro → Pclass ≥ 2.5</p>
+<p>      ramo sinistro → Fare ≥ 23.35</p>
+<p>          ramo sinistro → Died 24/3</p>
+<p>          ramo destro → Lived 48/69</p>
+<p>      ramo destro → Lived 9/161</p>
+<p>Numero di slide: 80</p>
+</figcaption></figure>
+<p>MODELLO: regole apprese → albero interpretabile</p>
+<p>Practical Machine Learning, slide 29 e 80</p>
+
+</article><article id="slide-33" aria-labelledby="slide-33-t">
+<h2 id="slide-33-t"><span class="num">Slide 33.</span> Dal notebook all&#x27;albero: addestrare e leggere il modello</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-33-1-t">
+<img src="immagini/d29af4faf5.png" alt="Slide &quot;Lab: Classification Tree on Titanic with Python&quot; con codice Python di un albero decisionale e l&#x27;albero stampato come funzione." loading="lazy">
+<figcaption>
+<h3 id="fig-33-1-t">Immagine: Slide &quot;Lab: Classification Tree on Titanic with Python&quot; con codice Python di un albero decisionale e l&#x27;albero stampato come funzione.</h3>
+<p><strong>Descrizione.</strong> Screenshot della slide 166 del corso &quot;Practical Machine Learning&quot;. Riproduce un ambiente di sviluppo Python (stile Spyder): in alto l&#x27;editor con codice che prepara i dati, addestra un DecisionTreeClassifier sul campo &quot;Survived&quot; e ne stampa il punteggio sul dataset di prova; in basso la console che esegue il file decision-tree.py e stampa l&#x27;albero come funzione Python con una serie di istruzioni &quot;if&quot; annidate sulle caratteristiche (Pclass, Age, SibSp, Parch, sqrt_Fare, Sex, Embarked).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Lab: Classification Tree on Titanic with Python</p>
+<p>Editor (righe 67-78):</p>
+<pre><code>67 features = prepare_data(data_train)
+68 features[:5]
+69 model = DecisionTreeClassifier()
+70 model.fit(features, data_train[&quot;Survived&quot;])
+71
+72 #print model.decision_path(features)
+73
+74 tree_to_code(model, features.columns)
+75 print model.score(prepare_data(data_test), data_test[&quot;Survived&quot;])</code></pre>
+<p>Console Python:</p>
+<p>In [38]: %run &quot;C:/Users/thimo/Dropbox/corsi/machine_learning/real-world-machine-learning-master/decision-tree.py&quot;</p>
+<pre><code>def tree(Pclass, Age, SibSp, Parch, sqrt_Fare, Sex=female, Sex=male, Embarked=C, Embarked=Q, Embarked=S, Embarked=nan):
+  if Sex=female &lt;= 0.5:
+    if Pclass &lt;= 1.5:
+      if Age &lt;= 53.0:
+        if Age &lt;= -0.0399999916553:
+          if sqrt_Fare &lt;= 6.2348575592:
+            if sqrt_Fare &lt;= 5.93713378906:
+              if sqrt_Fare &lt;= 5.12584447861:
+                return [[ 3.  0.]]
+              else:  # if sqrt_Fare &gt; 5.12584447861</code></pre>
+<p>Numero di slide: 166</p>
+</figcaption></figure>
+<p>PYTHON: fit del classificatore</p>
+<figure class="immagine" aria-labelledby="fig-33-2-t">
+<img src="immagini/99a2a1f3c1.png" alt="Slide &quot;Example of Classification Tree: Heart Data&quot;: un grande albero decisionale sui dati di malattie cardiache con foglie Yes e No." loading="lazy">
+<figcaption>
+<h3 id="fig-33-2-t">Immagine: Slide &quot;Example of Classification Tree: Heart Data&quot;: un grande albero decisionale sui dati di malattie cardiache con foglie Yes e No.</h3>
+<p><strong>Descrizione.</strong> Screenshot della slide 158 del corso &quot;Practical Machine Learning&quot;. Mostra un albero di classificazione molto ramificato costruito sul dataset &quot;Heart&quot; (diagnosi di malattia cardiaca). La radice è il test &quot;Thal:a&quot; (&quot;Thal&quot; è un esame del cuore); ogni ramo prosegue con altri test su variabili cliniche e termina in foglie &quot;Yes&quot; o &quot;No&quot; (malattia sì o no). Alcune etichette nell&#x27;angolo in basso a sinistra si sovrappongono tra loro. Serve a mostrare la leggibilità e al tempo stesso la complessità degli alberi decisionali.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Example of Classification Tree: Heart Data</p>
+<p>Radice: Thal:a</p>
+<p>Sottoalbero sinistro: Ca &lt; 0.5 → MaxHR &lt; 161.5 (→ RestBP &lt; 157 → Chol &lt; 244 → MaxHR &lt; 156 → MaxHR &lt; 145.5 → No / Yes; altre foglie No, No, Yes) e ChestPain:bc (→ Chol &lt; 244 → No, No; Sex &lt; 0.5 → No, Yes); foglia No.</p>
+<p>Sottoalbero destro: Ca &lt; 0.5 → Slope &lt; 1.5 (→ Age &lt; 52 → Yes, No; Thal:b → No, ChestPain:a → No, Yes) e Oldpeak &lt; 1.1 (→ RestECG &lt; 1 → Yes, Yes; foglia Yes).</p>
+<p>Numero di slide: 158</p>
+</figcaption></figure>
+<p>RISULTATO: split, soglie e foglie</p>
+<p>Practical Machine Learning, slide 158 e 166</p>
+
+</article><article id="slide-34" aria-labelledby="slide-34-t">
+<h2 id="slide-34-t"><span class="num">Slide 34.</span> AI generativa con Python: un&#x27;applicazione attorno al modello</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<pre><code>context = retrieve(question)
+prompt = build_prompt(context, question)
+answer = model.generate(prompt)
+return validate(answer, context)</code></pre>
+<h3>Schema: i cinque passi dell’applicazione</h3>
+<p>Cinque riquadri collegati da frecce, che seguono l’ordine delle righe di codice a sinistra:</p>
+<ol>
+<li><strong>Domanda</strong>: l’utente pone la domanda.</li>
+<li><strong>Retrieval</strong>: si recuperano i documenti di contesto (<code>retrieve</code>).</li>
+<li><strong>Prompt</strong>: si costruisce il prompt con contesto e domanda (<code>build_prompt</code>).</li>
+<li><strong>Modello</strong>: il modello genera la risposta (<code>model.generate</code>).</li>
+<li><strong>Validazione</strong>: la risposta viene controllata rispetto al contesto (<code>validate</code>).</li>
+</ol>
+
+<p>Python orchestra librerie, dati, chiamate API e controlli. Il modello è un componente, non l&#x27;intera soluzione.</p>
+<p><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/pandas_advanced_techniques.ipynb">COLAB · TECNICHE PANDAS AVANZATE</a></p>
+
+</article><article id="slide-35" aria-labelledby="slide-35-t">
+<h2 id="slide-35-t"><span class="num">Slide 35.</span> JavaScript nel browser: comportamento sopra HTML e CSS</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<h3>Schema: tre tecnologie che compongono la pagina</h3>
+<p>Tre riquadri collegati da segni “+”, che insieme producono una pagina interattiva:</p>
+<ul>
+<li><strong>HTML</strong>: struttura;</li>
+<li><strong>CSS</strong>: presentazione;</li>
+<li><strong>JavaScript</strong>: comportamento;</li>
+<li>risultato: <strong>pagina interattiva</strong>.</li>
+</ul>
+
+<pre><code>const button = document.querySelector(&#x27;button&#x27;);
+
+button.addEventListener(&#x27;click&#x27;, () =&gt; {
+  document.querySelector(&#x27;h1&#x27;).textContent = &#x27;Ciao!&#x27;;
+});</code></pre>
+<ul><li>il browser è l&#x27;ambiente di esecuzione</li><li>DOM e Web API collegano codice e pagina</li><li>eventi attivano funzioni</li><li>JavaScript moderno usa compilazione JIT</li></ul>
+<p><a href="https://developer.mozilla.org/en-US/play">PROVA NEL PLAYGROUND MDN</a></p>
+<p>MDN: What is JavaScript? e JavaScript Guide</p>
+
+</article><article id="slide-36" aria-labelledby="slide-36-t">
+<h2 id="slide-36-t"><span class="num">Slide 36.</span> La Console JavaScript: provare, osservare, diagnosticare</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-36-1-t">
+<img src="immagini/0a541c19ea.png" alt="Console degli strumenti per sviluppatori del browser Firefox con due comandi JavaScript: un alert e il cambio del colore di sfondo in viola." loading="lazy">
+<figcaption>
+<h3 id="fig-36-1-t">Immagine: Console degli strumenti per sviluppatori del browser Firefox con due comandi JavaScript: un alert e il cambio del colore di sfondo in viola.</h3>
+<p><strong>Descrizione.</strong> Screenshot della barra degli strumenti per sviluppatori di Firefox, con la scheda &quot;Console&quot; selezionata (le altre schede sono Inspector, Debugger, Style Editor, Performance, Memory, Network, Storage). Nella console sono stati digitati due comandi: il primo mostra una finestra di avviso con il testo &quot;Hello!&quot; e restituisce &quot;undefined&quot;; il secondo imposta a viola lo sfondo dell&#x27;elemento html della pagina e restituisce &quot;purple&quot;. In fondo c&#x27;è la riga di input vuota con il cursore.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Inspector · Console · Debugger · Style Editor · Performance · Memory · Network · Storage</p>
+<p>Filter output · Persist Logs</p>
+<pre><code>&gt;&gt; alert(&#x27;Hello!&#x27;);</code></pre>
+<p>← undefined</p>
+<p>&gt;&gt; document.querySelector(&#x27;html&#x27;).style.backgroundColor = &#x27;purple&#x27;;</p>
+<p>← &quot;purple&quot;</p>
+<p>&gt;&gt;</p>
+</figcaption></figure>
+<h3>Prova ora</h3>
+<pre><code>&gt; const nums = [2, 4, 6]
+undefined
+&gt; nums.map(n =&gt; n * 2)
+[4, 8, 12]
+&gt; console.table(nums)</code></pre>
+<p>F12 oppure Ctrl+Shift+I</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools#the_javascript_console">GUIDA MDN ALLA CONSOLE</a></p>
+<p>Screenshot originale MDN: browser Developer Tools, Console</p>
+
+</article><article id="slide-37" aria-labelledby="slide-37-t">
+<h2 id="slide-37-t"><span class="num">Slide 37.</span> Can I Use: decidere se una funzionalità Web è utilizzabile</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-37-1-t">
+<img src="immagini/27d09edd2b.png" alt="Pagina del sito Can I use dedicata a CSS Grid Layout, con il 96,88% di utenti globali supportati e la tabella di compatibilità dei browser." loading="lazy">
+<figcaption>
+<h3 id="fig-37-1-t">Immagine: Pagina del sito Can I use dedicata a CSS Grid Layout, con il 96,88% di utenti globali supportati e la tabella di compatibilità dei browser.</h3>
+<p><strong>Descrizione.</strong> Screenshot del sito &quot;Can I use&quot; (caniuse.com) aggiornato al 5 marzo 2026, con in alto il menu (Home, News, Compare browsers, About) e il campo di ricerca &quot;Can I use ... ?&quot;. Il titolo della pagina è &quot;CSS Grid Layout (level 1)&quot;. Un&#x27;etichetta &quot;Baseline&quot; segnala che la funzionalità è &quot;Widely available across major browsers&quot; (ampiamente disponibile nei principali browser). A destra i dati di utilizzo globale: 96,65% di supporto senza prefisso, più 0,24% parziale, per un totale del 96,88%. Sotto la descrizione c&#x27;è la tabella di compatibilità per browser: sulle colonne Chrome, Edge, Safari, Firefox, Opera, IE, Chrome per Android, Safari su iOS, Samsung Internet, Opera Mini, Opera Mobile, UC Browser, Android Browser, Firefox per Android; le celle verdi indicano le versioni che supportano la funzionalità (ad esempio Chrome dalla 57), le celle rosse quelle che non la supportano (ad esempio Chrome 4-28, IE 6-9), quelle giallo scuro il supporto parziale (ad esempio Edge 12-15, IE 10). La parte visibile della tabella si interrompe in basso.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Home · News · March 5, 2026 - New feature: Lazy loading via attribute for video &amp; audio · Compare browsers · About</p>
+<p>Can I use ______ ? Settings</p>
+<p>CSS Grid Layout (level 1) - CR</p>
+<p>Baseline: Widely available across major browsers</p>
+<p>Usage % of all users — Global 96.65% + 0.24% = 96.88%; unprefixed: 96.65%</p>
+<p>Method of using a grid concept to lay out content, providing a mechanism for authors to divide available space for layout into columns and rows using a set of predictable sizing behaviors. Includes support for all grid-* properties and the fr unit.</p>
+<p>Schede: Current aligned · Usage relative · Date relative · Filtered · All</p>
+<p>Browser: Chrome, Edge, Safari, Firefox, Opera, IE, Chrome for Android, Safari on iOS, Samsung Internet, Opera Mini, Opera Mobile, UC Browser for Android, Android Browser, Firefox for Android.</p>
+<p>Prime righe della tabella: Chrome 4-28 (no), 29-56 (con flag), 57 (sì), 58-151 (sì); Edge 12-15 (parziale), 16-151 (sì); Safari 3.1-10 (no), 10.1-26.5 (sì); Firefox 2-39 (no), 40-51 (con flag), 52-53 (sì), 54-154 (sì); Opera 10-27 (no), 28-43 (con flag), 44-134 (sì); IE 6-9 (no), 10 (parziale).</p>
+</figcaption></figure>
+<h3>Come si legge</h3>
+<p>Legenda dei colori nella tabella di compatibilità:</p>
+<table>
+<thead>
+<tr>
+<th>Colore</th>
+<th>Significato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verde</td>
+<td>supportata</td>
+</tr>
+<tr>
+<td>Giallo</td>
+<td>parziale</td>
+</tr>
+<tr>
+<td>Rosso</td>
+<td>non supportata</td>
+</tr>
+<tr>
+<td>Grigio</td>
+<td>dato ignoto</td>
+</tr>
+</tbody>
+</table>
+<p>Controlla versioni, note, supporto parziale e quota d’uso del pubblico reale.</p>
+
+<p><a href="https://caniuse.com/">APRI CANIUSE.COM</a></p>
+<p>Screenshot aggiornato: caniuse.com/css-grid</p>
+
+</article><article id="slide-38" aria-labelledby="slide-38-t">
+<h2 id="slide-38-t"><span class="num">Slide 38.</span> React Quick Start: l&#x27;interfaccia come composizione</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Schema: i cinque concetti base di React</h3>
+<p>Cinque riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Componenti</strong>: funzioni che restituiscono interfaccia utente (UI).</li>
+<li><strong>JSX</strong>: markup dentro JavaScript.</li>
+<li><strong>Dati</strong>: props passate dal componente padre.</li>
+<li><strong>Stato</strong>: memoria locale con <code>useState</code>.</li>
+<li><strong>Eventi</strong>: azioni che aggiornano lo stato.</li>
+</ol>
+
+<pre><code>function ServiceCard({ title }) {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+      {title}: {count}
+    &lt;/button&gt;
+  );
+}</code></pre>
+<h3>Render</h3>
+<p>Servizio: 0</p>
+<p>click → setState → nuovo render</p>
+<p>React documentation, Quick Start</p>
+
+</article><article id="slide-39" aria-labelledby="slide-39-t">
+<h2 id="slide-39-t"><span class="num">Slide 39.</span> Props, state e render: il flusso dei dati in React</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<h3>Schema: il flusso dei dati tra Parent e Child</h3>
+<p>Due riquadri sovrapposti:</p>
+<ol>
+<li><strong>Parent</strong>: possiede i dati condivisi.</li>
+<li><strong>Child</strong>: renderizza e genera eventi.</li>
+</ol>
+<p>Dal Parent al Child i dati scendono come <strong>props</strong> (freccia verso il basso); dal Child al Parent risalgono gli <strong>eventi</strong> (freccia verso l’alto).</p>
+
+<pre><code>function App() {
+  const [filter, setFilter] = useState(&#x27;Tutti&#x27;);
+  const visible = services.filter(s =&gt;
+    filter === &#x27;Tutti&#x27; || s.area === filter
+  );
+
+  return &lt;ServiceList items={visible}
+    onSelect={setFilter} /&gt;;
+}</code></pre>
+<p>Lo stato non modifica il DOM direttamente: descrive la UI desiderata.</p>
+<p>React Quick Start: responding to events, updating the screen, sharing data</p>
+
+</article><article id="slide-40" aria-labelledby="slide-40-t">
+<h2 id="slide-40-t"><span class="num">Slide 40.</span> Inciso · React Native: React incontra le UI mobili native</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<h3>Schema: da componente React a interfaccia nativa</h3>
+<p>Tre riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Componente React</strong>: JSX, props e state.</li>
+<li><strong>React Native</strong>: renderer e runtime nativo.</li>
+<li><strong>UI nativa</strong>: Android e iOS.</li>
+</ol>
+
+<h3>Corrispondenza tra componenti React Native e componenti nativi</h3>
+<table>
+<thead>
+<tr>
+<th>Componente React Native</th>
+<th>Componente nativo (iOS / Android)</th>
+<th>Ruolo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;View&gt;</code></td>
+<td>UIView / ViewGroup</td>
+<td>contenitore</td>
+</tr>
+<tr>
+<td><code>&lt;Text&gt;</code></td>
+<td>UITextView / TextView</td>
+<td>testo</td>
+</tr>
+<tr>
+<td><code>&lt;Image&gt;</code></td>
+<td>UIImageView / ImageView</td>
+<td>immagine</td>
+</tr>
+</tbody>
+</table>
+
+<p>Il modello mentale resta React; l&#x27;output non è HTML: sono building block dell&#x27;interfaccia della piattaforma.</p>
+<p><a href="https://reactnative.dev/docs/intro-react-native-components">CORE COMPONENTS</a></p>
+<p>React Native official documentation: Core Components</p>
+
+</article><article id="slide-41" aria-labelledby="slide-41-t">
+<h2 id="slide-41-t"><span class="num">Slide 41.</span> Expo Snack: una app React Native modificabile nel browser</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-41-1-t">
+<img src="immagini/d1b7d72b16.png" alt="Expo Snack con il progetto &quot;Fetch Example&quot;: a sinistra il codice React Native di App.js, a destra l&#x27;anteprima web." loading="lazy">
+<figcaption>
+<h3 id="fig-41-1-t">Immagine: Expo Snack con il progetto &quot;Fetch Example&quot;: a sinistra il codice React Native di App.js, a destra l&#x27;anteprima web.</h3>
+<p><strong>Descrizione.</strong> Screenshot dell&#x27;editor online Expo Snack con il progetto &quot;Fetch Example&quot;. In alto una barra con il nome del progetto, un messaggio verde &quot;Device connected!&quot;, i pulsanti &quot;Expo Docs&quot; e &quot;Save&quot; e altre icone. Colonna sinistra: elenco dei file (Open files: App.js; Project: assets, components, App.js, package.json, README.md). Al centro l&#x27;editor con il codice di App.js, un piccolo componente React Native che mostra un testo e una scheda (Card). A destra il pannello di anteprima, con le schede My Device, Android, iOS e Web (selezionata): mostra un testo in grassetto centrato e, sotto, una scheda bianca. In basso la barra di stato: &quot;No errors&quot;, Prettier, Editor, versione Expo v54.0.0, Devices 1, Preview attivo.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Fetch Example — Login to save your changes as you work</p>
+<p>Expo Docs · Save</p>
+<p>Open files: App.js. Project: assets, components, App.js, package.json, README.md</p>
+<p>Codice di App.js (righe 1-32):</p>
+<pre><code>import { StyleSheet, Text, View } from &#x27;react-native&#x27;;
+
+// You can import supported modules from npm
+import { Card } from &#x27;react-native-paper&#x27;;
+
+// or any files within the Snack
+import AssetExample from &#x27;./components/AssetExample&#x27;;
+
+export default function App() {
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.paragraph}&gt;
+        Change code in the editor and watch it change on your phone! Save to get a shareable url.
+      &lt;/Text&gt;
+      &lt;Card&gt;
+        &lt;AssetExample /&gt;
+      &lt;/Card&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &#x27;center&#x27;,
+    backgroundColor: &#x27;#ecf0f1&#x27;,
+    padding: 8,
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: &#x27;bold&#x27;,</code></pre>
+<p>Anteprima (Web): &quot;Change code in the editor and watch it change on your phone! Save to get a shareable url.&quot; e, nella scheda: &quot;Local files and assets can be imported by dragging and dropping them into the editor&quot;.</p>
+<p>Barra di stato: No errors · Prettier · Editor · Expo v54.0.0 · Devices 1 · Preview</p>
+</figcaption></figure>
+<h3>Prova in tre passi</h3>
+<ol>
+<li>Modifica il file <code>App.js</code>.</li>
+<li>Scegli l’anteprima Android o iOS.</li>
+<li>Osserva l’anteprima.</li>
+</ol>
+
+<p>Stesso progetto, feedback immediato su più piattaforme.</p>
+<p><a href="https://snack.expo.dev/?description=Example+usage&amp;hideQueryParams=true&amp;name=Fetch+Example&amp;platform=web">APRI EXPO SNACK</a></p>
+<p>Screenshot: Expo Snack, esempio ufficiale modificabile</p>
+
+</article><article id="slide-42" aria-labelledby="slide-42-t">
+<h2 id="slide-42-t"><span class="num">Slide 42.</span> Material UI: componenti pronti, tema coerente, API React</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Le tre varianti del pulsante</h3>
+<p>Tre pulsanti affiancati mostrano le varianti di Material UI: <strong>Text</strong> (solo testo), <strong>Contained</strong> (riempito, evidenziato) e <strong>Outlined</strong> (con solo il bordo).</p>
+
+<pre><code>import Button from &#x27;@mui/material/Button&#x27;;
+
+&lt;Button variant=&quot;contained&quot;
+        color=&quot;primary&quot;
+        onClick={submit}&gt;
+  Invia richiesta
+&lt;/Button&gt;</code></pre>
+<ul><li>componenti accessibili come base</li><li>varianti e proprietà dichiarative</li><li>tema centralizzato</li><li>composizione con layout, form e feedback</li><li>template React pronti</li></ul>
+<p><a href="https://mui.com/material-ui/react-button/">ESEMPI MUI · BUTTON</a></p>
+<p>Material UI documentation: overview and Button demos</p>
+
+</article><article id="slide-43" aria-labelledby="slide-43-t">
+<h2 id="slide-43-t"><span class="num">Slide 43.</span> MUI MCP: documentazione del componente dentro il flusso AI</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<h3>Schema: come MUI MCP entra nel flusso AI</h3>
+<p>Quattro riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>IDE / agente</strong>: l’ambiente di sviluppo o l’agente AI.</li>
+<li><strong>MUI MCP</strong>: il server MCP di Material UI.</li>
+<li><strong>Docs ufficiali</strong>: la documentazione ufficiale dei componenti.</li>
+<li><strong>Codice + props</strong>: il codice generato con le proprietà corrette.</li>
+</ol>
+
+<p>npx -y @mui/mcp@latest — preferred_theme · component_filter</p>
+<p>Obiettivo: generare esempi aderenti alle API correnti, riducendo props inventate o pattern obsoleti.</p>
+<p>MUI official MCP documentation</p>
+
+</article><article id="slide-44" aria-labelledby="slide-44-t">
+<h2 id="slide-44-t"><span class="num">Slide 44.</span> Design Italia: dal sistema di design al componente React</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Schema: dal sistema di design al componente React</h3>
+<p>Quattro riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro:</p>
+<ol>
+<li><strong>Linee guida</strong>: principi e requisiti.</li>
+<li><strong>UI Kit Italia</strong>: progettazione e prototipi.</li>
+<li><strong>Bootstrap Italia</strong>: stili e componenti web.</li>
+<li><strong>Design React Kit</strong>: componenti React.</li>
+</ol>
+
+<p>Il kit rende riusabili le decisioni del design system, ma non sostituisce ricerca, contenuti e test di accessibilità.</p>
+<p>Linee guida di design PA, §6.3; repository ufficiali Italia</p>
+
+</article><article id="slide-45" aria-labelledby="slide-45-t">
+<h2 id="slide-45-t"><span class="num">Slide 45.</span> Design React Kit: un componente conforme resta codice React</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<pre><code>import { Alert, Button } from &#x27;design-react-kit&#x27;;
+import &#x27;bootstrap-italia/dist/css/bootstrap-italia.min.css&#x27;;
+
+function App() {
+  const [sent, setSent] = useState(false);
+  return &lt;&gt;
+    &lt;Button color=&quot;primary&quot; onClick={() =&gt; setSent(true)}&gt;
+      Avvia richiesta
+    &lt;/Button&gt;
+    {sent &amp;&amp; &lt;Alert color=&quot;success&quot;&gt;Richiesta avviata&lt;/Alert&gt;}
+  &lt;/&gt;;
+}</code></pre>
+<h3>Cosa fornisce il kit</h3>
+<ul><li>componenti React tipizzati</li><li>stili di Bootstrap Italia</li><li>font istituzionali configurabili</li><li>Storybook con esempi</li><li>pacchetto npm riusabile</li></ul>
+<p><a href="https://stackblitz.com/edit/vitejs-vite-yy8bnk?file=src/App.tsx">APRI IL TEMPLATE STACKBLITZ</a></p>
+<p>Design React Kit README e template StackBlitz ufficiale</p>
+
+</article><article id="slide-46" aria-labelledby="slide-46-t">
+<h2 id="slide-46-t"><span class="num">Slide 46.</span> Laboratorio live: modifica React direttamente nel browser</h2>
+<p class="meta">Durata prevista: 25 minuti.</p>
+<h3>StackBlitz</h3>
+<p>Modifica <code>src/App.tsx</code> → anteprima immediata → condividi il risultato.</p>
+<h3>Quattro esercizi</h3>
+<ol>
+<li>Sostituisci Alert con un messaggio diverso.</li>
+<li>Aggiungi un Button primario con onClick.</li>
+<li>Introduci useState per mostrare o nascondere l’Alert.</li>
+<li>Prova color, outline, size e stato disabled.</li>
+</ol>
+<p><a href="https://stackblitz.com/edit/vitejs-vite-yy8bnk?file=src/App.tsx">Apri il laboratorio ufficiale in StackBlitz</a></p>
+
+
+</article><article id="slide-47" aria-labelledby="slide-47-t">
+<h2 id="slide-47-t"><span class="num">Slide 47.</span> Backend e frontend: responsabilità diverse</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<p>Due riquadri affiancati a confronto.</p>
+<h3>Frontend</h3>
+<ul>
+<li>Interazione e presentazione</li>
+<li>Stato dell'interfaccia</li>
+<li>Accessibilità e UX</li>
+</ul>
+<h3>Backend</h3>
+<ul>
+<li>Regole e dati</li>
+<li>Sicurezza e integrazione</li>
+<li>Affidabilità e scalabilità</li>
+</ul>
+
+
+</article><article id="slide-48" aria-labelledby="slide-48-t">
+<h2 id="slide-48-t"><span class="num">Slide 48.</span> Scegliere uno stack per un servizio</h2>
+<p class="kicker">CONFRONTO GUIDATO</p><p class="meta">Durata prevista: 30 minuti.</p>
+<h3>Scenario</h3>
+<p>Un nuovo servizio deve offrire un portale, integrare sistemi esistenti e produrre analisi periodiche.</p>
+<h3>Domande</h3>
+<ul>
+<li>Quali componenti distinguiamo?</li>
+<li>Quale tecnologia per ciascun ruolo?</li>
+<li>Quali competenze e vincoli contano?</li>
+<li>Cosa chiediamo al fornitore?</li>
+</ul>
+
+
+</article>
+<nav aria-label="Pagina precedente e successiva" class="pn"><p><a href="giornata-1.html" rel="prev">← Giornata 1</a></p><p><a href="giornata-3.html" rel="next">Giornata 3 →</a></p></nav>
+</main>
+<footer>
+<p>Versione accessibile della presentazione, per la lettura con screen reader. Il contenuto corrisponde alla presentazione PowerPoint; le immagini sono descritte a parole e il testo che contengono è trascritto.</p>
+</footer>
+</body>
+</html>

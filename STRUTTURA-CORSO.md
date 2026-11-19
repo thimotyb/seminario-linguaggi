@@ -50,7 +50,7 @@
 |---:|---|---|---|---|---|
 | 8-9 | Compilatore, interprete, runtime | Da cercare | | Figura | Da reperire |
 | 9-10 | Paradigmi object-oriented e funzionale | Wikipedia; Microsoft Learn; MDN Web Docs | definizioni OOP/FP; tutorial Inheritance; `Array.prototype.map()` | Diagrammi editabili, codice e link ai tutorial | Integrato |
-| 18-23 | Java, JVM, bytecode, GC e VisualVM | `java-performance-course_v1.pdf` | pp. 7-13, 23-25, 74-85, 99, 111-113 | Figure JVM/bytecode, memoria, G1 e schermate VisualVM | Integrato |
+| 18-23 | Java, JVM, bytecode, GC, VisualVM e supporto LTS | `java-performance-course_v1.pdf`; Oracle Java SE Support Roadmap | pp. 7-13, 23-25, 74-85, 99, 111-113; roadmap delle release | Figure JVM/bytecode, memoria, G1, schermate VisualVM e link alla roadmap LTS | Integrato |
 | 24-26 | .NET e confronto Java/.NET | Microsoft Learn, Introduzione a .NET e Common web application architectures; .NET Fiddle | componenti .NET; CLR/CIL; deployment Azure App Service; playground browser | Diagramma runtime editabile + figura architetturale Azure + link eseguibile | Integrato |
 | 27 | REST API | Google Doc `ARCHITETTURE MICROSERVIZI CON DOCKER; SPRING BOOT; KAFKA` + `Microservices-Architectures_v3.pdf` | sezione API; p. 45 | Metodi, risorse, status code + figura | Integrato |
 | 28-34 | Python, Pandas, visualizzazione, ML e AI generativa | Google Doc `Python Basic`; Google Slides `Practical Machine Learning`; gallery ufficiale Seaborn | sezioni Pandas/DataFrame; slide 29, 80, 158, 166; gallery 0.13.2 | Codice, notebook Colab, alberi e visualizzazioni | Integrato |
@@ -82,6 +82,8 @@
 - Documento Word Drive `GUIDA OPERATIVA S21: AZURE DEVOPS`, file ID `15uH8Rj1DAwjOc2ZmIZEimiqA7XthsLYM`.
 - Progetto Azure DevOps `TitanoPortal`, vista dei work item aggiornati di recente: `https://thimoty.visualstudio.com/TitanoPortal/_workitems/recentlyupdated/`.
 - PDF Drive `java-performance-course_v1.pdf`, file ID `1KOq4T9NVsarwD4DMNQzYzuYcTOc_ZdJ5`.
+- Oracle Java SE Support Roadmap, riferimento aggiornato per release LTS e finestre di supporto: `https://www.oracle.com/java/technologies/java-se-support-roadmap.html`.
+- TIOBE Programming Community Index, indicatore mensile di popolarità dei linguaggi da leggere come segnale di ecosistema e non come misura assoluta di qualità: `https://www.tiobe.com/tiobe-index/`.
 - Google Slides `Practical Machine Learning`, presentazione ID `1_XzbegydeSEKW7hHcS27Fw9_Rjp9NZQHpviZ4icBS_s`.
 - Google Doc `Python Basic`, documento ID `1ujryBtFvmoq9OapeV3vnDpvkuqjFAJzodAWzorFobQk`.
 - Seaborn 0.13.2 Example Gallery: `https://seaborn.pydata.org/examples/index.html`.

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giornata 3: Architetture moderne e delivery – Seminario linguaggi</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header>
+<p class="sito"><a href="index.html">Seminario: linguaggi moderni e scelte architetturali</a></p>
+<nav aria-label="Parti del corso"><ul>
+<li><a href="index.html">Indice</a></li><li><a href="apertura.html">Apertura</a></li><li><a href="giornata-1.html">Giornata 1</a></li><li><a href="giornata-2.html">Giornata 2</a></li><li><a href="giornata-3.html" aria-current="page">Giornata 3</a></li><li><a href="giornata-4.html">Giornata 4</a></li><li><a href="chiusura.html">Chiusura</a></li>
+</ul></nav>
+</header>
+<main id="contenuto">
+<h1>Giornata 3: Architetture moderne e delivery</h1>
+<p class="lead">Dalla forma dell&#x27;applicazione al modo in cui viene rilasciata e gestita.</p>
+<nav aria-label="Slide di questa parte"><h2 class="toc-t">Slide di questa parte (30)</h2><ol class="toc"><li><a href="#slide-50">Slide 50: Architettura: decisioni e trade-off</a></li><li><a href="#slide-51">Slide 51: Monolite e microservizi: cambia l&#x27;unità di cambiamento</a></li><li><a href="#slide-52">Slide 52: I benefici dei microservizi non arrivano da soli</a></li><li><a href="#slide-53">Slide 53: Il confine giusto parte dal dominio</a></li><li><a href="#slide-54">Slide 54: Il contratto API: quattro ingredienti</a></li><li><a href="#slide-55">Slide 55: API Gateway: un punto di ingresso, molte policy</a></li><li><a href="#slide-56">Slide 56: Container: immagine, istanza, runtime</a></li><li><a href="#slide-57">Slide 57: VM e container: due livelli di isolamento</a></li><li><a href="#slide-58">Slide 58: Perché serve un orchestratore</a></li><li><a href="#slide-59">Slide 59: Kubernetes: dal cluster agli oggetti applicativi</a></li><li><a href="#slide-60">Slide 60: Cloud: cosa cambia davvero rispetto al data center</a></li><li><a href="#slide-61">Slide 61: Quattro cloud principali: stesso vocabolario, accenti diversi</a></li><li><a href="#slide-62">Slide 62: Polo Strategico Nazionale: il cloud sovrano per la PA</a></li><li><a href="#slide-63">Slide 63: Confronto cloud: scegliere per scenario, non per slogan</a></li><li><a href="#slide-64">Slide 64: Infrastructure as Code: l’infrastruttura entra nel ciclo Git</a></li><li><a href="#slide-65">Slide 65: Dai diagrammi al deployment: Architecture Center + Terraform</a></li><li><a href="#slide-66">Slide 66: Caso S21: DevOps è una catena di tracciabilità</a></li><li><a href="#slide-67">Slide 67: Il team DevOps S21: responsabilità lungo il flusso</a></li><li><a href="#slide-68">Slide 68: Dal requisito al ticket: una gerarchia verificabile</a></li><li><a href="#slide-69">Slide 69: Ticket e board: dal chiarimento al lavoro quotidiano</a></li><li><a href="#slide-70">Slide 70: Git: il codice avanza per branch e controlli</a></li><li><a href="#slide-71">Slide 71: Pull Request: il punto di controllo prima del merge</a></li><li><a href="#slide-72">Slide 72: Pipeline CI/CD: dal commit a un artefatto distribuibile</a></li><li><a href="#slide-73">Slide 73: Il flusso di testing S21: tre livelli, un solo feedback loop</a></li><li><a href="#slide-74">Slide 74: Dal requisito al difetto: ogni test lascia un&#x27;evidenza</a></li><li><a href="#slide-75">Slide 75: Dashboard operative: vedere flusso e capacità</a></li><li><a href="#slide-76">Slide 76: Dashboard qualità: difetti, tempi ed esiti dei test</a></li><li><a href="#slide-77">Slide 77: Caso S21: dall&#x27;approvazione della release al deploy</a></li><li><a href="#slide-78">Slide 78: Osservabilità e gestione operativa</a></li><li><a href="#slide-79">Slide 79: Modernizzare: dove sta davvero il valore?</a></li></ol></nav>
+<article id="slide-50" aria-labelledby="slide-50-t">
+<h2 id="slide-50-t"><span class="num">Slide 50.</span> Architettura: decisioni e trade-off</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Struttura dei componenti</li><li>Relazioni e contratti</li><li>Qualità da privilegiare</li><li>Vincoli e decisioni difficili da cambiare</li></ul>
+<h3>Schema grafico: una decisione propaga conseguenze</h3>
+<p>Quattro riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro:</p>
+<ol>
+<li><strong>Driver e vincoli</strong>.</li>
+<li><strong>Decisione</strong>.</li>
+<li><strong>Struttura</strong>.</li>
+<li><strong>Attributi di qualità</strong>.</li>
+</ol>
+<p>Didascalia sotto lo schema: misurare i trade-off, non nasconderli.</p>
+
+
+</article><article id="slide-51" aria-labelledby="slide-51-t">
+<h2 id="slide-51-t"><span class="num">Slide 51.</span> Monolite e microservizi: cambia l&#x27;unità di cambiamento</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-51-1-t">
+<img src="immagini/23c2dcbc6d.png" alt="Confronto tra approccio monolitico e approccio a microservizi: nel monolite si clona l&#x27;intera applicazione su più server, nei microservizi ogni servizio si distribuisce in modo indipendente." loading="lazy">
+<figcaption>
+<h3 id="fig-51-1-t">Immagine: Confronto tra approccio monolitico e approccio a microservizi: nel monolite si clona l&#x27;intera applicazione su più server, nei microservizi ogni servizio si distribuisce in modo indipendente.</h3>
+<p><strong>Descrizione.</strong> Figura in due metà separate da una linea verticale, con testi in inglese. A sinistra, &quot;Monolithic deployment approach&quot;: un&#x27;applicazione tradizionale (&quot;App 1&quot;, un riquadro grigio con tre quadrati colorati: rosso, giallo, verde) ha la maggior parte delle funzioni in pochi processi; si scala clonando l&#x27;intera app su più server o macchine virtuali. Sotto, tre server (icone di monitor) contengono ciascuno una copia completa dei tre quadrati. Due fumetti rossi: &quot;Coarse-grained density of apps/services&quot; (densità di servizi a grana grossa) e &quot;Need to deploy the full application&quot; (occorre distribuire l&#x27;intera applicazione). A destra, &quot;Microservices application approach&quot;: un&#x27;applicazione a microservizi separa le funzioni in servizi più piccoli; &quot;App 1&quot; e &quot;App 2&quot; sono riquadri tratteggiati con tre esagoni colorati ciascuno; si scala distribuendo ogni servizio in modo indipendente con più istanze su server o VM. Sotto, sei server disposti in cerchio, ciascuno con un diverso insieme di esagoni (servizi di colori diversi, anche di app diverse). Due fumetti verdi: &quot;Independent deployment of microservice&quot; e &quot;Fine-grained density of services&quot; (densità di servizi a grana fine).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Monolithic deployment approach</p>
+<ul><li>A traditional application has most of its functionality within a few processes that are componentized with layers and libraries.</li><li>Scales by cloning the app on multiple servers/VMs</li></ul>
+<p>App 1. Fumetti: &quot;Coarse-grained density of apps/services&quot;; &quot;Need to deploy the full application&quot;.</p>
+<p>Microservices application approach</p>
+<ul><li>A microservice application segregates functionality into separate smaller services.</li><li>Scales out by deploying each service independently with multiple instances across servers/VMs.</li></ul>
+<p>App 1, App 2. Fumetti: &quot;Independent deployment of microservice&quot;; &quot;Fine-grained density of services&quot;.</p>
+</figcaption></figure>
+<h3>Come leggerla</h3>
+<p>Nel monolite si replica e si rilascia l&#x27;intera applicazione.</p>
+<p>Nei microservizi ogni servizio può scalare e cambiare in modo indipendente.</p>
+<p>Il prezzo è una rete di componenti da governare.</p>
+<p>Figura originale: appunti “ARCHITETTURE MICROSERVIZI…”, sezione MONOLITI E MICROSERVIZI</p>
+
+</article><article id="slide-52" aria-labelledby="slide-52-t">
+<h2 id="slide-52-t"><span class="num">Slide 52.</span> I benefici dei microservizi non arrivano da soli</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-52-1-t">
+<img src="immagini/a7c720de85.jpg" alt="Dettaglio di uno schema sul service discovery: due riquadri &quot;Client-side cache/load balancing&quot; con frecce verso il &quot;Service discovery layer&quot;, formato da tre nodi collegati tra loro." loading="lazy">
+<figcaption>
+<h3 id="fig-52-1-t">Immagine: Dettaglio di uno schema sul service discovery: due riquadri &quot;Client-side cache/load balancing&quot; con frecce verso il &quot;Service discovery layer&quot;, formato da tre nodi collegati tra loro.</h3>
+<p><strong>Descrizione.</strong> Parte centrale (ritaglio) di una figura più ampia da un libro sui microservizi; le altre parti sono mostrate in altre immagini della stessa sequenza. In alto due riquadri gialli, ciascuno con la scritta &quot;Client-side cache/load balancing&quot;, cioè la cache lato client che contiene gli indirizzi delle istanze dei servizi e bilancia il carico. Da ciascuno parte una freccia verso il basso che raggiunge il &quot;Service discovery layer&quot;, un riquadro verde con tre nodi (pile di server viola). I tre nodi sono collegati da frecce tratteggiate nei due sensi: si sincronizzano tra loro. Il testo sotto ogni nodo, &quot;Service discovery node 1/2/3&quot;, è visibile solo in parte. In alto a destra restano le ultime parole di una didascalia: &quot;service discovery layer.&quot;</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Client-side cache/load balancing (due riquadri)</p>
+<p>Service discovery layer</p>
+<p>Service discovery (nodi 1, 2, 3; testo tagliato)</p>
+<p>…service discovery layer.</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> SERVICE DISCOVERY</p>
+<p>repliche e failover</p>
+<figure class="immagine" aria-labelledby="fig-52-2-t">
+<img src="immagini/5af7f96206.jpg" alt="Diagramma a stati del Circuit Breaker con tre stati: Closed, Open e Half Open, e le transizioni tra essi." loading="lazy">
+<figcaption>
+<h3 id="fig-52-2-t">Immagine: Diagramma a stati del Circuit Breaker con tre stati: Closed, Open e Half Open, e le transizioni tra essi.</h3>
+<p><strong>Descrizione.</strong> Diagramma di stato con tre riquadri color pesca. &quot;Closed&quot; (a sinistra in alto): con &quot;success&quot; o con &quot;fail [under threshold]&quot; (fallimento sotto la soglia) resta in Closed, tramite due frecce che tornano sullo stesso stato. Con &quot;fail [threshold reached]&quot; (fallimenti che raggiungono la soglia) passa a &quot;Open&quot; (in alto a destra). In &quot;Open&quot; le chiamate vengono rifiutate: una freccia ad anello riporta &quot;call / raise circuit open&quot;. Dopo &quot;reset timeout&quot; (scadenza del timer) passa a &quot;Half Open&quot; (in basso a destra). Da &quot;Half Open&quot;: se la chiamata di prova ha &quot;success&quot; torna a &quot;Closed&quot;; se &quot;fail&quot; torna a &quot;Open&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Closed; Open; Half Open</p>
+<p>Transizioni: success (Closed→Closed); fail [under threshold] (Closed→Closed); fail [threshold reached] (Closed→Open); call / raise circuit open (Open→Open); reset timeout (Open→Half Open); success (Half Open→Closed); fail (Half Open→Open).</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> RESILIENZA</p>
+<p>circuit breaker</p>
+<figure class="immagine" aria-labelledby="fig-52-3-t">
+<img src="immagini/eadb0713cd.jpg" alt="Schermata di Kiali, il grafico del traffico tra microservizi nel namespace travel-agency, con servizi collegati da frecce e tempi di risposta." loading="lazy">
+<figcaption>
+<h3 id="fig-52-3-t">Immagine: Schermata di Kiali, il grafico del traffico tra microservizi nel namespace travel-agency, con servizi collegati da frecce e tempi di risposta.</h3>
+<p><strong>Descrizione.</strong> Screenshot parziale (tagliato in basso) di Kiali, la console di osservabilità per Istio. In alto una barra di controllo: namespace &quot;travel-agency&quot;, vista &quot;Traffic&quot;, tipo &quot;App graph&quot;, intervallo &quot;Last 1m&quot;, pulsanti Pause e aggiorna, &quot;Graph tour&quot;. Al centro il grafo: ogni servizio è un riquadro con un triangolo (workload) e un quadrato (servizio): &quot;flights&quot;, &quot;insurances&quot;, &quot;mysqldb&quot;, &quot;discounts&quot;, più &quot;voyages (travel-portal)&quot; in basso a sinistra. Le frecce mostrano il traffico: verdi se le richieste vanno a buon fine, rosse se ci sono errori (una freccia rossa parte da &quot;voyages&quot;), con etichette del tempo di risposta (20 ms, 23 ms, 35 ms, 6 ms). A destra un pannello con l&#x27;applicazione &quot;travels&quot; e la tabella delle richieste HTTP al secondo: In 0,80 totali, 86,25% successi, 13,75% errori; Out 1,71 totali, 93,57% successi, 6,43% errori; sotto due barre orizzontali quasi interamente verdi con una piccola parte rossa.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Namespace: travel-agency · Traffic · App graph · Last 1m · Pause · Display · Find… · Hide… · Graph tour</p>
+<p>Oct 11, 01:39:03 PM … 01:40:03 PM</p>
+<p>Nodi: flights (1 host), flights, insurances, mysqldb, discounts, voyages (travel-portal). Tempi: 20ms, 23ms, 35ms, 6ms.</p>
+<p>Pannello: A travels · health · S travels</p>
+<p>HTTP (requests per second): Total / %Success / %Error — In 0.80 / 86.25 / 13.75; Out 1.71 / 93.57 / 6.43</p>
+<p>Legenda: OK, 3xx, 4xx, 5xx, NR</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> OSSERVABILITÀ</p>
+<p>topologia e tracing</p>
+<p>Deploy autonomi, scala selettiva e partial degradation richiedono automazione, pattern di resilienza e diagnosi distribuita.</p>
+<p>Figure originali: Microservices-Architectures_v3.pdf, pp. 47, 63 e 76</p>
+
+</article><article id="slide-53" aria-labelledby="slide-53-t">
+<h2 id="slide-53-t"><span class="num">Slide 53.</span> Il confine giusto parte dal dominio</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-53-1-t">
+<img src="immagini/cac4cda892.png" alt="Schema ArchiMate che collega progetti, servizi, processo, componente applicativo e server con relazioni &quot;Realizes&quot; e &quot;Used by&quot;." loading="lazy">
+<figcaption>
+<h3 id="fig-53-1-t">Immagine: Schema ArchiMate che collega progetti, servizi, processo, componente applicativo e server con relazioni &quot;Realizes&quot; e &quot;Used by&quot;.</h3>
+<p><strong>Descrizione.</strong> Diagramma in notazione ArchiMate, in inglese, organizzato in tre colonne. Colonna centrale, dall&#x27;alto in basso: &quot;Business service&quot; (giallo), &quot;Business process&quot; (giallo), &quot;Application service&quot; (azzurro), &quot;Application component&quot; (azzurro) e &quot;Server&quot; (verde). Le relazioni sono: il Business process realizza il Business service (&quot;Realizes&quot;); l&#x27;Application service è usato dal Business process (&quot;Used by&quot;); l&#x27;Application component realizza l&#x27;Application service; il Server realizza l&#x27;Application component. Colonna sinistra (riquadri rosa): &quot;Business Transformation Project&quot;, che realizza il Business service, e &quot;IT Development Project&quot;, che realizza l&#x27;Application service. Colonna destra (riquadri viola): &quot;Business Goal&quot;, realizzato dal Business service, e &quot;IT Goal&quot;, realizzato dall&#x27;Application service.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Business Transformation Project —Realizes→ Business service —Realizes→ Business Goal</p>
+<p>Business process —Realizes→ Business service</p>
+<p>Application service —Used by→ Business process</p>
+<p>IT Development Project —Realizes→ Application service —Realizes→ IT Goal</p>
+<p>Application component —Realizes→ Application service</p>
+<p>Server —Realizes→ Application component</p>
+</figcaption></figure>
+<h3>Business</h3>
+<p>Capacità e processi</p>
+<h3>Servizio</h3>
+<p>Responsabilità coesa</p>
+<p>Il confine segue il dominio: non coincide automaticamente con server, team o livelli tecnici.</p>
+<h3>Dati</h3>
+<p>Ownership e modello</p>
+<h3>API</h3>
+<p>Contratto esplicito</p>
+<p>Figura originale: appunti “ARCHITETTURE MICROSERVIZI…”, schema ArchiMate/DDD</p>
+
+</article><article id="slide-54" aria-labelledby="slide-54-t">
+<h2 id="slide-54-t"><span class="num">Slide 54.</span> Il contratto API: quattro ingredienti</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-54-102-t">
+<img src="immagini/9385517ac9.jpg" alt="Schema del flusso di una richiesta HTTP GET in un microservizio Spring Boot: dal client al mapping della rotta, dei parametri, della logica di business e alla risposta JSON." loading="lazy">
+<figcaption>
+<h3 id="fig-54-102-t">Immagine: Schema del flusso di una richiesta HTTP GET in un microservizio Spring Boot: dal client al mapping della rotta, dei parametri, della logica di business e alla risposta JSON.</h3>
+<p><strong>Descrizione.</strong> Figura da un libro sui microservizi con Spring Boot. A sinistra la sagoma di un utente (client) invia una richiesta &quot;GET http://localhost:8080/hello/john/carnell&quot; a un server (pila di tre unità viola) e riceve &quot;HTTP STATUS:200&quot; con il corpo {&quot;message&quot;: &quot;Hello john carnell&quot;}. Sotto il server c&#x27;è un riquadro verde &quot;Flow of Spring Boot microservice&quot; con cinque passaggi in sequenza, collegati da frecce verso il basso: &quot;Route mapping&quot;, &quot;Parameter destructuring&quot;, &quot;JSON-&gt;Java object mapping&quot;, &quot;Business logic execution&quot;, &quot;Java-&gt;JSON object mapping&quot;. Ogni passaggio e la richiesta/risposta hanno una didascalia con freccia.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>GET http://localhost:8080/hello/john/carnell</p>
+<p>HTTP STATUS:200 {&quot;message&quot;: &quot;Hello john carnell&quot;}</p>
+<p>&quot;A client makes an HTTP GET request to your Hello microservice.&quot;</p>
+<p>&quot;The client receives the response from your service as JSON. The success or failure of the call is returned as an HTTP status code.&quot;</p>
+<p>Flow of Spring Boot microservice: Route mapping → Parameter destructuring → JSON-&gt;Java object mapping → Business logic execution → Java-&gt;JSON object mapping.</p>
+<p>&quot;Spring Boot will parse the HTTP request and map the route based on the HTTP Verb, the URL, and potential parameters defined for the URL. A route maps to a method in a Spring RestController class.&quot;</p>
+<p>&quot;Once Spring Boot has identified the route it will map any parameters defined inside the route to a Java method that will carry out the work.&quot;</p>
+<p>&quot;For an HTTP PUT or Post, a JSON passed in the HTTP body is mapped to a Java class.&quot;</p>
+<p>&quot;Once all of the data has been mapped, Spring Boot will execute the business logic.&quot;</p>
+<p>&quot;Once the business logic is executed, Spring Boot will convert a Java object to JSON.&quot;</p>
+</figcaption></figure>
+<h3>I quattro ingredienti del contratto API</h3>
+<p>Quattro riquadri numerati:</p>
+<ol>
+<li><strong>Servizi</strong>: cosa è disponibile.</li>
+<li><strong>Input</strong>: cosa inviare.</li>
+<li><strong>Output</strong>: cosa ritorna.</li>
+<li><strong>Schemi</strong>: forma e tipi dei dati.</li>
+</ol>
+<p>Una specifica formale consente documentazione, validazione, mocking e generazione di strumenti.</p>
+
+
+</article><article id="slide-55" aria-labelledby="slide-55-t">
+<h2 id="slide-55-t"><span class="num">Slide 55.</span> API Gateway: un punto di ingresso, molte policy</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-55-1-t">
+<img src="immagini/6d8c764f99.jpg" alt="Schema &quot;Using a single custom API Gateway service&quot;: tre tipi di client passano da un unico API Gateway verso tre microservizi nel back end." loading="lazy">
+<figcaption>
+<h3 id="fig-55-1-t">Immagine: Schema &quot;Using a single custom API Gateway service&quot;: tre tipi di client passano da un unico API Gateway verso tre microservizi nel back end.</h3>
+<p><strong>Descrizione.</strong> Diagramma Microsoft in inglese. A sinistra tre client: &quot;Client mobile app&quot; (telefono) e &quot;Client SPA Web app&quot; (JavaScript/Angular.js) inviano richieste in formato JSON; &quot;Traditional Web app&quot; (un browser) comunica in HTML con il &quot;Client WebApp MVC&quot; (contenitore ASP.NET Core MVC). Tutti questi client confluiscono, con frecce, in un unico riquadro &quot;API Gateway&quot; (contenitore, ASP.NET Core WebHost). Il gateway, a sua volta, instrada le richieste verso tre riquadri, &quot;Microservice 1&quot;, &quot;Microservice 2&quot; e &quot;Microservice 3&quot;, ciascuno una Web API in un container. Tutto tranne i client e il browser sta dentro un grande riquadro tratteggiato chiamato &quot;Back end&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Using a single custom API Gateway service</p>
+<p>Client mobile app —JSON→ API Gateway</p>
+<p>Client SPA Web app (JavaScript/Angular.js) —JSON→ API Gateway</p>
+<p>Traditional Web app (Browser) ←HTML→ Client WebApp MVC (ASP.NET Core MVC container) → API Gateway</p>
+<p>API Gateway (container, ASP.NET Core WebHost) → Microservice 1 (Web API container); Microservice 2 (Web API container); Microservice 3 (Web API container)</p>
+<p>Riquadro &quot;Back end&quot;.</p>
+</figcaption></figure>
+<h3>Policy trasversali</h3>
+<p>Routing e versioni</p>
+<p>Autenticazione</p>
+<p>Rate limiting e quote</p>
+<p>Caching e CORS</p>
+<p>Logging e metriche</p>
+<figure class="immagine" aria-labelledby="fig-55-2-t">
+<img src="immagini/6e39248569.jpg" alt="Schema &quot;OAuth Dance&quot;: il client ottiene un token dal provider OAuth e lo usa per chiamare l&#x27;API, che lo fa validare dal provider." loading="lazy">
+<figcaption>
+<h3 id="fig-55-2-t">Immagine: Schema &quot;OAuth Dance&quot;: il client ottiene un token dal provider OAuth e lo usa per chiamare l&#x27;API, che lo fa validare dal provider.</h3>
+<p><strong>Descrizione.</strong> Diagramma con tre elementi: in alto &quot;Client application&quot;, a sinistra &quot;OAuth provider&quot;, in basso &quot;API&quot;, quest&#x27;ultimo racchiuso in un grande cerchio rosso con l&#x27;etichetta &quot;OAuth 2.0 Access Token Enforcement Using External Provider policy&quot;. Sette frecce numerate descrivono la sequenza. Frecce tratteggiate tra client e provider: 1 il client chiede l&#x27;autorizzazione al provider e 2 riceve il token (percorsi &quot;/authorize&quot; e &quot;/access_token&quot;). Frecce azzurre piene: 3 il client chiama l&#x27;API con il token e 7 l&#x27;API restituisce la risposta al client. Frecce tratteggiate tra API e provider: 4 e 5, rispettivamente la richiesta di validazione del token (&quot;/validate&quot;) al provider e la risposta; la freccia 6 indica che, a validazione riuscita, l&#x27;API elabora la richiesta.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>OAuth Dance</p>
+<p>Client application; OAuth provider; API</p>
+<p>1, 2: /authorize, /access_token (tra client e provider)</p>
+<p>3: client → API</p>
+<p>4, 5: /validate (tra API e provider)</p>
+<p>6: dentro l&#x27;API</p>
+<p>7: API → client</p>
+<p>Etichetta: &quot;OAuth 2.0 Access Token Enforcement Using External Provider policy&quot;</p>
+</figcaption></figure>
+<p>Figure originali: Microservices-Architectures_v3.pdf, pp. 64 e 78</p>
+
+</article><article id="slide-56" aria-labelledby="slide-56-t">
+<h2 id="slide-56-t"><span class="num">Slide 56.</span> Container: immagine, istanza, runtime</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-56-1-t">
+<img src="immagini/5c98560f99.jpg" alt="Schema dell&#x27;architettura Docker: sotto, hardware e sistema operativo; sopra, la parte utente con Docker CLI e daemon e tre container isolati." loading="lazy">
+<figcaption>
+<h3 id="fig-56-1-t">Immagine: Schema dell&#x27;architettura Docker: sotto, hardware e sistema operativo; sopra, la parte utente con Docker CLI e daemon e tre container isolati.</h3>
+<p><strong>Descrizione.</strong> Schema a strati. In basso l&#x27;hardware: riquadri &quot;CPU&quot;, &quot;Memory&quot; e &quot;IO&quot; (che comprende &quot;Network interface&quot;, &quot;Persistent storage&quot; e &quot;Devices&quot;). Sopra l&#x27;hardware, a tutta larghezza, il riquadro &quot;Operating system&quot;. Sopra il sistema operativo la fascia &quot;User space&quot;: a sinistra un&#x27;area verde con &quot;Command line&quot;, che invia comandi con una freccia a &quot;Docker CLI&quot;, il quale a sua volta comunica con &quot;Docker daemon&quot;. A destra tre colonne affiancate, ognuna uno spazio isolato che condivide lo stesso sistema operativo: &quot;Container space A&quot; con &quot;Web server&quot;, &quot;Container space B&quot; con &quot;Hello World&quot;, &quot;Container space C&quot; con &quot;Database&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>User space: Command line → Docker CLI → Docker daemon</p>
+<p>Container space A: Web server</p>
+<p>Container space B: Hello World</p>
+<p>Container space C: Database</p>
+<p>Operating system</p>
+<p>CPU; Memory; IO (Network interface, Persistent storage, Devices)</p>
+</figcaption></figure>
+<h3>Quattro livelli</h3>
+<ul><li>Dockerfile: istruzioni</li><li>Immagine: layer versionati</li><li>Registry: distribuzione</li><li>Container: processo isolato</li></ul>
+<p>Il runtime gestisce il ciclo di vita; i dati durevoli richiedono volumi.</p>
+<p>Figura originale: Microservices-Architectures_v3.pdf, p. 80; testo: appunti Docker/Kubernetes</p>
+
+</article><article id="slide-57" aria-labelledby="slide-57-t">
+<h2 id="slide-57-t"><span class="num">Slide 57.</span> VM e container: due livelli di isolamento</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<h3>Macchina virtuale</h3>
+<p>Applicazione</p>
+<p>Guest OS</p>
+<p>Hypervisor</p>
+<p>Hardware</p>
+<h3>Container</h3>
+<p>Applicazione + dipendenze</p>
+<p>Container runtime</p>
+<p>Host OS / kernel</p>
+<p>Hardware</p>
+<figure class="immagine" aria-labelledby="fig-57-1-t">
+<img src="immagini/ae0589a117.jpg" alt="Fotografia di un piazzale con container da trasporto colorati impilati e un camion che ne trasporta uno, al tramonto." loading="lazy">
+<figcaption>
+<h3 id="fig-57-1-t">Immagine: Fotografia di un piazzale con container da trasporto colorati impilati e un camion che ne trasporta uno, al tramonto.</h3>
+<p><strong>Descrizione.</strong> Fotografia decorativa usata come metafora del container software: a destra pile di container metallici standard, rossi e gialli, alte più file; a sinistra un camion con un container giallo; sullo sfondo una collina verde e il sole basso che illumina il cielo di arancione.</p>
+</figcaption></figure>
+<p>Spesso i container girano dentro VM: i due modelli si combinano.</p>
+<p>Figura originale: Microservices-Architectures_v3.pdf, p. 82; confronto dagli appunti Docker/Kubernetes</p>
+
+</article><article id="slide-58" aria-labelledby="slide-58-t">
+<h2 id="slide-58-t"><span class="num">Slide 58.</span> Perché serve un orchestratore</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-58-1-t">
+<img src="immagini/fa7af83610.jpg" alt="Prima parte dello schema sul service discovery: le applicazioni client controllano una cache locale degli indirizzi IP delle istanze del servizio." loading="lazy">
+<figcaption>
+<h3 id="fig-58-1-t">Immagine: Prima parte dello schema sul service discovery: le applicazioni client controllano una cache locale degli indirizzi IP delle istanze del servizio.</h3>
+<p><strong>Descrizione.</strong> Ritaglio superiore di una figura da un libro sui microservizi. In alto la didascalia numero 1; sotto due icone di server azzurri con la scritta &quot;Client applications&quot;. Una linea esce da un&#x27;applicazione client e scende verso la parte inferiore dello schema (mostrata nelle altre due immagini della sequenza). A destra inizia la didascalia numero 3, tagliata.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>1. When a service client needs to call a service it will check a local cache for the service instance IPs. Load balancing between service instances will occur on the service.</p>
+<p>Client applications</p>
+<p>3. Periodically, the client-side cache will be refreshed with the … (testo tagliato)</p>
+</figcaption></figure>
+<p>1. Trova istanze sane</p>
+<figure class="immagine" aria-labelledby="fig-58-2-t">
+<img src="immagini/a7c720de85.jpg" alt="Dettaglio di uno schema sul service discovery: due riquadri &quot;Client-side cache/load balancing&quot; con frecce verso il &quot;Service discovery layer&quot;, formato da tre nodi collegati tra loro." loading="lazy">
+<figcaption>
+<h3 id="fig-58-2-t">Immagine: Dettaglio di uno schema sul service discovery: due riquadri &quot;Client-side cache/load balancing&quot; con frecce verso il &quot;Service discovery layer&quot;, formato da tre nodi collegati tra loro.</h3>
+<p><strong>Descrizione.</strong> Parte centrale (ritaglio) di una figura più ampia da un libro sui microservizi; le altre parti sono mostrate in altre immagini della stessa sequenza. In alto due riquadri gialli, ciascuno con la scritta &quot;Client-side cache/load balancing&quot;, cioè la cache lato client che contiene gli indirizzi delle istanze dei servizi e bilancia il carico. Da ciascuno parte una freccia verso il basso che raggiunge il &quot;Service discovery layer&quot;, un riquadro verde con tre nodi (pile di server viola). I tre nodi sono collegati da frecce tratteggiate nei due sensi: si sincronizzano tra loro. Il testo sotto ogni nodo, &quot;Service discovery node 1/2/3&quot;, è visibile solo in parte. In alto a destra restano le ultime parole di una didascalia: &quot;service discovery layer.&quot;</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Client-side cache/load balancing (due riquadri)</p>
+<p>Service discovery layer</p>
+<p>Service discovery (nodi 1, 2, 3; testo tagliato)</p>
+<p>…service discovery layer.</p>
+</figcaption></figure>
+<p>2. Aggiorna la mappa</p>
+<figure class="immagine" aria-labelledby="fig-58-3-t">
+<img src="immagini/673d93141b.jpg" alt="Parte finale dello schema sul service discovery: le istanze del Service A inviano heartbeat ai nodi di discovery e un&#x27;istanza guasta è barrata con una X rossa." loading="lazy">
+<figcaption>
+<h3 id="fig-58-3-t">Immagine: Parte finale dello schema sul service discovery: le istanze del Service A inviano heartbeat ai nodi di discovery e un&#x27;istanza guasta è barrata con una X rossa.</h3>
+<p><strong>Descrizione.</strong> Ritaglio inferiore di una figura da un libro sui microservizi. In alto si intravede il fondo del riquadro verde con i tre nodi di discovery (&quot;Service discovery node 1&quot;, &quot;node 2&quot;, &quot;node 3&quot;). Sotto, un secondo riquadro verde chiamato &quot;Service A&quot; contiene quattro istanze del servizio (pile di server viola). Frecce verso l&#x27;alto collegano le istanze ai nodi di discovery: così le istanze si registrano. Quella più a destra ha una grande X rossa, cioè è guasta, e il suo collegamento tratteggiato è etichettato &quot;Heartbeat&quot;: il segnale periodico che, se manca, fa considerare l&#x27;istanza non disponibile. A sinistra la didascalia numero 2.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Service discovery node 1; node 2; node 3</p>
+<p>Heartbeat</p>
+<p>Service instances</p>
+<p>Service A</p>
+<p>2. If the client finds a service IP in the cache, it will use it. Otherwise it goes to the service discovery.</p>
+</figcaption></figure>
+<p>3. Esclude i guasti</p>
+<p>Scheduling • self-healing • scaling • networking • rollout</p>
+<p>Kubernetes osserva lo stato reale e lo riconcilia con quello desiderato.</p>
+<p>Sequenza originale: Microservices-Architectures_v3.pdf, p. 47; concetti: appunti Docker/Kubernetes</p>
+
+</article><article id="slide-59" aria-labelledby="slide-59-t">
+<h2 id="slide-59-t"><span class="num">Slide 59.</span> Kubernetes: dal cluster agli oggetti applicativi</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-59-1-t">
+<img src="immagini/33f0f672d2.png" alt="Architettura di Kubernetes: control plane con kube-apiserver ed etcd, due nodi worker con pod, kube-proxy, kubelet, e un load balancer verso gli utenti finali." loading="lazy">
+<figcaption>
+<h3 id="fig-59-1-t">Immagine: Architettura di Kubernetes: control plane con kube-apiserver ed etcd, due nodi worker con pod, kube-proxy, kubelet, e un load balancer verso gli utenti finali.</h3>
+<p><strong>Descrizione.</strong> Diagramma dell&#x27;architettura di un cluster Kubernetes, in inglese. A sinistra il riquadro azzurro &quot;Ctrl Plane - 1,2...n&quot; (il piano di controllo, replicabile su più macchine). Dentro, nell&#x27;area &quot;Containers&quot;, il &quot;kube-apiserver&quot; (riquadro giallo verticale) è collegato con frecce a &quot;cloud-controller-manager&quot;, &quot;kube-controller-manager&quot;, &quot;kube-scheduler&quot;, &quot;kube-proxy&quot; e &quot;Additional Services&quot;, e a &quot;etcd&quot;, il database di stato del cluster. Sotto, i &quot;System Services&quot; comprendono &quot;Container Runtime&quot; e &quot;kubelet&quot;. Sopra il piano di controllo due attori esterni: &quot;Cloud Provider API&quot; (collegata al cloud-controller-manager) e &quot;kubectl&quot; (l&#x27;utente amministratore, collegato al kube-apiserver). A destra due riquadri verdi uguali, &quot;Node 1&quot; e &quot;Node 2&quot; (i nodi worker): ciascuno contiene due &quot;pod&quot; nell&#x27;area Containers, &quot;kube-proxy&quot;, e nei System Services &quot;Container Runtime&quot; e &quot;kubelet&quot;. Il kube-apiserver comunica con il kubelet di ogni nodo. A destra della linea verticale tratteggiata &quot;Cloud Provider Network Edge&quot; ci sono un &quot;Load Balancer&quot;, collegato al kube-proxy di entrambi i nodi, e gli &quot;End Users&quot;, che lo raggiungono.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Cloud Provider API; kubectl</p>
+<p>Ctrl Plane - 1,2...n: Containers (cloud-controller-manager, kube-controller-manager, kube-scheduler, kube-proxy, Additional Services, kube-apiserver, etcd); System Services (Container Runtime, kubelet)</p>
+<p>Node 1 e Node 2: Containers (pod, pod, kube-proxy); System Services (Container Runtime, kubelet)</p>
+<p>Cloud Provider Network Edge; Load Balancer; End Users</p>
+</figcaption></figure>
+<h3>Due piani</h3>
+<p>Control plane</p>
+<p>API server, scheduler, controller, etcd</p>
+<p>Worker plane</p>
+<p>kubelet, runtime, rete e Pod applicativi</p>
+<p>Manifest → stato desiderato</p>
+<p><a href="https://killercoda.com/kubernetes">SANDBOX KUBERNETES</a></p>
+<p>Figura originale: appunti “ARCHITETTURE MICROSERVIZI…”, architettura Kubernetes</p>
+
+</article><article id="slide-60" aria-labelledby="slide-60-t">
+<h2 id="slide-60-t"><span class="num">Slide 60.</span> Cloud: cosa cambia davvero rispetto al data center</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<h3>Responsabilità gestita dal provider</h3>
+<p>Quattro livelli, dal più gestito dal provider al meno gestito:</p>
+<table>
+<thead>
+<tr>
+<th>Modello</th>
+<th>Cosa offre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SaaS</td>
+<td>applicazione pronta</td>
+</tr>
+<tr>
+<td>PaaS</td>
+<td>runtime e servizi gestiti</td>
+</tr>
+<tr>
+<td>IaaS</td>
+<td>compute, rete, storage</td>
+</tr>
+<tr>
+<td>On-prem</td>
+<td>hardware → applicazione (tutto a carico dell’organizzazione)</td>
+</tr>
+</tbody>
+</table>
+<h3>Il valore non è “avere server altrove”</h3>
+<p>Quattro vantaggi del cloud:</p>
+<ul>
+<li><strong>Elasticità</strong>: capacità on demand.</li>
+<li><strong>Managed services</strong>: meno componenti da operare.</li>
+<li><strong>Global reach</strong>: regioni, zone e rete.</li>
+<li><strong>Automazione</strong>: API, IaC (infrastructure as code) e policy.</li>
+</ul>
+<p><strong>Trade-off:</strong> più velocità e servizi, ma governance, costi e lock-in vanno progettati.</p>
+
+<p class="fonte"><strong>Fonte.</strong> Sintesi didattica: modello di responsabilità condivisa e servizi cloud</p>
+</article><article id="slide-61" aria-labelledby="slide-61-t">
+<h2 id="slide-61-t"><span class="num">Slide 61.</span> Quattro cloud principali: stesso vocabolario, accenti diversi</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<p>Quattro schede, una per ciascun provider; ogni scheda ha un collegamento al sito ufficiale.</p>
+<h3>AWS</h3>
+<p>Ampiezza di servizi, ecosistema cloud-native. <a href="https://aws.amazon.com/">Sito ufficiale AWS</a></p>
+<h3>Microsoft Azure</h3>
+<p>Identity, Microsoft stack e scenari hybrid. <a href="https://azure.microsoft.com/">Sito ufficiale Microsoft Azure</a></p>
+<h3>Google Cloud</h3>
+<p>Data e analytics, AI e Kubernetes. <a href="https://cloud.google.com/">Sito ufficiale Google Cloud</a></p>
+<h3>Oracle Cloud</h3>
+<p>Oracle Database, workload enterprise e multicloud. <a href="https://www.oracle.com/cloud/">Sito ufficiale Oracle Cloud</a></p>
+<p><strong>La scelta parte dal workload e dai vincoli, non dal logo.</strong></p>
+
+<p class="fonte"><strong>Fonte.</strong> Schede cliccabili: siti ufficiali AWS · Azure · Google Cloud · Oracle Cloud</p>
+</article><article id="slide-62" aria-labelledby="slide-62-t">
+<h2 id="slide-62-t"><span class="num">Slide 62.</span> Polo Strategico Nazionale: il cloud sovrano per la PA</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<h3>PSN</h3>
+<p>Infrastruttura nazionale ad alta affidabilità per dati e servizi critici e strategici della PA.</p>
+<p>Non un quinto hyperscaler: un contesto di sovranità, sicurezza e continuità operativa.</p>
+<p>Collegamenti: <a href="https://www.polostrategiconazionale.it/">Sito PSN</a> · <a href="https://innovazione.gov.it/dipartimento/focus/polo-strategico-nazionale/">Pagina del Dipartimento per la trasformazione digitale</a></p>
+<h3>Cosa significa nella scelta architetturale</h3>
+<table>
+<thead>
+<tr>
+<th>Aspetto</th>
+<th>Che cosa implica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dati e servizi</td>
+<td>classificazione e criticità</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>private cloud, hybrid cloud, CSP (cloud service provider)</td>
+</tr>
+<tr>
+<td>Sovranità</td>
+<td>territorio, controllo, chiavi e responsabilità</td>
+</tr>
+<tr>
+<td>Resilienza</td>
+<td>continuità operativa e tolleranza ai guasti</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Domanda guida:</strong> quali vincoli pubblici cambiano region, servizio e modello operativo?</p>
+
+<p class="fonte"><strong>Fonte.</strong> Fonti: Dipartimento per la trasformazione digitale · Polo Strategico Nazionale</p>
+</article><article id="slide-63" aria-labelledby="slide-63-t">
+<h2 id="slide-63-t"><span class="num">Slide 63.</span> Confronto cloud: scegliere per scenario, non per slogan</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<h3>Confronto tra i quattro cloud</h3>
+<p>Tabella con i criteri sulle righe e i provider sulle colonne (AWS, Azure, Google, OCI = Oracle Cloud Infrastructure):</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>AWS</th>
+<th>Azure</th>
+<th>Google</th>
+<th>OCI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fit ricorrente</td>
+<td>ecosistema ampio</td>
+<td>Microsoft + hybrid</td>
+<td>data · AI · K8s</td>
+<td>Oracle workload</td>
+</tr>
+<tr>
+<td>Differenziatore</td>
+<td>maturità operativa</td>
+<td>identity/enterprise</td>
+<td>analytics/cloud-native</td>
+<td>DB + multicloud</td>
+</tr>
+<tr>
+<td>Verificare</td>
+<td>complessità/costi</td>
+<td>licenze e governance</td>
+<td>skill e copertura</td>
+<td>fit fuori stack Oracle</td>
+</tr>
+<tr>
+<td>Prima domanda</td>
+<td>servizi già usati?</td>
+<td>Microsoft è centrale?</td>
+<td>dati/AI dominano?</td>
+<td>DB Oracle è centrale?</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decisione:</strong> skill disponibili · data gravity · compliance/region · servizi gestiti · TCO/egress · exit strategy.</p>
+<p><a href="https://docs.cloud.google.com/docs/get-started/aws-azure-gcp-service-comparison">Mappa dei servizi AWS, Azure e GCP (Google Cloud)</a></p>
+
+<p class="fonte"><strong>Fonte.</strong> Sintesi didattica da documentazione ufficiale: validare sempre sul workload e con una prova di costo</p>
+</article><article id="slide-64" aria-labelledby="slide-64-t">
+<h2 id="slide-64-t"><span class="num">Slide 64.</span> Infrastructure as Code: l’infrastruttura entra nel ciclo Git</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<h3>Schema: il ciclo dell’infrastruttura come codice</h3>
+<p>Quattro riquadri in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Codice</strong>: risorse e policy.</li>
+<li><strong>Plan</strong>: diff (differenze) revisionabile.</li>
+<li><strong>Apply</strong>: chiamate alle API dei provider.</li>
+<li><strong>State</strong>: drift (scostamento tra stato reale e dichiarato) e output.</li>
+</ol>
+<h3>Esempio: file main.tf</h3>
+<pre><code>terraform {
+  required_providers {
+    google = { source = &quot;hashicorp/google&quot; }
+  }
+}
+resource &quot;google_storage_bucket&quot; &quot;assets&quot; {
+  name = &quot;corso-assets&quot;
+  location = &quot;EU&quot;
+}
+</code></pre>
+<h3>Perché</h3>
+<p>Versioning, review, ripetibilità, ambienti coerenti.</p>
+<h3>Attenzione</h3>
+<p>State remoto e lock · segreti fuori dal codice · versioni dei provider fissate · policy e test.</p>
+<p>Collegamenti: <a href="https://developer.hashicorp.com/terraform/intro">Terraform: introduzione</a> · <a href="https://registry.terraform.io/browse/providers">Registry dei provider</a></p>
+
+<p class="fonte"><strong>Fonte.</strong> Fonte: HashiCorp Terraform documentation e Registry</p>
+</article><article id="slide-65" aria-labelledby="slide-65-t">
+<h2 id="slide-65-t"><span class="num">Slide 65.</span> Dai diagrammi al deployment: Architecture Center + Terraform</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<p>Due riquadri affiancati, uno per Google Cloud e uno per Oracle Cloud.</p>
+<h3>Google Cloud: Cloud Architecture Center</h3>
+<ul>
+<li>Reference architecture e design guidance.</li>
+<li>Well-Architected, landing zone, blueprint.</li>
+<li>Esempio evidenziato: Enterprise foundations blueprint e repository Terraform deployable.</li>
+<li>Collegamenti: <a href="https://cloud.google.com/architecture">Architecture Center</a> · <a href="https://docs.cloud.google.com/architecture/blueprints/security-foundations">Blueprint Terraform</a></li>
+</ul>
+<h3>Oracle Cloud: Oracle Architecture Center</h3>
+<ul>
+<li>Design pattern e reference architecture.</li>
+<li>Solution playbook e deployment code.</li>
+<li>Esempio evidenziato: soluzioni con GitHub Terraform e “Deploy to Oracle Cloud”.</li>
+<li>Collegamenti: <a href="https://docs.oracle.com/en/solutions/">Architecture Center</a> · <a href="https://docs.oracle.com/en-us/iaas/Content/dev/terraform/examples-templates.htm">Esempi Terraform</a></li>
+</ul>
+
+<p class="fonte"><strong>Fonte.</strong> Fonti ufficiali: Google Cloud Architecture Center · Oracle Architecture Center</p>
+</article><article id="slide-66" aria-labelledby="slide-66-t">
+<h2 id="slide-66-t"><span class="num">Slide 66.</span> Caso S21: DevOps è una catena di tracciabilità</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<h3>Schema: la catena di tracciabilità in sei passi</h3>
+<p>Sei riquadri numerati in sequenza da sinistra a destra, collegati da frecce:</p>
+<ol>
+<li><strong>Bisogno</strong>: Epic e Feature.</li>
+<li><strong>Lavoro</strong>: Story e Task.</li>
+<li><strong>Codice</strong>: Git e pull request (PR).</li>
+<li><strong>Verifica</strong>: CI e test.</li>
+<li><strong>Rilascio</strong>: artifact e deploy.</li>
+<li><strong>Misura</strong>: dashboard.</li>
+</ol>
+<p>Ogni passaggio produce evidenze collegate: requisito → ticket → commit → pull request → build → test → release.</p>
+<p><a href="https://thimoty.visualstudio.com/TitanoPortal/_workitems/recentlyupdated/">Apri TitanoPortal in Azure DevOps</a></p>
+
+
+</article><article id="slide-67" aria-labelledby="slide-67-t">
+<h2 id="slide-67-t"><span class="num">Slide 67.</span> Il team DevOps S21: responsabilità lungo il flusso</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-67-1-t">
+<img src="immagini/a37f8681de.png" alt="Organigramma del modello di collaborazione S21: team di sviluppo con analisti e sviluppatori, test factory, project manager e operations, con i flussi di epic, task, test e release." loading="lazy">
+<figcaption>
+<h3 id="fig-67-1-t">Immagine: Organigramma del modello di collaborazione S21: team di sviluppo con analisti e sviluppatori, test factory, project manager e operations, con i flussi di epic, task, test e release.</h3>
+<p><strong>Descrizione.</strong> Diagramma a riquadri e frecce, in inglese. In alto &quot;Program Manager&quot;, che comunica con due &quot;PM&quot; (uno a sinistra, uno a destra). A sinistra il &quot;Client&quot; dialoga con il primo PM e con il &quot;Business Analyst&quot;. Un grande riquadro arrotondato &quot;Team&quot; racchiude: &quot;Business Analyst&quot;, &quot;Functional Analyst&quot;, &quot;Project Lead / Architect&quot; e tre &quot;Dev&quot;, sotto i quali una doppia freccia &quot;Swarming&quot; indica che gli sviluppatori collaborano insieme sullo stesso lavoro. Le frecce portano le etichette &quot;&lt;&lt;Epic&gt;&gt;&quot;, &quot;&lt;&lt;Function&gt;&gt;&quot;, &quot;&lt;&lt;Task&gt;&gt;&quot; e &quot;&lt;&lt;Sprint Planning&gt;&gt;&quot;; due icone indicano gli strumenti: un foglio Excel e il logo di Azure DevOps (accanto agli sviluppatori). A destra la test factory: &quot;Test Factory Manager&quot;, che coordina due &quot;Test Lead&quot; e due &quot;Tester&quot;; le etichette &quot;&lt;&lt;Test Plans&gt;&gt;&quot; e &quot;&lt;&lt;Test Case&gt;&gt;&quot; descrivono ciò che passa tra project lead e test. In basso &quot;Operations&quot;, che riceve dal Project Lead del team e dal Project Lead / Architect di destra l&#x27;etichetta &quot;&lt;&lt;Release&gt;&gt;&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Program Manager; PM; PM; Client; Business Analyst; Functional Analyst; Project Lead / Architect; Dev; Dev; Dev; Swarming; Test Factory Manager; Test Lead; Test Lead; Tester; Tester; Project Lead / Architect; Operations; Team.</p>
+<p>Etichette: &lt;&lt;Epic&gt;&gt;, &lt;&lt;Function&gt;&gt;, &lt;&lt;Task&gt;&gt;, &lt;&lt;Sprint Planning&gt;&gt;, &lt;&lt;Test Plans&gt;&gt;, &lt;&lt;Test Case&gt;&gt;, &lt;&lt;Release&gt;&gt;.</p>
+</figcaption></figure>
+<h3>Lettura</h3>
+<ul><li>Analista funzionale: bisogno e criteri</li><li>Architect/lead: disegno e coordinamento</li><li>Developer: implementazione e review</li><li>Tester/QA: evidenze e difetti</li><li>Operations: rilascio ed esercizio</li></ul>
+<p>Il lavoro attraversa ruoli diversi; la piattaforma conserva i collegamenti.</p>
+<p>Figura 1 originale: struttura organizzativa S21 per l&#x27;adozione DevOps</p>
+
+</article><article id="slide-68" aria-labelledby="slide-68-t">
+<h2 id="slide-68-t"><span class="num">Slide 68.</span> Dal requisito al ticket: una gerarchia verificabile</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<h3>Schema: la gerarchia del lavoro</h3>
+<p>Cinque riquadri in sequenza da sinistra a destra, collegati da frecce; ciascuno è un livello più dettagliato del precedente:</p>
+<ol>
+<li><strong>Iniziativa</strong>: contenitore.</li>
+<li><strong>Epic</strong>: obiettivo.</li>
+<li><strong>Feature</strong>: caso d’uso.</li>
+<li><strong>User story</strong>: valore per l’utente.</li>
+<li><strong>Task / Bug</strong>: lavoro tecnico.</li>
+</ol>
+<p>Sotto lo schema:</p>
+<ul>
+<li>Catena dei documenti: BRD → dominio → Use Case → Feature → User Story → Sequence Diagram → Task.</li>
+<li><strong>DoR</strong> (Definition of Ready), prima di iniziare: titolo, bisogno, criteri di accettazione, stima e dipendenze.</li>
+<li><strong>DoD</strong> (Definition of Done), per chiudere: criteri soddisfatti, task chiusi, codice revisionato e validazione completata.</li>
+</ul>
+
+
+</article><article id="slide-69" aria-labelledby="slide-69-t">
+<h2 id="slide-69-t"><span class="num">Slide 69.</span> Ticket e board: dal chiarimento al lavoro quotidiano</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-69-1-t">
+<img src="immagini/5d53c2c59f.png" alt="Azure DevOps: scheda di un Task con descrizione in formato Card e conversazione tra PO, Dev e QA sull&#x27;integrazione con SPID e CIE." loading="lazy">
+<figcaption>
+<h3 id="fig-69-1-t">Immagine: Azure DevOps: scheda di un Task con descrizione in formato Card e conversazione tra PO, Dev e QA sull&#x27;integrazione con SPID e CIE.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps (progetto &quot;TitanoPortal&quot;), pagina di dettaglio del work item &quot;TASK 30 – Configurare integrazione SirioGatewayKeycloak per SPID/CIE&quot;. A sinistra il menu del progetto (Overview, Boards, Work items, Backlogs, Sprints, Queries, Delivery Plans, Analytics views, Repos, Pipelines, Test Plans, Artifacts). Il task è assegnato a Thimoty Barbieri, stato &quot;Active&quot;, area TitanoPortal\Middleware, iterazione &quot;Sprint 1 – Fondamenta (Auth e Multi-Tenant)&quot;. La descrizione ha la forma di una &quot;Card&quot; (Ruolo, Cosa, Perché) seguita da una &quot;Conversation&quot; che simula il dialogo tra Product Owner (PO), sviluppatore (Dev) e tester (QA). A destra: Planning (priorità 2, attività Development), Effort in ore (stima originale 24, rimanenti 20, completate 4), Deployment, Development (link a commit, pull request o branch), Related Work con il padre &quot;29 RF-02 – Login con SPID/CIE&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal — Queries › Shared Queries › Task con CCC — 2 of 11 work items</p>
+<p>TASK 30 — 30 Configurare integrazione SirioGatewayKeycloak per SPID/CIE</p>
+<p>Thimoty Barbieri; 0 Comments; tag: ccc. Updated by Thimoty Barbieri: 1 mar</p>
+<p>State: Active; Area: TitanoPortal\Middleware; Reason: Work started; Iteration: TitanoPortal\Sprint 1 – Fondamenta (Auth e Multi-Tenant)</p>
+<p>Description:</p>
+<p>Card</p>
+<p>Ruolo: Backend Developer / DevOps</p>
+<p>Cosa: Configurare il realm Keycloak e il broker SAML2 per consentire il login federato tramite SPID e CIE attraverso SirioGatewayKeycloak.</p>
+<p>Perché: I cittadini devono potersi autenticare con la propria identità digitale nazionale senza creare credenziali native; Keycloak è il punto di orchestrazione.</p>
+<p>Conversation</p>
+<p>PO: Dobbiamo supportare sia SPID che CIE. Il cliente usa già AgID come identity provider di test — abbiamo accesso?</p>
+<p>Dev: Sì, ho le credenziali per l&#x27;ambiente AgID di collaudo. Configurerò il broker SAML2 nel realm TitanoPortal puntando all&#x27;IdP di test per lo sviluppo e all&#x27;IdP di produzione AgID per il go-live.</p>
+<p>QA: Come gestiamo i certificati SSL per la firma delle AuthnRequest SAML?</p>
+<p>Dev: Genero un certificato self-signed per lo sviluppo e in produzione userò quello fornito da AgID. Il keystore va configurato in Keycloak lato broker — lo documenterò nel wiki.</p>
+<p>PO: E se l&#x27;utente sceglie SPID ma l&#x27;IdP di AgID è down?</p>
+<p>Planning: Priority 2; Activity Development</p>
+<p>Effort (Hours): Original Estimate 24; Remaining 20; Completed 4</p>
+<p>Deployment: To track releases associated with this work item, go to Releases and turn on deployment status reporting for Boards in your pipeline&#x27;s Options menu. Learn more about deployment status reporting.</p>
+<p>Development: Add link. Link an Azure Repos commit, pull request or branch to see the status of your development. You can also create a branch to get started.</p>
+<p>Related Work: Parent — 29 RF-02 – Login con SPID/CIE (Updated 1 mar, Active)</p>
+</figcaption></figure>
+<h3>User story / task con CCC</h3>
+<figure class="immagine" aria-labelledby="fig-69-2-t">
+<img src="immagini/a4bb19ab08.png" alt="Azure DevOps: Taskboard dello Sprint 1 del team Titano Portal con tre card nelle colonne New e Active." loading="lazy">
+<figcaption>
+<h3 id="fig-69-2-t">Immagine: Azure DevOps: Taskboard dello Sprint 1 del team Titano Portal con tre card nelle colonne New e Active.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps (progetto Software Factory S21, Boards › Sprints) con il Taskboard del &quot;Titano Portal Team&quot;. Colonne: New, Active, Testing, Tested. Nella colonna New: la user story 22 &quot;Come cittadino, voglio visualizzare la lista delle notifiche&quot;, non assegnata, e il task 58 &quot;API Lista notifiche&quot;, assegnato a thimoty@thim…, con tag &quot;Back-end&quot;. Nella colonna Active, su sfondo verde: il task 57 &quot;Implementare card area notifiche&quot;, assegnato a Stefano Fiora, con tag &quot;Front-end&quot;. Le colonne Testing e Tested sono vuote. A destra il pannello &quot;Work details&quot; e, in alto a destra, il periodo dello sprint: dal 2 al 28 febbraio, 19 giorni lavorativi rimanenti.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Azure DevOps — Safety21SPA / Software Factory S21 / Boards / Sprints</p>
+<p>Titano Portal Team — Taskboard · Backlog · Capacity · Analytics</p>
+<p>Sprint1; Person: All; 2 febbraio - 28 febbraio; 19 work days remaining</p>
+<p>Colonne: New, Active, Testing, Tested</p>
+<p>New: 22 &quot;Come cittadino, voglio visualizzare la lista delle notifiche&quot; — New — Unassigned. 58 &quot;API Lista notifiche&quot; — New — thimoty@thim… — Back-end.</p>
+<p>Active: 57 &quot;Implementare card area notifiche&quot; — Active — Stefano Fiora — Front-end.</p>
+<p>Work details: &quot;Read more on how to set capacity for team and team members&quot;</p>
+</figcaption></figure>
+<h3>Sprint board e stato del flusso</h3>
+<p>Figure originali S21: User Story con Card-Conversation-Confirmation e Sprint Board</p>
+
+</article><article id="slide-70" aria-labelledby="slide-70-t">
+<h2 id="slide-70-t"><span class="num">Slide 70.</span> Git: il codice avanza per branch e controlli</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-70-103-t">
+<img src="immagini/917f8a4aa8.png" alt="Diagramma Git Flow di Vincent Driessen: branch master, hotfixes, release, develop e feature nel tempo, con i tag 0.1, 0.2 e 1.0." loading="lazy">
+<figcaption>
+<h3 id="fig-70-103-t">Immagine: Diagramma Git Flow di Vincent Driessen: branch master, hotfixes, release, develop e feature nel tempo, con i tag 0.1, 0.2 e 1.0.</h3>
+<p><strong>Descrizione.</strong> Diagramma disegnato a mano con il tempo che scorre dall&#x27;alto verso il basso (freccia verticale &quot;Time&quot; a sinistra). Cinque colonne, da sinistra a destra: &quot;feature branches&quot; (cerchi rosa), &quot;develop&quot; (cerchi gialli), &quot;release branches&quot; (cerchi verdi), &quot;hotfixes&quot; (cerchio rosso) e &quot;master&quot; (cerchi azzurri). Ogni cerchio è un commit e le frecce indicano i merge. In alto &quot;master&quot; ha il commit etichettato &quot;Tag 0.1&quot;; da lì parte &quot;develop&quot;. Dalle feature branch, create da develop, i commit vengono riuniti in develop quando la funzione è pronta (&quot;Major feature for next release&quot;, &quot;Feature for future release&quot;). Un hotfix parte da master per correggere un bug grave in produzione (&quot;Severe bug fixed for production: hotfix 0.2&quot;), viene riunito in master con &quot;Tag 0.2&quot; e anche in develop (&quot;Incorporate bugfix in develop&quot;). Poi da develop parte una release branch (&quot;Start of release branch for 1.0&quot;): da quel punto &quot;next release&quot; significa la release successiva alla 1.0; sulla release branch si fanno &quot;Only bugfixes!&quot;, che possono essere riportati in continuazione in develop (&quot;Bugfixes from rel. branch may be continuously merged back into develop&quot;); alla fine la release branch viene riunita in master con &quot;Tag 1.0&quot; e in develop. In fondo una nuova release branch porta a un ulteriore commit su master.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Colonne: feature branches; develop; release branches; hotfixes; master. Asse: Time.</p>
+<p>Fumetti: &quot;Tag 0.1&quot;; &quot;Tag 0.2&quot;; &quot;Tag 1.0&quot;; &quot;Feature for future release&quot;; &quot;Major feature for next release&quot;; &quot;Severe bug fixed for production: hotfix 0.2&quot;; &quot;Incorporate bugfix in develop&quot;; &quot;Start of release branch for 1.0&quot;; &quot;From this point on, &#x27;next release&#x27; means the release after 1.0&quot;; &quot;Only bugfixes!&quot;; &quot;Bugfixes from rel. branch may be continuously merged back into develop&quot;.</p>
+</figcaption></figure>
+<h3>Git Flow</h3>
+<p><strong>Branch principali:</strong></p>
+<ul>
+<li><code>master</code>: produzione e release.</li>
+<li><code>develop</code>: integrazione della prossima release.</li>
+</ul>
+<p>Branch di supporto: <code>feature/*</code>, <code>release/*</code>, <code>hotfix/*</code>.</p>
+<h3>Quando è adatto?</h3>
+<p>Software versionato, o più versioni supportate contemporaneamente.</p>
+<h3>Nota 2020</h3>
+<p>Per la continuous delivery Driessen suggerisce un workflow più semplice, come GitHub Flow.</p>
+<p><a href="https://nvie.com/posts/a-successful-git-branching-model/">Apri l’articolo originale di Vincent Driessen</a></p>
+
+
+</article><article id="slide-71" aria-labelledby="slide-71-t">
+<h2 id="slide-71-t"><span class="num">Slide 71.</span> Pull Request: il punto di controllo prima del merge</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-71-104-t">
+<img src="immagini/5d53c2c59f.png" alt="Azure DevOps: scheda di un Task con descrizione in formato Card e conversazione tra PO, Dev e QA sull&#x27;integrazione con SPID e CIE." loading="lazy">
+<figcaption>
+<h3 id="fig-71-104-t">Immagine: Azure DevOps: scheda di un Task con descrizione in formato Card e conversazione tra PO, Dev e QA sull&#x27;integrazione con SPID e CIE.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps (progetto &quot;TitanoPortal&quot;), pagina di dettaglio del work item &quot;TASK 30 – Configurare integrazione SirioGatewayKeycloak per SPID/CIE&quot;. A sinistra il menu del progetto (Overview, Boards, Work items, Backlogs, Sprints, Queries, Delivery Plans, Analytics views, Repos, Pipelines, Test Plans, Artifacts). Il task è assegnato a Thimoty Barbieri, stato &quot;Active&quot;, area TitanoPortal\Middleware, iterazione &quot;Sprint 1 – Fondamenta (Auth e Multi-Tenant)&quot;. La descrizione ha la forma di una &quot;Card&quot; (Ruolo, Cosa, Perché) seguita da una &quot;Conversation&quot; che simula il dialogo tra Product Owner (PO), sviluppatore (Dev) e tester (QA). A destra: Planning (priorità 2, attività Development), Effort in ore (stima originale 24, rimanenti 20, completate 4), Deployment, Development (link a commit, pull request o branch), Related Work con il padre &quot;29 RF-02 – Login con SPID/CIE&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal — Queries › Shared Queries › Task con CCC — 2 of 11 work items</p>
+<p>TASK 30 — 30 Configurare integrazione SirioGatewayKeycloak per SPID/CIE</p>
+<p>Thimoty Barbieri; 0 Comments; tag: ccc. Updated by Thimoty Barbieri: 1 mar</p>
+<p>State: Active; Area: TitanoPortal\Middleware; Reason: Work started; Iteration: TitanoPortal\Sprint 1 – Fondamenta (Auth e Multi-Tenant)</p>
+<p>Description:</p>
+<p>Card</p>
+<p>Ruolo: Backend Developer / DevOps</p>
+<p>Cosa: Configurare il realm Keycloak e il broker SAML2 per consentire il login federato tramite SPID e CIE attraverso SirioGatewayKeycloak.</p>
+<p>Perché: I cittadini devono potersi autenticare con la propria identità digitale nazionale senza creare credenziali native; Keycloak è il punto di orchestrazione.</p>
+<p>Conversation</p>
+<p>PO: Dobbiamo supportare sia SPID che CIE. Il cliente usa già AgID come identity provider di test — abbiamo accesso?</p>
+<p>Dev: Sì, ho le credenziali per l&#x27;ambiente AgID di collaudo. Configurerò il broker SAML2 nel realm TitanoPortal puntando all&#x27;IdP di test per lo sviluppo e all&#x27;IdP di produzione AgID per il go-live.</p>
+<p>QA: Come gestiamo i certificati SSL per la firma delle AuthnRequest SAML?</p>
+<p>Dev: Genero un certificato self-signed per lo sviluppo e in produzione userò quello fornito da AgID. Il keystore va configurato in Keycloak lato broker — lo documenterò nel wiki.</p>
+<p>PO: E se l&#x27;utente sceglie SPID ma l&#x27;IdP di AgID è down?</p>
+<p>Planning: Priority 2; Activity Development</p>
+<p>Effort (Hours): Original Estimate 24; Remaining 20; Completed 4</p>
+<p>Deployment: To track releases associated with this work item, go to Releases and turn on deployment status reporting for Boards in your pipeline&#x27;s Options menu. Learn more about deployment status reporting.</p>
+<p>Development: Add link. Link an Azure Repos commit, pull request or branch to see the status of your development. You can also create a branch to get started.</p>
+<p>Related Work: Parent — 29 RF-02 – Login con SPID/CIE (Updated 1 mar, Active)</p>
+</figcaption></figure>
+<h3>Le cinque condizioni prima del merge</h3>
+<p>Cinque riquadri numerati, in sequenza dall’alto verso il basso:</p>
+<ol>
+<li>Work item collegato.</li>
+<li>Reviewer nominato.</li>
+<li>Build CI superata.</li>
+<li>Discussione risolta.</li>
+<li>Merge nel branch target.</li>
+</ol>
+
+
+</article><article id="slide-72" aria-labelledby="slide-72-t">
+<h2 id="slide-72-t"><span class="num">Slide 72.</span> Pipeline CI/CD: dal commit a un artefatto distribuibile</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Schema: le sei fasi della pipeline</h3>
+<p>Sei riquadri in sequenza da sinistra a destra, collegati da frecce: <strong>Commit</strong> → <strong>Build</strong> → <strong>Test</strong> → <strong>Package</strong> → <strong>Publish</strong> → <strong>Deploy</strong>.</p>
+<h3>Esecuzione e log</h3>
+<figure class="immagine" aria-labelledby="fig-72-105-t">
+<img src="immagini/47822cee9f.png" alt="Azure DevOps, finestra History di un Web Hook: tre invii, due falliti e uno riuscito, con il contenuto JSON della richiesta." loading="lazy">
+<figcaption>
+<h3 id="fig-72-105-t">Immagine: Azure DevOps, finestra History di un Web Hook: tre invii, due falliti e uno riuscito, con il contenuto JSON della richiesta.</h3>
+<p><strong>Descrizione.</strong> Screenshot della finestra &quot;History&quot; di Azure DevOps per la sottoscrizione &quot;Work item updated &gt; Web Hooks (Post via HTTP)&quot;. In alto: creata da Thimoty Barbieri (19 minuti fa), modificata da Thimoty Barbieri (2 minuti fa), &quot;Detailed logging: On&quot;. A sinistra l&#x27;elenco dei tentativi: due &quot;Failed&quot; (17 e 3 minuti fa) e uno &quot;Succeeded&quot; (2 minuti fa, selezionato); in fondo il riepilogo degli ultimi 7 giorni: 1 riuscito e 2 falliti. A destra, nella scheda &quot;Request&quot; (le altre sono Summary, Response, Event), si vede parte del JSON inviato: i campi modificati dal work item con &quot;oldValue&quot; e &quot;newValue&quot;, tra cui lo stato che passa da &quot;Approved&quot; a &quot;Draft&quot; con motivo &quot;Moved to state Draft&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>HISTORY — Work item updated &gt; Web Hooks (Post via HTTP)</p>
+<p>Created by: Thimoty Barbieri (19 minutes ago) · Modified by: Thimoty Barbieri (2 minutes ago) · Detailed logging: On</p>
+<p>Status / When: Failed 17 minutes ago; Failed 3 minutes ago; Succeeded 2 minutes ago. Last 7 days: 1 succeeded, 2 failed.</p>
+<p>Schede: Summary, Request, Response, Event</p>
+<p>Contenuto della richiesta (parziale):</p>
+<p>  &quot;oldValue&quot;: 6, &quot;newValue&quot;: 7</p>
+<p>  &quot;System.AuthorizedDate&quot;: { &quot;oldValue&quot;: &quot;2026-03-07T14:31:24.143Z&quot;, &quot;newValue&quot;: &quot;2026-03-07T14:33:30.647Z&quot; }</p>
+<p>  &quot;System.RevisedDate&quot;: { &quot;oldValue&quot;: &quot;2026-03-07T14:33:30.647Z&quot;, &quot;newValue&quot;: &quot;9999-01-01T00:00:00Z&quot; }</p>
+<p>  &quot;System.State&quot;: { &quot;oldValue&quot;: &quot;Approved&quot;, &quot;newValue&quot;: &quot;Draft&quot; }</p>
+<p>  &quot;System.Reason&quot;: { &quot;oldValue&quot;: &quot;Moved to state Approved&quot;, &quot;newValue&quot;: &quot;Moved to state Draft&quot; }</p>
+<p>Pulsante: Close</p>
+</figcaption></figure>
+<h3>Artifact versionati</h3>
+<figure class="immagine" aria-labelledby="fig-72-106-t">
+<img src="immagini/df57acaba6.png" alt="Azure DevOps Artifacts: feed &quot;TitanoPortal&quot; con sei pacchetti Maven, NuGet e Python." loading="lazy">
+<figcaption>
+<h3 id="fig-72-106-t">Immagine: Azure DevOps Artifacts: feed &quot;TitanoPortal&quot; con sei pacchetti Maven, NuGet e Python.</h3>
+<p><strong>Descrizione.</strong> Screenshot della pagina Artifacts di Azure DevOps con il feed &quot;TitanoPortal&quot;. In alto i pulsanti &quot;Connect to Feed&quot;, &quot;Create Feed&quot;, &quot;Search Upstream Sources&quot; e &quot;Recycle Bin&quot;. Una tabella con colonne Type, Package, Views e Source elenca sei pacchetti, tutti con sorgente &quot;This feed&quot;: tre pacchetti Maven (icona &quot;M&quot; arancione) e due pacchetti NuGet (icona blu), più un pacchetto Python (icona con serpenti blu e giallo).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Feed: TitanoPortal — Connect to Feed · Create Feed · Search Upstream Sources · Recycle Bin</p>
+<p>Colonne: Type, Package, Views, Source</p>
+<ul><li>Maven: com.example.demo:app, Version 1.0.6, This feed</li><li>Maven: com.example.demo:java-release-demo-parent, Version 1.0.6, This feed</li><li>Maven: com.example.demo:shared-lib, Version 1.0.6, This feed</li><li>NuGet: CourseDemo.GreeterApp, Version 1.0.0, This feed</li><li>NuGet: CourseDemo.SharedLib, Version 1.0.0, This feed</li><li>Python: titanoport-report, Version 1.0.1.115, This feed</li></ul>
+</figcaption></figure>
+
+
+</article><article id="slide-73" aria-labelledby="slide-73-t">
+<h2 id="slide-73-t"><span class="num">Slide 73.</span> Il flusso di testing S21: tre livelli, un solo feedback loop</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<h3>Tre livelli di test in sequenza</h3>
+<p>Tre riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro; ciascuno ha un titolo, un contesto e una descrizione:</p>
+<table>
+<thead>
+<tr>
+<th>Livello</th>
+<th>Contesto</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Unit test / test del developer</td>
+<td>Task · locale</td>
+<td>Verifica il comportamento del codice prima della Pull Request.</td>
+</tr>
+<tr>
+<td>2. Test automatici in CI</td>
+<td>PR · build</td>
+<td>La pipeline esegue i controlli: un esito negativo blocca il merge.</td>
+</tr>
+<tr>
+<td>3. Test di integrazione e validazione</td>
+<td>develop → UAT → staging</td>
+<td>Integrazione tecnica, accettazione degli stakeholder e verifica finale pre-produzione.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Se un test fallisce:</strong> niente avanzamento; correggere il Task o aprire un Bug collegato, poi rieseguire il test.</p>
+
+
+</article><article id="slide-74" aria-labelledby="slide-74-t">
+<h2 id="slide-74-t"><span class="num">Slide 74.</span> Dal requisito al difetto: ogni test lascia un&#x27;evidenza</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<p>Sequenza in quattro passi: ogni test lascia un’evidenza, dal piano al difetto.</p>
+<h3>1. Test plan</h3>
+<figure class="immagine" aria-labelledby="fig-74-107-t">
+<img src="immagini/c79ba5ed54.png" alt="Azure DevOps Test Plans: suite &quot;TitanoPortal Integration Test 1&quot; con dieci casi di test, ciascuno assegnato a una persona e in stato Design." loading="lazy">
+<figcaption>
+<h3 id="fig-74-107-t">Immagine: Azure DevOps Test Plans: suite &quot;TitanoPortal Integration Test 1&quot; con dieci casi di test, ciascuno assegnato a una persona e in stato Design.</h3>
+<p><strong>Descrizione.</strong> Screenshot della pagina Test Plans di Azure DevOps (progetto Software Factory S21). A sinistra il menu (Overview, Boards, Repos, Pipelines, Test Plans con Test plans, Progress report, Parameters, Configurations, Runs, Exploratory sessions). Al centro la lista delle suite, con una sola suite, &quot;TitanoPortal Integration Test 1 (10)&quot;. A destra, nella scheda Define (le altre sono Execute e Chart) del piano &quot;TitanoPortal Integration Test 1 (ID: 217)&quot;, periodo feb 2 – feb 28, stato &quot;Past&quot;, la tabella dei dieci Test Case con titolo, ordine, ID, assegnatario e stato: tutti in stato &quot;Design&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal Integration Test 1 (ID: 217) — feb 2 - feb 28 (Past) — Define · Execute · Chart</p>
+<p>Test Suites: TitanoPortal Integration Test 1 (10)</p>
+<p>Test Cases (10 items) — colonne: Title, Order, Test Case Id, Assigned To, State</p>
+<p>1. TC-01-Timo – Login con username/password — 209 — thimoty thimoty.it — Design</p>
+<p>2. TC-08 – Pagamento tramite PagoPA — 210 — Lorenzo Tramuto — Design</p>
+<p>3. TC-04 - Componente wizard multi-step – navigazione e persistenza — 212 — Carlo Meazza — Design</p>
+<p>4. TC-05 – Inserimento permesso associato alla pratica — 213 — Fabio Aprile — Design</p>
+<p>5. TC-07 – Upload documenti a supporto della pratica/veicolo — 214 — Matteo Sanguin — Design</p>
+<p>6. TC-02 – Login con SPID/CIE — 219 — Andrea Ferrigo — Design</p>
+<p>7. TC - Test post-login e cambio tenant — 237 — Tommaso Garavaglia — Design</p>
+<p>8. Validazione OWASP Top 10 – scan automatico, IDOR e XSS — 240 — Davide Sattin — Design</p>
+<p>9. TC - Audit log – registrazione eventi critici e immutabilità — 241 — Kevin Piazzi — Design</p>
+<p>10. Middleware filtro TenantId – isolamento automatico query DB — 242 — Paolo Barretta — Design</p>
+<p>Pulsante: New Test Case</p>
+</figcaption></figure>
+<h3>2. Test case</h3>
+<figure class="immagine" aria-labelledby="fig-74-108-t">
+<img src="immagini/2e3508e07c.png" alt="Azure DevOps: scheda del Test Case 219 &quot;Login con SPID/CIE&quot; con tre passi di test e i relativi risultati attesi." loading="lazy">
+<figcaption>
+<h3 id="fig-74-108-t">Immagine: Azure DevOps: scheda del Test Case 219 &quot;Login con SPID/CIE&quot; con tre passi di test e i relativi risultati attesi.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps con il dettaglio del Test Case 219 &quot;TC-02 – Login con SPID/CIE&quot;, assegnato ad Andrea Ferrigo, stato &quot;Design&quot;, area Software Factory S21\Titano Portal Area\BE Area, iterazione &quot;Sprint 1 – Fondamenta (Auth e Multi-Tenant)&quot;. Al centro l&#x27;elenco dei passi (Steps) con colonne Action e Expected result: tre passi, il primo evidenziato. A destra i pannelli Recent test results, Deployment, Development, Related Work (il test è collegato al requisito &quot;200 RF-02 – Login con SPID/CIE&quot;).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TEST CASE 219 — TC-02 – Login con SPID/CIE — Andrea Ferrigo — State: Design — Reason: New</p>
+<p>Area: Software Factory S21\Titano Portal Area\BE Area; Iteration: Software Factory S21\TitanoPortal_iterations\Sprint 1 – Fondamenta (Auth e Multi-Tenant)</p>
+<p>Steps:</p>
+<p>1. Action: Dato che l&#x27;utente clicca &#x27;Accedi con SPID&#x27; e completa l&#x27;autenticazione sull&#x27;IdP AgID di test. — Expected result: Keycloak riceve la SAML Response, valida la firma e restituisce un JWT valido al frontend.</p>
+<p>2. Action: Dato che la SAML Response inviata da AgID ha una firma digitale non valida. — Expected result: L&#x27;autenticazione è rifiutata. L&#x27;utente vede una pagina di errore leggibile senza dettagli tecnici o stack trace.</p>
+<p>3. Action: Dato che l&#x27;IdP AgID non risponde entro 10 secondi (timeout simulato con Wiremock). — Expected result: Il middleware restituisce HTTP 503 con messaggio localizzato &#x27;Servizio SPID temporaneamente non disponibile&#x27;.</p>
+<p>Pannelli: Recent test results (Run manual tests with web runner); Deployment; Development; Related Work — Tests: 200 RF-02 – Login con SPID/CIE (Updated 23 feb, New).</p>
+</figcaption></figure>
+<h3>3. Test run</h3>
+<figure class="immagine" aria-labelledby="fig-74-109-t">
+<img src="immagini/e85b88e04a.png" alt="Azure DevOps: esecuzione dei test manuali con il Web Runner, in una finestra del browser sopra l&#x27;elenco dei dieci test point." loading="lazy">
+<figcaption>
+<h3 id="fig-74-109-t">Immagine: Azure DevOps: esecuzione dei test manuali con il Web Runner, in una finestra del browser sopra l&#x27;elenco dei dieci test point.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps, scheda Execute del piano &quot;TitanoPortal Integration Test 1 (ID: 217)&quot;. Sullo sfondo la tabella dei dieci &quot;Test Points&quot; con colonne Title, Order, Test Case Id, State, Configuration (Windows 10) e Current Tester; tutti selezionati. Sopra, una finestra separata del browser, &quot;Runner - Test Plans&quot;, mostra il test &quot;209: TC-01-Timo – Login con username/password&quot; (Test 1 di 10) con tre passi, ciascuno con il risultato atteso (EXPECTED RESULT) e i pulsanti per segnarlo come superato o fallito. A destra, in alto, il pulsante &quot;Run for web application&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Azure DevOps Safety21SPA / Software Factory S21 / Test Plans / TitanoPortal Integration Tes…</p>
+<p>TitanoPortal Integration Test 1 (ID: 217) — schede Define, Execute, Chart. Test Suites: TitanoPortal Integration Test 1 (10)</p>
+<p>Test Points (10 items): TC-01-Timo – Login con username/password (209); TC-02 – Login con SPID/CIE (219); TC-04 - Componente wizard multi-step – navigazione e persistenza (212); TC-05 – Inserimento permesso associato alla pratica (213); TC-07 – Upload documenti a supporto della pratica/veicolo (214); TC-08 – Pagamento tramite PagoPA (210); TC - Test post-login e cambio tenant (237); Validazione OWASP Top 10 – scan automatico, IDOR e XSS (240); TC - Audit log – registrazione eventi critici e immutabilità (241); TC - 09 - Middleware filtro TenantId – isolamento automatico query DB (242). Configurazione: Windows 10; State: Design.</p>
+<p>Finestra Runner – Test Plans – Google Chrome (dev.azure.com/Safety21SPA/Software%20Fa…), Test 1 of 10, &quot;209: TC-01-Timo – Login con username/passw…&quot;:</p>
+<p>1. Dato che l&#x27;utente lascia il campo username vuoto, clicca il pulsante Login. EXPECTED RESULT: Appare un messaggio di errore inline &#x27;Campo obbligatorio&#x27; sotto il campo username. Nessuna chiamata HTTP viene effettuata.</p>
+<p>2. Dato che username e password sono compilati correttamente, l&#x27;utente clicca Login. EXPECTED RESULT: Il form invia la richiesta all&#x27;endpoint BE4FE /auth/login senza errori frontend.</p>
+<p>3. Dato che il form è parzialmente compilato (solo username), l&#x27;utente preme il tasto Invio. EXPECTED RESULT: Vengono evidenziati tutti i campi mancanti con messaggi inline. Nessuna chiamata API viene effettuata.</p>
+<p>Pulsante: Run for web application</p>
+</figcaption></figure>
+<figure class="immagine" aria-labelledby="fig-74-110-t">
+<img src="immagini/f8f3e4afb8.png" alt="Azure DevOps: risultati di una esecuzione di test: elenco con test superati e falliti, dettaglio del test 214 superato con i suoi passi." loading="lazy">
+<figcaption>
+<h3 id="fig-74-110-t">Immagine: Azure DevOps: risultati di una esecuzione di test: elenco con test superati e falliti, dettaglio del test 214 superato con i suoi passi.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps con la pagina &quot;Run - 2 TitanoPortal Integ…&quot;. A sinistra l&#x27;elenco dei test case con un&#x27;icona di esito: rosso (fallito) per 209 TC-01 e 219 TC-02 e 240 Validazione OWASP; verde (superato) per 213, 214, 210, 237, 241; grigio (non eseguito) per 242. È selezionato il 214 &quot;TC-07 – Upload documenti a supporto della pratica/veicolo&quot;, con stato &quot;Passed&quot; e configurazione Windows 10. Al centro il riepilogo (Run by, configurazione, data di completamento 3/2/2026 11:10, test plan, test suite, test case, priorità 2), &quot;Linked work items&quot; vuoto e, in basso, &quot;Test passed&quot; con tabella dei quattro passi (Step, Outcome, Action, Expected Result). A destra &quot;Analysis&quot; con proprietario Matteo Sanguin e il pulsante &quot;Create bug&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Run - 2 TitanoPortal Integ… — Search by test case ID; Filter on</p>
+<p>Elenco: 209 TC-01-Timo – Login con username… (fallito); 219 TC-02 – Login con SPID/CIE (fallito); 213 TC-05 – Inserimento permesso ass… (superato); 214 TC-07 – Upload documenti a supp… (superato, selezionato); 210 TC-08 – Pagamento tramite PagoPA (superato); 237 TC - Test post-login e cambio tena… (superato); 240 Validazione OWASP Top 10 – scan … (fallito); 241 TC - Audit log – registrazione eve… (superato); 242 TC - 09 - Middleware filtro Tenantl… (non eseguito). Tutti: Windows 10.</p>
+<p>Dettaglio: 214 TC-07 – Upload documenti a supporto della pratica/veicolo — Passed — Configuration Windows 10 — Create bug. Schede: Summary, Attachments (0).</p>
+<p>Summary: Run by thimoty thimoty.it; Pipeline run tested None; Configuration Windows 10; Completed time 3/2/2026 11:10 AM; Test plan 216 TitanoPortal Integration Test 1; Test suite 217 TitanoPortal Integration Test 1; Test case 214 TC-07 – Upload documenti a supporto della pratica/veicolo; Priority 2.</p>
+<p>Analysis: Analysis owner Matteo Sanguin; Comment (vuoto). Linked work items: No work items linked.</p>
+<p>Test passed — Start time 3/2/2026 11:10 AM — Duration 2s — Show images</p>
+<p>Passi: 1 Unspecified — Dato che l&#x27;utente carica un file PDF autentico di 4 MB tramite l&#x27;endpoint POST /documenti. → L&#x27;endpoint restituisce HTTP 201 con ID documento, nome e dimensione. Il file è salvato nel bucket del tenant corretto. 2 Unspecified — Dato che l&#x27;utente carica un file con estensione .pdf ma il contenuto è un eseguibile EXE (magic bytes non corrispondenti). → L&#x27;endpoint analizza i magic bytes, rileva la discrepanza e restituisce HTTP 422 con messaggio &#x27;Formato file non consentito&#x27;. 3 Unspecified — Dato che l&#x27;utente carica un PDF da 15 MB su un tenant con limite configurato a 10 MB. → L&#x27;endpoint restituisce HTTP 413 con messaggio &#x27;File troppo grande: massimo consentito 10 MB per questo ente&#x27;. 4 Unspecified (vuoto).</p>
+</figcaption></figure>
+<h3>4. Bug e fix</h3>
+<p>Se un test fallisce: Bug collegato al Test Case → Task di correzione → nuova esecuzione → chiusura.</p>
+
+
+</article><article id="slide-75" aria-labelledby="slide-75-t">
+<h2 id="slide-75-t"><span class="num">Slide 75.</span> Dashboard operative: vedere flusso e capacità</h2>
+<p class="meta">Durata prevista: 15 minuti.</p>
+<figure class="immagine" aria-labelledby="fig-75-1-t">
+<img src="immagini/105aa057d8.png" alt="Azure DevOps: cruscotto operativo del team TitanoPortal con lavoro assegnato, avanzamento dello sprint, grafico a ciambella e burndown." loading="lazy">
+<figcaption>
+<h3 id="fig-75-1-t">Immagine: Azure DevOps: cruscotto operativo del team TitanoPortal con lavoro assegnato, avanzamento dello sprint, grafico a ciambella e burndown.</h3>
+<p><strong>Descrizione.</strong> Screenshot del cruscotto (dashboard) &quot;TitanoPortal Team - Team Operational …&quot; di Azure DevOps, composto da riquadri (widget). In alto a sinistra &quot;Work assigned to Thimoty Barbieri (18)&quot;: 8 task, 5 feature, 5 user story, con un elenco di work item attivi. In alto a destra &quot;StuffDidYesterday (211)&quot;, elenco di work item chiusi o attivi ieri. Al centro, il riquadro &quot;Sprint 1 – Fondamenta (Auth e Multi-Tenant)&quot; (18 febbraio – 18 marzo): 89,4 di 52 ore, &quot;Stories: 5 in progress&quot; con barra rossa; il riquadro del team con &quot;13 days remaining&quot; e barre di avanzamento (8 giorni; 21 e 11 work item). A destra, un grafico a ciambella &quot;Task con CCC by Assigned To&quot; con totale 11: 7 non assegnati (blu) e 4 di Thimoty Barbieri (arancione). In basso il grafico &quot;Burndown&quot; (15/02/2026 – 01/03/2026): task rimanenti 126, completato 13%, burndown medio −9, aumento dello scope totale 146; un suggerimento mostra per il 18/02/2026 Remaining 121, Burndown 121, Total Scope 128. In basso a destra &quot;Blocked &amp; TechDebt Items (2)&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal Team - Team Operational …</p>
+<p>Work assigned to Thimoty Barbieri (18): 8 Task, 5 Feature, 5 User Story. 159 Active UI backoffice gestione tenant; 158 Active API POST nuovo tenant / PATCH modifica …; 156 Active Gestione tenant: censimento e configurazi…; 185 Active Endpoint BE4FE: autenticazione (login, refr…; 180 Active Gestione marca/modello veicoli personali…</p>
+<p>StuffDidYesterday (211): 22 Feature F1.1 – Login Nativo (user… Closed; 23 User Story RF-01 – Login con userna… Closed; 24 Task Implementare form di log… Closed; 25 Task Integrare endpoint autent… Closed; 26 Task Gestire ciclo vita sessione:… Closed; 27 Task Implementare blocco su c… Closed; 28 Feature F1.2 – Login SPID/CIE Active. View query.</p>
+<p>Sprint 1 – Fondamenta (Auth e Multi-Tenant), February 18 - March 18: 89.4 of 52 h; Stories: 5 in progress.</p>
+<p>TitanoPortal Team — Sprint 1 – Fondamenta, 18 febbraio - 18 marzo: 13 days remaining (8); 2 work items not started (21, 11).</p>
+<p>Task con CCC by Assigned To: 11 (blank) 7; Thimoty Barbieri 4. View query.</p>
+<p>Burndown 15/02/2026 - 01/03/2026: Task Remaining 126; Completed 13%; Average burndown -9; Total Scope Increase 146. Tooltip 18/02/2026: Remaining: 121, Burndown: 121, Total Scope: 128.</p>
+<p>Blocked &amp; TechDebt Items (2): 23 User St… RF-01 – Login con userna… Closed.</p>
+</figcaption></figure>
+<p>TEAM: carico, burndown, blocchi</p>
+<figure class="immagine" aria-labelledby="fig-75-2-t">
+<img src="immagini/f4895d3af6.png" alt="Azure DevOps: cruscotto strategico di engineering management con velocity, richieste di modifica, diagramma di flusso cumulativo e cycle time." loading="lazy">
+<figcaption>
+<h3 id="fig-75-2-t">Immagine: Azure DevOps: cruscotto strategico di engineering management con velocity, richieste di modifica, diagramma di flusso cumulativo e cycle time.</h3>
+<p><strong>Descrizione.</strong> Screenshot del cruscotto &quot;TitanoPortal Team - Engineering Mana…&quot; di Azure DevOps, con quattro riquadri. &quot;TitanoPortal Team Velocity&quot; (ultima iterazione): grafico a barre per lo Sprint 1, con una barra azzurra dei work item pianificati (circa 30) e una barra composta da una parte verde completata (circa 19) e una blu incompleta (circa 6); velocità media 0. &quot;Management - Change Requests (CR) (2)&quot;: due richieste di modifica attive, 257 &quot;[CR] Integrazione autentic…&quot; e 258 &quot;[CR] Cambio provider ma…&quot;, create il 3/2/20… . &quot;Cumulative Flow Diagram (CFD)&quot; degli ultimi 30 giorni: aree New (grigio), Active (azzurro) e Closed (verde); i work item in corso sono in media 2; il tooltip del 9 febbraio indica Closed: 0. &quot;TitanoPortal Team Cycle Time&quot; degli ultimi 30 giorni: in media 1 giorno (da avviato a completato) su 20 task, con un grafico a punti.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal Team - Engineering Mana…</p>
+<p>TitanoPortal Team Velocity — Last iteration — Count of work items, Average Velocity: 0. Sprint 1 – Fond… Legenda: Planned, Completed, Completed Late, Incomplete.</p>
+<p>Management - Change Requests (CR) (2): 257 Issue [CR] Integrazione autenti… Active 3/2/20…; 258 Issue [CR] Cambio provider ma… Active 3/2/20… View query.</p>
+<p>Cumulative Flow Diagram (CFD) — Last 30 days — Work items in progress, Average Count: 2. Legenda: Closed, Active, New. Tooltip 2/9/2026 Closed: 0.</p>
+<p>TitanoPortal Team Cycle Time — Last 30 days — 1 Days on average (Started to Completed) — 20 Task.</p>
+</figcaption></figure>
+<p>MANAGEMENT: velocity, CFD, cycle time</p>
+<p>Figure S21: Cruscotto tattico e cruscotto strategico</p>
+
+</article><article id="slide-76" aria-labelledby="slide-76-t">
+<h2 id="slide-76-t"><span class="num">Slide 76.</span> Dashboard qualità: difetti, tempi ed esiti dei test</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<p class="didascalia"><strong>Didascalia.</strong> BUG ATTIVI, SEVERITÀ, LEAD TIME</p>
+<figure class="immagine" aria-labelledby="fig-76-1-t">
+<img src="immagini/adb558db55.png" alt="Azure DevOps: cruscotto qualità con elenco dei bug attivi, bug per gravità e tempo di lead time." loading="lazy">
+<figcaption>
+<h3 id="fig-76-1-t">Immagine: Azure DevOps: cruscotto qualità con elenco dei bug attivi, bug per gravità e tempo di lead time.</h3>
+<p><strong>Descrizione.</strong> Screenshot del cruscotto &quot;TitanoPortal Team - Test - Quality Man…&quot;. In alto &quot;Quality - Active Bugs (10)&quot;: tabella con ID, titolo, gravità, stato e tag; ad esempio 231 &quot;Possibile SQL Injection ne…&quot; gravità 1 - Critical, attivo; 228, 237, 239, 244, 250 con gravità 2 - High; 247 gravità 3 - Medium. Sotto a sinistra &quot;Quality - Active Bugs by Severity&quot;: grafico ad aree dal 24 febbraio al 2 marzo, con valori a zero fino al 28 febbraio e poi un forte aumento fino a 10 bug (High, Medium, Low, Critical). A destra &quot;TitanoPortal Team Lead Time&quot; degli ultimi 30 giorni: in media 13 giorni (da creato a completato) su 3 bug. In basso inizia il riquadro &quot;Burnup of Bugs&quot;: 10 bug rimanenti, 23% completato, burnup medio 0,2, scope totale 13.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>TitanoPortal Team - Test - Quality Man…</p>
+<p>Quality - Active Bugs (10): ID, Title, Severity, State, Tags</p>
+<p>231 Possibile SQL Injection ne… — 1 - Crit… — Active</p>
+<p>228 Data di scadenza permes… — 2 - High — New</p>
+<p>237 Errore 403 su download P… — 2 - High — Active</p>
+<p>239 La mappa interattiva (Leaf… — 2 - High — New</p>
+<p>244 Falso positivo su &#x27;Targa gi… — 2 - High — Active — tag Data</p>
+<p>250 La registrazione Persona … — 2 - High — New</p>
+<p>247 I log di Audit non registra… — 3 - Me… — New</p>
+<p>Quality - Active Bugs by Severity: legenda 2 - High, 3 - Medium, 4 - Low, 1 - Critical; asse dal 24 Feb al 2 Mar.</p>
+<p>TitanoPortal Team Lead Time — Last 30 days — 13 Days on average (Created to Completed) — 3 Bug</p>
+<p>Burnup of Bugs 15/02/2026 - 01/03/2026 — Bug Remaining 10; Completed 23%; Average burnup 0.2; Total Scope 13</p>
+</figcaption></figure>
+<p class="didascalia"><strong>Didascalia.</strong> SCOPE CREEP ED ESCAPED DEFECT</p>
+<figure class="immagine" aria-labelledby="fig-76-2-t">
+<img src="immagini/939dfbb1a0.png" alt="Azure DevOps: grafico &quot;Burnup of Bugs&quot; con i bug completati e rimanenti, e riquadri sui tempi di risoluzione e sull&#x27;andamento dei test." loading="lazy">
+<figcaption>
+<h3 id="fig-76-2-t">Immagine: Azure DevOps: grafico &quot;Burnup of Bugs&quot; con i bug completati e rimanenti, e riquadri sui tempi di risoluzione e sull&#x27;andamento dei test.</h3>
+<p><strong>Descrizione.</strong> Screenshot di due riquadri del cruscotto qualità di Azure DevOps. In alto &quot;Burnup of Bugs&quot; (15/02/2026 – 01/03/2026): 10 bug rimanenti, 23% completato, burnup medio 0,2, aumento dello scope totale 13. Il grafico a barre mostra le barre verdi dei bug completati (da 1 il 24 febbraio a 3 il 28 febbraio e 1 marzo) e, solo l&#x27;1 marzo, una grande barra blu di bug rimanenti; la linea arancione dello scope totale sale da 0 a 13 nell&#x27;ultimo giorno. Un tooltip del 16/02/2026 indica tutti i valori a 0. In basso a sinistra &quot;Bugs - Resolution Time (3)&quot;: tre bug chiusi. In basso a destra &quot;Test Results Trend&quot;: una linea verde piatta a 4 test falliti, con asse della percentuale di successo da 0 a 100.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Burnup of Bugs — 15/02/2026 - 01/03/2026 — Bug Remaining 10; Completed 23%; Average burnup 0.2; Total Scope Increase 13</p>
+<p>Tooltip 16/02/2026: Completed: 0; Remaining: 0; Burnup: 0; Total Scope: 0</p>
+<p>Legenda: Completed, Remaining, Burnup, Total Scope</p>
+<p>Bugs - Resolution Time (3): 254 Timeout 504 durante la g… Closed 2/9/20… 2/28/2…; 256 L&#x27;upload di PDF superiori … Closed 2/15/2… 2/28/2…; 253 Impossibile completare il … Closed 2/18/2… 2/24/2…</p>
+<p>Test Results Trend: Failed tests 4; Pass percentage 100/75/50/25.</p>
+</figcaption></figure>
+<p>Figure 34-36 originali: Dashboard Quality Management S21</p>
+
+</article><article id="slide-77" aria-labelledby="slide-77-t">
+<h2 id="slide-77-t"><span class="num">Slide 77.</span> Caso S21: dall&#x27;approvazione della release al deploy</h2>
+<p class="meta">Durata prevista: 20 minuti.</p>
+<p>Sequenza in quattro passi, dalla approvazione della release al deploy.</p>
+<h3>1. Approvazione</h3>
+<figure class="immagine" aria-labelledby="fig-77-111-t">
+<img src="immagini/0314622f06.png" alt="Azure DevOps: work item di tipo Release 260 &quot;Release 1.0.0 - Demo release candidate&quot; con lo stato che passa ad Approved, evidenziato da una freccia rossa." loading="lazy">
+<figcaption>
+<h3 id="fig-77-111-t">Immagine: Azure DevOps: work item di tipo Release 260 &quot;Release 1.0.0 - Demo release candidate&quot; con lo stato che passa ad Approved, evidenziato da una freccia rossa.</h3>
+<p><strong>Descrizione.</strong> Screenshot di Azure DevOps (progetto TitanoPortal, Boards › Work items) con il work item &quot;RELEASE 260 – Release 1.0.0 - Demo release candidate&quot;. Una freccia rossa disegnata sull&#x27;immagine punta al campo &quot;State&quot;, impostato su &quot;Approved&quot;, con motivo &quot;Moved to state Approved&quot;. Nella sezione &quot;Release Details&quot;: Release Version 1.0.0, Release Component java-release-demo, Target Environment UAT, Release Notes &quot;- Initial Java release demo - Multi-module Maven build…&quot;. Sono presenti anche le sezioni Description, Discussion (campo commento), Deployment, Development e Related Work. In alto a destra: &quot;Updated by TitanoPortal Build Service (thimoty): 9 mar&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Azure DevOps thimoty / TitanoPortal / Boards / Work items — Recently completed — 2 of 29</p>
+<p>RELEASE 260* — 260 Release 1.0.0 - Demo release candidate — No one selected — 0 Comments — Add Tag</p>
+<p>State: Approved (freccia rossa); Reason: Moved to state Approved; Area: TitanoPortal; Iteration: TitanoPortal</p>
+<p>Release Details: Release Version 1.0.0; Release Component java-release-demo; Target Environment UAT; Release Notes: - Initial Java release demo- Multi-module Maven build…</p>
+<p>Deployment: To track releases associated with this work item, go to Releases and turn on deployment status reporting for Boards in your pipeline&#x27;s Options menu.</p>
+<p>Development: Add link — Link an Azure Repos commit, pull request or branch to see the status of your development. You can also create a branch to get started.</p>
+<p>Related Work: Add link — Add an existing work item as a parent</p>
+<p>Discussion: Add a comment. Use # to link a work item, @ to mention a person, or ! to link a pull request. (switch to Markdown editor)</p>
+</figcaption></figure>
+<h3>2. Trigger</h3>
+<figure class="immagine" aria-labelledby="fig-77-112-t">
+<img src="immagini/7179443a0b.png" alt="Azure DevOps: finestra &quot;New service hooks subscription&quot;, passo Action, per inviare gli eventi con un POST HTTP a un URL." loading="lazy">
+<figcaption>
+<h3 id="fig-77-112-t">Immagine: Azure DevOps: finestra &quot;New service hooks subscription&quot;, passo Action, per inviare gli eventi con un POST HTTP a un URL.</h3>
+<p><strong>Descrizione.</strong> Screenshot delle impostazioni del progetto TitanoPortal in Azure DevOps, pagina &quot;Service Hooks&quot;, con una finestra di dialogo &quot;New service hooks subscription&quot; sul passo &quot;Action&quot;. A sinistra il menu Project Settings (General: Overview, Teams, Permissions, Notifications, Service hooks, Dashboards; Boards; Pipelines…). Nella finestra: azione &quot;Post via HTTP&quot;, con la spiegazione che l&#x27;azione invia una rappresentazione JSON dell&#x27;evento all&#x27;URL indicato e il consiglio di usare solo endpoint HTTPS. Campi: URL (obbligatorio, vuoto, con segnale di errore), casella &quot;Accept untrusted SSL certificates&quot;, &quot;Basic authentication username&quot; e &quot;Basic authentication password&quot; (facoltativi). In fondo i pulsanti Previous, Next, Test, Finish, Cancel (solo Previous e Cancel attivi).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>thimoty / TitanoPortal / Settings / Service hooks</p>
+<p>Project Settings TitanoPortal — General: Overview, Teams, Permissions, Notifications, Service hooks, Dashboards; Boards: Project configuration, Team configuration, GitHub connections; Pipelines: Agent pools, Parallel jobs</p>
+<p>Service Hooks — &quot;Integrate with your favor…&quot; — pulsante &quot;+ Create subscription&quot;</p>
+<p>NEW SERVICE HOOKS SUBSCRIPTION — Action</p>
+<p>Select and configure the action to perform.</p>
+<p>Perform this action: Post via HTTP</p>
+<p>This action posts a JSON object representation of the event to the specified URL. It&#x27;s recommended that you only use HTTPS endpoints due to the potential for private data including any authentication headers in the event payload. Learn more about Webhooks</p>
+<p>SETTINGS: URL (required); Accept untrusted SSL certificates; Basic authentication username (optional); Basic authentication password (optional)</p>
+<p>Pulsanti: Previous, Next, Test, Finish, Cancel</p>
+</figcaption></figure>
+<h3>3. Pipeline</h3>
+<figure class="immagine" aria-labelledby="fig-77-113-t">
+<img src="immagini/47822cee9f.png" alt="Azure DevOps, finestra History di un Web Hook: tre invii, due falliti e uno riuscito, con il contenuto JSON della richiesta." loading="lazy">
+<figcaption>
+<h3 id="fig-77-113-t">Immagine: Azure DevOps, finestra History di un Web Hook: tre invii, due falliti e uno riuscito, con il contenuto JSON della richiesta.</h3>
+<p><strong>Descrizione.</strong> Screenshot della finestra &quot;History&quot; di Azure DevOps per la sottoscrizione &quot;Work item updated &gt; Web Hooks (Post via HTTP)&quot;. In alto: creata da Thimoty Barbieri (19 minuti fa), modificata da Thimoty Barbieri (2 minuti fa), &quot;Detailed logging: On&quot;. A sinistra l&#x27;elenco dei tentativi: due &quot;Failed&quot; (17 e 3 minuti fa) e uno &quot;Succeeded&quot; (2 minuti fa, selezionato); in fondo il riepilogo degli ultimi 7 giorni: 1 riuscito e 2 falliti. A destra, nella scheda &quot;Request&quot; (le altre sono Summary, Response, Event), si vede parte del JSON inviato: i campi modificati dal work item con &quot;oldValue&quot; e &quot;newValue&quot;, tra cui lo stato che passa da &quot;Approved&quot; a &quot;Draft&quot; con motivo &quot;Moved to state Draft&quot;.</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>HISTORY — Work item updated &gt; Web Hooks (Post via HTTP)</p>
+<p>Created by: Thimoty Barbieri (19 minutes ago) · Modified by: Thimoty Barbieri (2 minutes ago) · Detailed logging: On</p>
+<p>Status / When: Failed 17 minutes ago; Failed 3 minutes ago; Succeeded 2 minutes ago. Last 7 days: 1 succeeded, 2 failed.</p>
+<p>Schede: Summary, Request, Response, Event</p>
+<p>Contenuto della richiesta (parziale):</p>
+<p>  &quot;oldValue&quot;: 6, &quot;newValue&quot;: 7</p>
+<p>  &quot;System.AuthorizedDate&quot;: { &quot;oldValue&quot;: &quot;2026-03-07T14:31:24.143Z&quot;, &quot;newValue&quot;: &quot;2026-03-07T14:33:30.647Z&quot; }</p>
+<p>  &quot;System.RevisedDate&quot;: { &quot;oldValue&quot;: &quot;2026-03-07T14:33:30.647Z&quot;, &quot;newValue&quot;: &quot;9999-01-01T00:00:00Z&quot; }</p>
+<p>  &quot;System.State&quot;: { &quot;oldValue&quot;: &quot;Approved&quot;, &quot;newValue&quot;: &quot;Draft&quot; }</p>
+<p>  &quot;System.Reason&quot;: { &quot;oldValue&quot;: &quot;Moved to state Approved&quot;, &quot;newValue&quot;: &quot;Moved to state Draft&quot; }</p>
+<p>Pulsante: Close</p>
+</figcaption></figure>
+<h3>4. Artifact</h3>
+<figure class="immagine" aria-labelledby="fig-77-114-t">
+<img src="immagini/df57acaba6.png" alt="Azure DevOps Artifacts: feed &quot;TitanoPortal&quot; con sei pacchetti Maven, NuGet e Python." loading="lazy">
+<figcaption>
+<h3 id="fig-77-114-t">Immagine: Azure DevOps Artifacts: feed &quot;TitanoPortal&quot; con sei pacchetti Maven, NuGet e Python.</h3>
+<p><strong>Descrizione.</strong> Screenshot della pagina Artifacts di Azure DevOps con il feed &quot;TitanoPortal&quot;. In alto i pulsanti &quot;Connect to Feed&quot;, &quot;Create Feed&quot;, &quot;Search Upstream Sources&quot; e &quot;Recycle Bin&quot;. Una tabella con colonne Type, Package, Views e Source elenca sei pacchetti, tutti con sorgente &quot;This feed&quot;: tre pacchetti Maven (icona &quot;M&quot; arancione) e due pacchetti NuGet (icona blu), più un pacchetto Python (icona con serpenti blu e giallo).</p>
+<h4>Testo contenuto nell’immagine</h4>
+<p>Feed: TitanoPortal — Connect to Feed · Create Feed · Search Upstream Sources · Recycle Bin</p>
+<p>Colonne: Type, Package, Views, Source</p>
+<ul><li>Maven: com.example.demo:app, Version 1.0.6, This feed</li><li>Maven: com.example.demo:java-release-demo-parent, Version 1.0.6, This feed</li><li>Maven: com.example.demo:shared-lib, Version 1.0.6, This feed</li><li>NuGet: CourseDemo.GreeterApp, Version 1.0.0, This feed</li><li>NuGet: CourseDemo.SharedLib, Version 1.0.0, This feed</li><li>Python: titanoport-report, Version 1.0.1.115, This feed</li></ul>
+</figcaption></figure>
+
+
+</article><article id="slide-78" aria-labelledby="slide-78-t">
+<h2 id="slide-78-t"><span class="num">Slide 78.</span> Osservabilità e gestione operativa</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Log, metriche e trace</li><li>Health check e alert</li><li>Obiettivi di servizio</li><li>Capacità di diagnosi</li></ul>
+<h3>Schema grafico: tre segnali, una storia</h3>
+<p>Quattro riquadri: <strong>Log</strong> e <strong>Metriche</strong> sono in alto, affiancati, e con due frecce convergono su <strong>Contesto</strong>, in posizione centrale; sotto compare <strong>Trace</strong>. I tre segnali (log, metriche, trace) insieme costruiscono il contesto per capire che cosa è successo.</p>
+<p>Didascalia sotto lo schema: alert → diagnosi → azione.</p>
+
+
+</article><article id="slide-79" aria-labelledby="slide-79-t">
+<h2 id="slide-79-t"><span class="num">Slide 79.</span> Modernizzare: dove sta davvero il valore?</h2>
+<p class="kicker">CONFRONTO GUIDATO</p><p class="meta">Durata prevista: 30 minuti.</p>
+<h3>Scenario</h3>
+<p>Un&#x27;applicazione stabile viene proposta per la migrazione a microservizi su Kubernetes.</p>
+<h3>Domande</h3>
+<ul><li>Quale problema stiamo risolvendo?</li><li>Quali benefici sono misurabili?</li><li>Quali nuove complessità introduciamo?</li><li>Quale percorso incrementale è possibile?</li></ul>
+
+</article>
+<nav aria-label="Pagina precedente e successiva" class="pn"><p><a href="giornata-2.html" rel="prev">← Giornata 2</a></p><p><a href="giornata-4.html" rel="next">Giornata 4 →</a></p></nav>
+</main>
+<footer>
+<p>Versione accessibile della presentazione, per la lettura con screen reader. Il contenuto corrisponde alla presentazione PowerPoint; le immagini sono descritte a parole e il testo che contengono è trascritto.</p>
+</footer>
+</body>
+</html>

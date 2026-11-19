@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giornata 1: Linguaggi, paradigmi e runtime – Seminario linguaggi</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header>
+<p class="sito"><a href="index.html">Seminario: linguaggi moderni e scelte architetturali</a></p>
+<nav aria-label="Parti del corso"><ul>
+<li><a href="index.html">Indice</a></li><li><a href="apertura.html">Apertura</a></li><li><a href="giornata-1.html" aria-current="page">Giornata 1</a></li><li><a href="giornata-2.html">Giornata 2</a></li><li><a href="giornata-3.html">Giornata 3</a></li><li><a href="giornata-4.html">Giornata 4</a></li><li><a href="chiusura.html">Chiusura</a></li>
+</ul></nav>
+</header>
+<main id="contenuto">
+<h1>Giornata 1: Linguaggi, paradigmi e runtime</h1>
+<p class="lead">Costruire un vocabolario comune prima di confrontare gli stack.</p>
+<nav aria-label="Slide di questa parte"><h2 class="toc-t">Slide di questa parte (10)</h2><ol class="toc"><li><a href="#slide-6">Slide 6: Che cos&#x27;è un linguaggio di programmazione?</a></li><li><a href="#slide-7">Slide 7: Dal codice al sistema in esecuzione</a></li><li><a href="#slide-8">Slide 8: Compilato e interpretato: una distinzione utile ma non assoluta</a></li><li><a href="#slide-9">Slide 9: Object-oriented: oggetti che collaborano attraverso contratti</a></li><li><a href="#slide-10">Slide 10: Funzionale: descrivere trasformazioni componendo funzioni</a></li><li><a href="#slide-11">Slide 11: Multiparadigma: il caso reale</a></li><li><a href="#slide-12">Slide 12: Tipi statici e dinamici</a></li><li><a href="#slide-13">Slide 13: Ecosistema, tooling e comunità</a></li><li><a href="#slide-14">Slide 14: I trend che cambiano le scelte</a></li><li><a href="#slide-15">Slide 15: Leggere oltre l&#x27;etichetta</a></li></ol></nav>
+<article id="slide-6" aria-labelledby="slide-6-t">
+<h2 id="slide-6-t"><span class="num">Slide 6.</span> Che cos&#x27;è un linguaggio di programmazione?</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Una notazione con regole sintattiche e semantiche</li><li>Un modello per esprimere dati, controllo e comportamento</li><li>Un elemento di un ecosistema più ampio</li></ul>
+<h3>Schema grafico: tre livelli, tre responsabilità</h3>
+<p>Tre riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro, dal livello più astratto al più concreto:</p>
+<ol>
+<li><strong>Linguaggio</strong>: sintassi e semantica.</li>
+<li><strong>Runtime</strong>: esegue il programma e gestisce la memoria.</li>
+<li><strong>Framework</strong>: struttura e librerie.</li>
+</ol>
+<p>Esempio sotto lo schema: C#, .NET, ASP.NET Core (il linguaggio, il runtime e il framework corrispondenti).</p>
+
+
+</article><article id="slide-7" aria-labelledby="slide-7-t">
+<h2 id="slide-7-t"><span class="num">Slide 7.</span> Dal codice al sistema in esecuzione</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Codice sorgente</li><li>Compilatore o interprete</li><li>Runtime e librerie</li><li>Sistema operativo e infrastruttura</li></ul>
+<h3>Schema grafico: dal testo al processo</h3>
+<p>Quattro riquadri sovrapposti, con una freccia verso il basso tra l’uno e l’altro:</p>
+<ol>
+<li>Codice sorgente</li>
+<li>Compiler o interprete</li>
+<li>Runtime e librerie</li>
+<li>Sistema operativo e infrastruttura</li>
+</ol>
+<p>Didascalia sotto lo schema: ogni livello introduce decisioni e vincoli.</p>
+
+
+</article><article id="slide-8" aria-labelledby="slide-8-t">
+<h2 id="slide-8-t"><span class="num">Slide 8.</span> Compilato e interpretato: una distinzione utile ma non assoluta</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<p>Compilazione</p>
+<ul><li>Traduzione prima dell&#x27;esecuzione</li><li>Controlli anticipati</li><li>Artefatto distribuibile</li></ul>
+<p>Interpretazione / VM</p>
+<ul><li>Runtime intermedio</li><li>Portabilità e dinamismo</li><li>JIT e approcci ibridi</li></ul>
+
+</article><article id="slide-9" aria-labelledby="slide-9-t">
+<h2 id="slide-9-t"><span class="num">Slide 9.</span> Object-oriented: oggetti che collaborano attraverso contratti</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<p>Definizione · Un programma è organizzato come oggetti che incapsulano dati e funzioni e interagiscono fra loro.</p>
+<h3>Schema grafico: programmare contro l’astrazione</h3>
+<p>In alto un riquadro scuro con la classe astratta <strong>Shape</strong>, che dichiara due operazioni: Area e Perimeter. Una freccia con la scritta “implementa” scende verso tre riquadri affiancati, le classi concrete, ciascuna con la propria formula dell’area:</p>
+<ul>
+<li><strong>Rectangle</strong>: larghezza per altezza (w × h);</li>
+<li><strong>Square</strong>: lato al quadrato (side²);</li>
+<li><strong>Circle</strong>: π per il raggio al quadrato (πr²).</li>
+</ul>
+<p>In basso un riquadro scuro mostra il ciclo <code>foreach (Shape s in shapes) → s.Area</code>, con la nota: dynamic binding, cioè il tipo reale dell’oggetto viene deciso a runtime.</p>
+
+<h3>Le quattro idee da vedere nell’esempio</h3>
+<p>Astrazione · Shape definisce il contratto comune.</p><p>Incapsulamento · ogni oggetto conserva i propri dati.</p><p>Ereditarietà · le forme concrete specializzano Shape.</p><p>Polimorfismo · la stessa chiamata seleziona l’override corretto.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/inheritance">TUTORIAL COMPLETO · MICROSOFT LEARN</a></p>
+<p>Fonti: Wikipedia · Microsoft Learn, Introduction to Inheritance</p>
+
+</article><article id="slide-10" aria-labelledby="slide-10-t">
+<h2 id="slide-10-t"><span class="num">Slide 10.</span> Funzionale: descrivere trasformazioni componendo funzioni</h2>
+<p class="meta">Durata prevista: 18 minuti.</p>
+<p>Definizione · Il programma nasce applicando e componendo funzioni che trasformano valori, invece di aggiornare una sequenza di stati.</p>
+<h3>Esempio di codice e schema del flusso</h3>
+<p>Codice JavaScript:</p>
+<pre><code>const numeri = [1, 4, 9, 16];
+const raddoppia = x =&gt; x * 2;
+
+const risultato = numeri.map(raddoppia);
+// [2, 8, 18, 32]
+</code></pre>
+<p>Sotto il codice, uno schema in cinque passi mostra come la funzione <code>map</code> trasforma ogni valore dell’elenco senza modificarlo: 1 diventa 2, 4 diventa 8, 9 diventa 18, 16 diventa 32. Il risultato è l’elenco [2, 8, 18, 32].</p>
+
+<h3>Cosa rende funzionale il flusso</h3>
+<p>Funzione come valore · raddoppia è passata a map.</p><p>Trasformazione · ogni input produce un nuovo output.</p><p>Immutabilità · numeri non viene modificato.</p><p>Composizione · map, filter e reduce formano pipeline.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">ESEMPIO INTERATTIVO · MDN ARRAY.MAP</a></p>
+<p>Fonti: Wikipedia · MDN Web Docs, Array.prototype.map()</p>
+
+</article><article id="slide-11" aria-labelledby="slide-11-t">
+<h2 id="slide-11-t"><span class="num">Slide 11.</span> Multiparadigma: il caso reale</h2>
+<p class="meta">Durata prevista: 12 minuti.</p>
+<p>Due riquadri affiancati.</p>
+<h3>Etichetta del linguaggio</h3>
+<ul>
+<li>Orientamento prevalente</li>
+<li>Costrutti disponibili</li>
+<li>Storia dell'ecosistema</li>
+</ul>
+<h3>Uso nel progetto</h3>
+<ul>
+<li>Stile scelto dal team</li>
+<li>Vincoli del framework</li>
+<li>Coesistenza di paradigmi</li>
+</ul>
+
+
+</article><article id="slide-12" aria-labelledby="slide-12-t">
+<h2 id="slide-12-t"><span class="num">Slide 12.</span> Tipi statici e dinamici</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Quando avvengono i controlli</li><li>Cosa può inferire lo strumento</li><li>Impatto su feedback, refactoring e interoperabilità</li></ul>
+<h3>Schema grafico: quando arriva il feedback?</h3>
+<p>Due colonne affiancate a confronto, ciascuna con tre passi in sequenza dall’alto verso il basso:</p>
+<ul>
+<li><strong>Statico</strong>: codice, poi controllo, poi esecuzione. I controlli sui tipi avvengono prima dell’esecuzione.</li>
+<li><strong>Dinamico</strong>: codice, poi esecuzione, poi controllo. I controlli avvengono mentre il programma gira.</li>
+</ul>
+<p>Didascalia sotto lo schema: trade-off tra anticipo (dei controlli) e flessibilità.</p>
+
+
+</article><article id="slide-13" aria-labelledby="slide-13-t">
+<h2 id="slide-13-t"><span class="num">Slide 13.</span> Ecosistema, tooling e comunità</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>Librerie e framework</li><li>IDE, build, test e osservabilità</li><li>Competenze disponibili</li><li>Ciclo di vita e governance</li></ul>
+<h3>Schema grafico: la sintassi è solo la punta</h3>
+<p>Cinque fasce sovrapposte che formano una piramide, la cui larghezza cresce dall’alto verso il basso. Dall’alto: sintassi (la fascia più piccola, la punta), librerie, tooling e IDE, community e competenze (skill), supporto e governance (la fascia più larga, la base). Il messaggio è che la sintassi del linguaggio è solo la parte visibile di un ecosistema molto più ampio.</p>
+
+
+</article><article id="slide-14" aria-labelledby="slide-14-t">
+<h2 id="slide-14-t"><span class="num">Slide 14.</span> I trend che cambiano le scelte</h2>
+<p class="meta">Durata prevista: 10 minuti.</p>
+<ul><li>API-first</li><li>Cloud-native</li><li>Microservizi</li><li>Containerizzazione</li><li>Automazione della delivery</li></ul>
+<h3>Schema grafico: i trend si rafforzano a vicenda</h3>
+<p>Al centro un riquadro “Delivery rapido”, circondato da sei riquadri che rappresentano i trend che lo alimentano e si influenzano tra loro: API-first, Microservizi, Cloud, AI, Container e DevOps.</p>
+
+
+</article><article id="slide-15" aria-labelledby="slide-15-t">
+<h2 id="slide-15-t"><span class="num">Slide 15.</span> Leggere oltre l&#x27;etichetta</h2>
+<p class="kicker">CONFRONTO GUIDATO</p><p class="meta">Durata prevista: 20 minuti.</p>
+<h3>Scenario</h3>
+<p>Tre proposte si dichiarano rispettivamente “moderna”, “cloud-native” e “enterprise-grade”.</p>
+<h3>Domande</h3>
+<ul><li>Quali fatti verifichiamo?</li><li>Quali qualità ci interessano?</li><li>Quali parole sono solo etichette?</li></ul>
+
+</article>
+<nav aria-label="Pagina precedente e successiva" class="pn"><p><a href="apertura.html" rel="prev">← Apertura</a></p><p><a href="giornata-2.html" rel="next">Giornata 2 →</a></p></nav>
+</main>
+<footer>
+<p>Versione accessibile della presentazione, per la lettura con screen reader. Il contenuto corrisponde alla presentazione PowerPoint; le immagini sono descritte a parole e il testo che contengono è trascritto.</p>
+</footer>
+</body>
+</html>
